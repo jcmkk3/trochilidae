@@ -6,33 +6,41 @@ points:
     matrix:
       columns:
         pinky:
+          spread: cx
           rows:
             bottom:
               skip: true
         ring:
-          stagger: cy / 2
+          spread: cx
+          stagger: 0.5cy
         middle:
-          stagger: cy / 4
+          spread: cx
+          stagger: 0.25cy
         index:
-          stagger: -cy / 4
+          spread: cx
+          stagger: -0.25cy
         inner:
-          stagger: -cy / 2
+          spread: cx
+          stagger: -0.5cy
           rows:
             bottom:
               skip: true
       rows:
         bottom:
+          spread: cy
         home:
+          spread: cy
         top:
+          spread: cy
     thumb:
       anchor:
         ref: matrix_inner_bottom
-        shift: [(cx / 4) - cx, -cy]
+        shift: [0.25cx - cx, -cy]
       columns:
         outer:
         inner:
-          stagger: -cy / 4
+          stagger: -0.25cy
   rotate: -20
   mirror:
     ref: matrix_inner_home
-    distance: cx * 3
+    distance: 3cx
