@@ -1,0 +1,38 @@
+units:
+  cy: 19
+  cx: 19
+points:
+  zones:
+    matrix:
+      columns:
+        pinky:
+          rows:
+            bottom:
+              skip: true
+        ring:
+          stagger: cy / 2
+        middle:
+          stagger: cy / 4
+        index:
+          stagger: -cy / 4
+        inner:
+          stagger: -cy / 2
+          rows:
+            bottom:
+              skip: true
+      rows:
+        bottom:
+        home:
+        top:
+    thumb:
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [(cx / 4) - cx, -cy]
+      columns:
+        outer:
+        inner:
+          stagger: -cy / 4
+  rotate: -20
+  mirror:
+    ref: matrix_inner_home
+    distance: cx * 3
