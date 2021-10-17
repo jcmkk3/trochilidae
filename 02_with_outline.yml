@@ -1,0 +1,168 @@
+units:
+  cx: 18  # Key spacing vertical
+  cy: 17  # Key spacing horizontal
+points:
+  rotate: -20
+  mirror:
+    ref: matrix_inner_home
+    distance: 3cx
+  zones.matrix:
+    rows:
+      bottom.spread: cy
+      home.spread: cy
+      top.spread: cy
+    columns.pinky:
+      spread: cx
+      rows:
+        bottom.skip: true
+        top:
+          bind: 1
+          row_net: P0
+          column_net: P6
+        home:
+          bind: 1
+          row_net: P2
+          column_net: P6
+        top.mirror:
+          row_net: P1
+          column_net: P10
+        home.mirror:
+          row_net: P3
+          column_net: P10
+    columns.ring:
+      spread: cx
+      stagger: 0.5cy
+      rows:
+        top:
+          bind: 1
+          row_net: P1
+          column_net: P6
+        home:
+          bind: 1
+          row_net: P3
+          column_net: P6
+        bottom:
+          bind: 1
+          row_net: P4
+          column_net: P6
+        top.mirror:
+          row_net: P0
+          column_net: P10
+        home.mirror:
+          row_net: P2
+          column_net: P10
+        bottom.mirror:
+          row_net: P5
+          column_net: P9
+    columns.middle:
+      spread: cx
+      stagger: 0.25cy
+      rows:
+        top:
+          bind: 1
+          row_net: P0
+          column_net: P7
+        home:
+          bind: 1
+          row_net: P2
+          column_net: P7
+        bottom:
+          bind: 1
+          row_net: P5
+          column_net: P6
+        top.mirror:
+          row_net: P1
+          column_net: P9
+        home.mirror:
+          row_net: P3
+          column_net: P9
+        bottom.mirror:
+          row_net: P4
+          column_net: P9
+    columns.index:
+      spread: cx
+      stagger: -0.25cy
+      rows:
+        top:
+          bind: 1
+          row_net: P1
+          column_net: P7
+        home:
+          bind: 1
+          row_net: P3
+          column_net: P7
+        bottom:
+          bind: 1
+          row_net: P4
+          column_net: P7
+        top.mirror:
+          row_net: P0
+          column_net: P9
+        home.mirror:
+          row_net: P2
+          column_net: P9
+        bottom.mirror:
+          row_net: P5
+          column_net: P8
+    columns.inner:
+      spread: cx
+      stagger: -0.5cy
+      rows:
+        bottom.skip: true
+        top:
+          bind: 1
+          row_net: P0
+          column_net: P8
+        home:
+          bind: 1
+          row_net: P2
+          column_net: P8
+        top.mirror:
+          row_net: P1
+          column_net: P8
+        home.mirror:
+          row_net: P3
+          column_net: P8
+  zones.thumb:
+    anchor:
+      ref: matrix_inner_bottom
+      shift: [0.25cx - cx, -cy]
+    columns:
+      outer:
+      inner:
+        spread: cx
+        stagger: -0.25cy
+    rows:
+      thumb:
+        outer:
+          bind: 1
+          row_net: P5
+          column_net: P7
+        inner:
+          bind: 1
+          row_net: P4
+          column_net: P8
+        outer.mirror:
+          row_net: P4
+          column_net: P10
+        inner.mirror:
+          row_net: P5
+          column_net: P10
+outlines:
+  glue:
+    center_area:
+      top:
+        left:
+          ref: matrix_inner_home
+        right:
+          ref: mirror_matrix_inner_home
+      bottom:
+        left:
+          ref: thumb_inner_thumb
+        right: 
+          ref: mirror_thumb_inner_thumb
+  exports:
+    default:
+      - type: keys
+        side: both
+        size: [cx, cy]
