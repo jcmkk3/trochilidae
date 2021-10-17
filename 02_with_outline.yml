@@ -16,11 +16,11 @@ points:
       rows:
         bottom.skip: true
         top:
-          bind: 1
+          bind: [0, 0, 1, 0]
           row_net: P0
           column_net: P6
         home:
-          bind: 1
+          bind: [1, 0, 0, 0]
           row_net: P2
           column_net: P6
         top.mirror:
@@ -34,15 +34,13 @@ points:
       stagger: 0.5cy
       rows:
         top:
-          bind: 1
           row_net: P1
           column_net: P6
         home:
-          bind: 1
+          bind: [0, 2]
           row_net: P3
           column_net: P6
         bottom:
-          bind: 1
           row_net: P4
           column_net: P6
         top.mirror:
@@ -59,15 +57,13 @@ points:
       stagger: 0.25cy
       rows:
         top:
-          bind: 1
           row_net: P0
           column_net: P7
         home:
-          bind: 1
+          bind: [0, 2]
           row_net: P2
           column_net: P7
         bottom:
-          bind: 1
           row_net: P5
           column_net: P6
         top.mirror:
@@ -84,15 +80,13 @@ points:
       stagger: -0.25cy
       rows:
         top:
-          bind: 1
           row_net: P1
           column_net: P7
         home:
-          bind: 1
+          bind: [0, 2]
           row_net: P3
           column_net: P7
         bottom:
-          bind: 1
           row_net: P4
           column_net: P7
         top.mirror:
@@ -110,11 +104,11 @@ points:
       rows:
         bottom.skip: true
         top:
-          bind: 1
+          bind: [0, 0, 1, 0]
           row_net: P0
           column_net: P8
         home:
-          bind: 1
+          bind: [1, 0, 0, 0]
           row_net: P2
           column_net: P8
         top.mirror:
@@ -127,40 +121,45 @@ points:
     anchor:
       ref: matrix_inner_bottom
       shift: [0.25cx - cx, -cy]
+    rows.thumb:
     columns:
       outer:
+        rows:
+          thumb:
+            bind: [25, 0, 0, 0]
+            row_net: P5
+            column_net: P7
+          thumb.mirror:
+            row_net: P4
+            column_net: P10
       inner:
         spread: cx
         stagger: -0.25cy
-    rows:
-      thumb:
-        outer:
-          bind: 1
-          row_net: P5
-          column_net: P7
-        inner:
-          bind: 1
-          row_net: P4
-          column_net: P8
-        outer.mirror:
-          row_net: P4
-          column_net: P10
-        inner.mirror:
-          row_net: P5
-          column_net: P10
+        rows:
+          thumb:
+            bind: [25, 0, 0, 0]
+            row_net: P4
+            column_net: P8
+          thumb.mirror:
+            row_net: P5
+            column_net: P10
 outlines:
   glue:
     center_area:
       top:
         left:
           ref: matrix_inner_home
+          shift: [0, 0.5cy]
         right:
           ref: mirror_matrix_inner_home
+          shift: [0, 0.5cy]
       bottom:
         left:
           ref: thumb_inner_thumb
+          shift: [0, 0.5cy]
         right: 
           ref: mirror_thumb_inner_thumb
+          shift: [0, 0.5cy]
   exports:
     default:
       - type: keys
