@@ -161,7 +161,11 @@ outlines:
           ref: mirror_thumb_inner_thumb
           shift: [0, 0.5cy]
   exports:
-    default:
+    raw:
       - type: keys
         side: both
         size: [cx, cy]
+    final:
+      - type: outline
+        name: raw
+        fillet: 1
