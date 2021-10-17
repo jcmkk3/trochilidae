@@ -124,12 +124,12 @@ points:
         outer:
           row_net: P5
           column_net: P7
-        outer.mirror:
-          row_net: P4
-          column_net: P10
         inner:
           row_net: P4
           column_net: P8
+        outer.mirror:
+          row_net: P4
+          column_net: P10
         inner.mirror:
           row_net: P5
           column_net: P10
