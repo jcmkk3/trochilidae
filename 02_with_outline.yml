@@ -165,6 +165,12 @@ outlines:
       - type: keys
         side: both
         size: [cx, cy]
+      - type: rectangle
+        anchor:
+          ref: [matrix_inner_home, mirror_matrix_inner_home]
+          shift: [0, -0.5cy]
+        size: [cx, cy]
+        mirror: true
     final:
       - type: outline
         name: raw
