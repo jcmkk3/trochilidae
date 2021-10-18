@@ -157,42 +157,42 @@ outlines:
           shift: [0, 0.5cy]
           rotate: r
       bottom:
-        left:
-          ref: thumb_inner_thumb
-          shift: [0, 0.5cy]
-          rotate: r
-        right: 
-          ref: mirror_thumb_inner_thumb
-          shift: [0, 0.5cy]
-          rotate: r
+        left.ref: thumb_inner_thumb
+        right.ref: mirror_thumb_inner_thumb
   exports:
-    raw:
+    _top_center:
       - type: keys
         side: both
         size: [cx, cy]
-    center:
-      - type: keys
-        side: glue
-      - operation: add
+      - operation: intersect
         type: rectangle
         anchor:
-          ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
-          shift: [0, 7]
-        size: 30
+          ref: [matrix_inner_home, mirror_matrix_inner_home]
+        size: [cx, cy]
         mirror: true
-      - operation: intersect
+    _bottom_center:
+      - type: keys
+        side: glue
+      - operation: subtract
         type: circle
         anchor:
           ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
-          shift: [0, -41]
-        radius: 53.9
-    together:
+          shift: [0, -60 + 0.5cy]
+        radius: 60
+    _combined:
       - type: outline
-        name: raw
-      - operation: subtract
-        type: outline
-        name: center
+        name: _top_center
+        fillet: 3
+      - type: outline
+        name: _bottom_center
+        fillet: 3
+      - type: keys
+        side: left
+        size: [cx, cy]
+      - type: keys
+        side: right
+        size: [cx, cy]
     final:
       - type: outline
-        name: together
+        name: _combined
         fillet: 1
