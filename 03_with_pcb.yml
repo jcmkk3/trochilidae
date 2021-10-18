@@ -1,6 +1,6 @@
 units:
-  cx: 18  # Key spacing vertical
-  cy: 17  # Key spacing horizontal
+  cx: 18  # Key spacing horizontal
+  cy: 17  # Key spacing vertical
   r: 20
 points:
   rotate: -r
