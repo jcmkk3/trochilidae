@@ -153,17 +153,14 @@ points:
           to: =column_net
         params:
           keycaps: true
-          reverse: true
       diode:
         type: diode
         anchor:
-          rotate: 90
-          shift: [ 8.25, 0 ]
+          shift: [0, -0.5cy + 3]
         nets:
           from: =colrow
           to: =row_net
         params:
-          via_in_pad: true
           through_hole: false
 outlines:
   glue:
