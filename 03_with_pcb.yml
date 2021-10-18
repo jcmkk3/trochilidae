@@ -6,7 +6,7 @@ points:
   rotate: -r
   mirror:
     ref: matrix_inner_home
-    distance: 3cx
+    distance: cx + 34
   zones.matrix:
     rows:
       bottom.spread: cy
@@ -189,7 +189,7 @@ outlines:
         type: rectangle
         anchor:
           ref: [matrix_inner_home, mirror_matrix_inner_home]
-        size: [cx, cy]
+        size: [34 - cx, cy]
         mirror: true
     _bottom_center:
       - type: keys
