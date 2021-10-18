@@ -1,8 +1,9 @@
 units:
   cx: 18  # Key spacing vertical
   cy: 17  # Key spacing horizontal
+  r: 20
 points:
-  rotate: -20
+  rotate: -r
   mirror:
     ref: matrix_inner_home
     distance: 3cx
@@ -145,33 +146,53 @@ points:
             column_net: P10
 outlines:
   glue:
-    center_area:
+    center:
       top:
         left:
           ref: matrix_inner_home
           shift: [0, 0.5cy]
+          rotate: r
         right:
           ref: mirror_matrix_inner_home
           shift: [0, 0.5cy]
+          rotate: r
       bottom:
         left:
           ref: thumb_inner_thumb
           shift: [0, 0.5cy]
+          rotate: r
         right: 
           ref: mirror_thumb_inner_thumb
           shift: [0, 0.5cy]
+          rotate: r
   exports:
     raw:
       - type: keys
         side: both
         size: [cx, cy]
-      - type: rectangle
+    center:
+      - type: keys
+        side: glue
+      - operation: add
+        type: rectangle
         anchor:
-          ref: [matrix_inner_home, mirror_matrix_inner_home]
-          shift: [0, -0.5cy]
-        size: [cx, cy]
+          ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
+          shift: [0, 7]
+        size: 30
         mirror: true
-    final:
+      - operation: intersect
+        type: circle
+        anchor:
+          ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
+          shift: [0, -41]
+        radius: 53.9
+    together:
       - type: outline
         name: raw
+      - operation: subtract
+        type: outline
+        name: center
+    final:
+      - type: outline
+        name: together
         fillet: 1
