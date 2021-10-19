@@ -231,8 +231,8 @@ outlines:
     switch_plate:
       main:
         type: outline
-        name: panel
-        fillet: 0.5
+        name: _combined
+        fillet: 1
       keyholes:
         type: outline
         name: switch_cutouts
