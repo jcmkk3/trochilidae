@@ -1,7 +1,7 @@
 units:
   cx: 18  # Key spacing horizontal
   cy: 17  # Key spacing vertical
-  angle: 20
+  angle: 20  # Angle between halves
 points:
   rotate: -angle
   mirror:
@@ -168,20 +168,19 @@ points:
         params:
           through_hole: false
 outlines:
-  glue:
-    center:
-      top:
-        left:
-          ref: matrix_inner_home
-          shift: [0, 0.5cy]
-          rotate: angle
-        right:
-          ref: mirror_matrix_inner_home
-          shift: [0, 0.5cy]
-          rotate: angle
-      bottom:
-        left.ref: thumb_inner_thumb
-        right.ref: mirror_thumb_inner_thumb
+  glue.center:
+    top:
+      left:
+        ref: matrix_inner_home
+        shift: [0, 0.5cy]
+        rotate: angle
+      right:
+        ref: mirror_matrix_inner_home
+        shift: [0, 0.5cy]
+        rotate: angle
+    bottom:
+      left.ref: thumb_inner_thumb
+      right.ref: mirror_thumb_inner_thumb
   exports:
     _top_center:
       - type: keys
