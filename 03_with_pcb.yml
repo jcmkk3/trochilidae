@@ -215,10 +215,28 @@ outlines:
       - type: keys
         side: right
         size: [cx - 1, cy - 1]
+    switch_cutouts:
+      - type: keys
+        side: left
+        size: 14
+        bound: false
+      - type: keys
+        side: right
+        size: 14
+        bound: false
     panel:
       - type: outline
         name: _combined
         fillet: 1
+    switch_plate:
+      main:
+        type: outline
+        name: panel
+        fillet: 0.5
+      keyholes:
+        type: outline
+        name: switch_cutouts
+        operation: subtract
 pcbs:
   humbingbird:
     outlines:
