@@ -130,7 +130,7 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_inner_bottom
-      shift: [0.25cx - cx, -cy]
+      shift: [0.25cx - cx, -sc]
     rows.thumb:
     columns.outer:
       rows:
