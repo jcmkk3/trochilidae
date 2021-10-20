@@ -157,8 +157,8 @@ points:
       choc:
         type: choc
         nets:
-          from: =colrow
-          to: =column_net
+          from: =row_net
+          to: =colrow
         params:
           keycaps: true
       diode:
@@ -166,8 +166,8 @@ points:
         anchor:
           shift: [0, -0.5cy + 3]
         nets:
-          from: =colrow
-          to: =row_net
+          from: =column_net
+          to: =colrow
         params:
           through_hole: false
 outlines:
