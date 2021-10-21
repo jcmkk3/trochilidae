@@ -5,7 +5,7 @@ units:
   sf: 17       # Switch footprint (square)
   bx: cx - sf  # Bind padding horizontal
   by: cy - sf  # Bind padding vertical
-  angle: 20    # Angle between halves
+  angle: 23    # Angle between halves
 points:
   rotate: -angle
   mirror:
