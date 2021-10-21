@@ -9,8 +9,8 @@ units:
 points:
   rotate: -angle
   mirror:
-    ref: matrix_inner_home
-    distance: cx + 32
+    ref: matrix_inner_top
+    distance: 1cx + 18
   zones.matrix:
     rows:
       bottom.padding: cy
