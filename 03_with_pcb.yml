@@ -1,6 +1,6 @@
 units:
-  cx: 18       # Key spacing horizontal
-  cy: 17       # Key spacing vertical
+  cx: 18.5       # Key spacing horizontal
+  cy: 17.5       # Key spacing vertical
   sc: 14       # Switch cutout (square)
   sf: 15       # Switch footprint (square)
   bx: cx - sf  # Bind padding horizontal
@@ -171,33 +171,37 @@ points:
         params:
           through_hole: false
 outlines:
-  glue.center:
-    top:
-      left:
-        ref: matrix_inner_home
-        shift: [0, 0.5cy]
-        rotate: angle
-      right:
-        ref: mirror_matrix_inner_home
-        shift: [0, 0.5cy]
-        rotate: angle
-    bottom:
-      left.ref: thumb_inner_thumb
-      right.ref: mirror_thumb_inner_thumb
   exports:
+    _center:
+      - type: polygon
+        points:
+          - ref: matrix_inner_top
+            shift: [0,-0.65cy]
+          - ref: mirror_matrix_inner_top
+            shift: [0,-0.65cy]
+          - ref: mirror_thumb_inner_thumb
+          - ref: thumb_inner_thumb
     _top_center:
       - type: keys
-        side: both
+        side: left
         size: sf
-      - operation: intersect
-        type: rectangle
-        anchor:
-          ref: [matrix_inner_home, mirror_matrix_inner_home]
-        size: [34 - cx, cy]
-        mirror: true
-    _bottom_center:
       - type: keys
-        side: glue
+        side: right
+        size: sf
+      - type: outline
+        name: _center
+      - operation: intersect
+        type: polygon
+        points:
+          - ref: matrix_inner_top
+            shift: [-cx, 0]
+          - ref: mirror_matrix_inner_top
+            shift: [-cx, 0]
+          - ref: mirror_matrix_inner_home
+          - ref: matrix_inner_home
+    _bottom_center:
+      - type: outline
+        name: _center
       - operation: subtract
         type: circle
         anchor:
@@ -210,7 +214,6 @@ outlines:
         fillet: 3
       - type: outline
         name: _bottom_center
-        fillet: 3
       - type: keys
         side: left
         size: sf
@@ -239,7 +242,7 @@ outlines:
         type: outline
         name: switch_cutouts
         operation: subtract
-        fillet: 1
+        fillet: 0.5
 pcbs:
   humbingbird:
     outlines:
