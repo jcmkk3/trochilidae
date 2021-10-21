@@ -2,7 +2,7 @@ units:
   cx: 18       # Key spacing horizontal
   cy: 17       # Key spacing vertical
   sc: 14       # Switch cutout (square)
-  sf: 17       # Switch footprint (square)
+  sf: 15       # Switch footprint (square)
   bx: cx - sf  # Bind padding horizontal
   by: cy - sf  # Bind padding vertical
   angle: 23    # Angle between halves
@@ -239,6 +239,7 @@ outlines:
         type: outline
         name: switch_cutouts
         operation: subtract
+        fillet: 1
 pcbs:
   humbingbird:
     outlines:
