@@ -211,7 +211,7 @@ outlines:
     _combined:
       - type: outline
         name: _top_center
-        fillet: 3
+        fillet: 4
       - type: outline
         name: _bottom_center
       - type: keys
