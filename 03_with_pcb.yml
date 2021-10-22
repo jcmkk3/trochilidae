@@ -12,7 +12,7 @@ points:
   rotate: -angle
   mirror:
     ref: matrix_inner_top
-    distance: 1cx + 18
+    distance: 15.5 + cx
   zones.matrix:
     rows:
       bottom.padding: cy
@@ -213,7 +213,7 @@ outlines:
     _combined:
       - type: outline
         name: _top_center
-        fillet: 4
+        fillet: 3
       - type: outline
         name: _bottom_center
       - type: keys
