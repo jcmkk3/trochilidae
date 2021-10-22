@@ -131,8 +131,8 @@ points:
           column_net: P8
   zones.thumb:
     anchor:
-      ref: matrix_inner_bottom
-      shift: [0.25cx - cx, -sc]
+      ref: matrix_index_bottom
+      shift: [0.25cx, -22]
     rows.thumb:
     columns.outer:
       rows:
@@ -166,7 +166,7 @@ points:
       diode:
         type: diode
         anchor:
-          shift: [0, -0.5cy + 3]
+          shift: [0, -4.7]
         nets:
           from: =column_net
           to: =colrow
