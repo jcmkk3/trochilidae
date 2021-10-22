@@ -64,7 +64,7 @@ points:
           column_net: P9
     columns.middle:
       spread: cx
-      stagger: 0.35cy
+      stagger: cy / 3
       rotate: -2
       rows:
         top:
@@ -90,7 +90,7 @@ points:
           column_net: P9
     columns.index:
       spread: cx
-      stagger: -0.35cy
+      stagger: cy / -3
       rows:
         top:
           bind: [0,0,by,bx]
