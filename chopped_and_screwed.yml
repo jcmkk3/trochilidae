@@ -12,7 +12,7 @@ points:
   rotate: -angle + 5
   mirror:
     ref: matrix_inner_top
-    distance: 15.5 + cx
+    distance: 15.5 + cx + 1
   zones.matrix:
     rows:
       bottom.padding: cy
@@ -134,7 +134,7 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [0.25cx, -22]
+      shift: [0.35cx, -22]
     rows.thumb:
     columns.outer:
       rows:
