@@ -5,7 +5,7 @@ units:
   sf: 16       # Switch footprint (square)
   bx: cx - sf  # Bind padding horizontal
   by: cy - sf  # Bind padding vertical
-  angle: 23    # Angle between halves
+  angle: 25    # Angle between halves
   xiaox: 17.5
   xiaoy: 20
 points:
