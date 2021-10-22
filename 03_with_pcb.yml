@@ -2,7 +2,7 @@ units:
   cx: 18.5     # Key spacing horizontal
   cy: 17.5     # Key spacing vertical
   sc: 14       # Switch cutout (square)
-  sf: 15       # Switch footprint (square)
+  sf: 16       # Switch footprint (square)
   bx: cx - sf  # Bind padding horizontal
   by: cy - sf  # Bind padding vertical
   angle: 23    # Angle between halves
