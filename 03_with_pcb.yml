@@ -6,6 +6,8 @@ units:
   bx: cx - sf  # Bind padding horizontal
   by: cy - sf  # Bind padding vertical
   angle: 23    # Angle between halves
+  xiaox: 17.5
+  xiaoy: 20
 points:
   rotate: -angle
   mirror:
@@ -251,5 +253,5 @@ pcbs:
     footprints:
       - type: xiao
         anchor:
-          ref: [matrix_inner_home, mirror_matrix_inner_home]
-          shift: [-0.5cx, -13]
+          ref: [matrix_inner_top, mirror_matrix_inner_top]
+          shift: [-(xiaox / 2), -0.7cy - xiaoy]
