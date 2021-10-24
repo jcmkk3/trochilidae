@@ -1,12 +1,14 @@
 units:
-  cx: 18.5     # Key spacing horizontal
-  cy: 17.5     # Key spacing vertical
-  sf: 16       # Switch footprint (square)
-  angle: 23    # Angle between halves
+  cx: 18.5        # Key spacing horizontal
+  cy: 17.5        # Key spacing vertical
+  sf: 16          # Switch footprint (square)
+  angle: 23       # Angle between halves
   xiao_x: 17.5
   xiao_y: 20
+  pinky_splay: 0  # Degrees of splay between pinky and ring columns
+  ring_splay: 0   # Degrees of splay between ring and index columns
 points:
-  rotate: -angle
+  rotate: -angle + pinky_splay + ring_splay
   mirror:
     ref: matrix_inner_top
     distance: 15.5 + cx
@@ -36,6 +38,7 @@ points:
     columns.ring:
       spread: cx
       stagger: 0.5cy
+      rotate: -pinky_splay
       rows:
         top:
           bind: [0,cx,cy,0]
@@ -61,6 +64,7 @@ points:
     columns.middle:
       spread: cx
       stagger: 0.25cy
+      rotate: -ring_splay
       rows:
         top:
           bind: [0,0,cy,0]
