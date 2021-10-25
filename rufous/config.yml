@@ -214,8 +214,7 @@ outlines:
         glue: center
         tags: [center_top]  # Include the top center keys in addition to the glue outline
     _center:
-      - type: outline
-        name: _center_raw
+      - name: _center_raw
         fillet: 3  # The inner rounding where the glue meets the top center keys
       - operation: subtract
         type: circle
@@ -236,16 +235,13 @@ outlines:
         size: 14
         bound: false
     panel:
-      - type: outline
-        name: _combined
+      - name: _combined
         fillet: 1
     switch_plate:
-      - type: outline
-        name: _combined
+      - name: _combined
         fillet: 1
-      - type: outline
+      - operation: subtract
         name: _switch_cutouts
-        operation: subtract
         fillet: 0.5
 pcbs:
   humbingbird:
