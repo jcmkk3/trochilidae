@@ -284,6 +284,6 @@ pcbs:
       - type: xiao
         anchor:
           ref: [matrix_inner_top, mirror_matrix_inner_top]
-          shift: [-(xiao_x / 2), -xiao_y - 0.7cy]
+          shift: [-(xiao_x / 2), -xiao_y - 0.05cy - 0.7cy]
           # Final vertical shift should be the same as the vertical shift from
           # `glue.top.left` and `glue.top.right` in the outline section above
