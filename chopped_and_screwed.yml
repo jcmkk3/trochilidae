@@ -1,0 +1,262 @@
+units:
+  # Parameters
+  # *Note:* not all supported changes are parameterized
+  cx: 18.5        # Key spacing horizontal
+  cy: 17.5        # Key spacing vertical
+  sf: 16          # Switch footprint (square)
+  angle: 23       # Angle between halves
+  pinky_splay: 0  # Degrees of splay between pinky and ring columns
+  ring_splay: 0   # Degrees of splay between ring and index columns
+
+  # Constants
+  xiao_x: 17.5
+  xiao_y: 20
+points:
+  rotate: -angle + pinky_splay + ring_splay
+  mirror:
+    ref: matrix_inner_top
+    distance: 15.5 + cx
+  zones.matrix:
+    rows:
+      bottom.padding: cy
+      home.padding: cy
+      top.padding: cy
+    columns.pinky:
+      spread: cx
+      rows:
+        bottom.skip: true
+        top:
+          bind: [0,0.5cx,0.5cy,0]
+          row_net: P0
+          column_net: P6
+        home:
+          bind: [0.5cy,0.5cx,0,0]
+          row_net: P2
+          column_net: P6
+        top.mirror:
+          row_net: P1
+          column_net: P10
+        home.mirror:
+          row_net: P3
+          column_net: P10
+    columns.ring:
+      spread: cx
+      stagger: 0.5cy
+      rotate: -pinky_splay
+      rows:
+        top:
+          bind: [0,0.5cx,0.5cy,0]
+          row_net: P1
+          column_net: P6
+        home:
+          bind: [0,0.5cx,0,0]
+          row_net: P3
+          column_net: P6
+        bottom:
+          bind: [0.5cy,0,0,0]
+          row_net: P4
+          column_net: P6
+        top.mirror:
+          row_net: P0
+          column_net: P10
+        home.mirror:
+          row_net: P2
+          column_net: P10
+        bottom.mirror:
+          row_net: P5
+          column_net: P9
+    columns.middle:
+      spread: cx
+      stagger: 0.25cy
+      rotate: -ring_splay
+      rows:
+        top:
+          bind: [0,0,0.5cy,0]
+          row_net: P0
+          column_net: P7
+        home:
+          bind: [0,0.5cx,0,0]
+          row_net: P2
+          column_net: P7
+        bottom:
+          bind: [0.5cy,0.5cx,0,0.5cx]
+          row_net: P5
+          column_net: P6
+        top.mirror:
+          row_net: P1
+          column_net: P9
+        home.mirror:
+          row_net: P3
+          column_net: P9
+        bottom.mirror:
+          row_net: P4
+          column_net: P9
+    columns.index:
+      spread: cx
+      stagger: -0.25cy
+      rows:
+        top:
+          bind: [0,0,0.5cy,0.5cx]
+          row_net: P1
+          column_net: P7
+        home:
+          row_net: P3
+          column_net: P7
+        bottom:
+          bind: [0.5cy,0,0,0]
+          row_net: P4
+          column_net: P7
+        top.mirror:
+          row_net: P0
+          column_net: P9
+        home.mirror:
+          row_net: P2
+          column_net: P9
+        bottom.mirror:
+          row_net: P5
+          column_net: P8
+    columns.inner:
+      spread: cx
+      stagger: -0.5cy
+      rows:
+        bottom.skip: true
+        top:
+          bind: [0,0,0.5cy,0.5cx]
+          row_net: P0
+          column_net: P8
+        home:
+          bind: [0.5cy,0,0.5cy,0.5cx]
+          row_net: P2
+          column_net: P8
+        top.mirror:
+          row_net: P1
+          column_net: P8
+        home.mirror:
+          row_net: P3
+          column_net: P8
+  zones.thumb:
+    anchor:
+      ref: matrix_index_bottom
+      shift: [0.25cx, -22]
+    rows.thumb:
+    columns.outer:
+      rows:
+        thumb:
+          bind: [0.5cy, 0.5cx, 0, 0]
+          row_net: P5
+          column_net: P7
+        thumb.mirror:
+          row_net: P4
+          column_net: P10
+    columns.inner:
+      spread: cx
+      stagger: -0.25cy
+      rows:
+        thumb:
+          bind: [1.5cy, 0, 0, 0]
+          row_net: P4
+          column_net: P8
+        thumb.mirror:
+          row_net: P5
+          column_net: P10
+  key:
+    footprints:
+      choc:
+        type: choc
+        nets:
+          from: =row_net
+          to: =colrow
+        params:
+          keycaps: true
+      diode:
+        type: diode
+        anchor:
+          shift: [0, -4.7]
+        nets:
+          from: =column_net
+          to: =colrow
+        params:
+          through_hole: false
+outlines:
+  exports:
+    _center_base:
+      - type: polygon
+        points:
+          - ref: matrix_inner_top
+            shift: [0,-0.7cy]
+          - ref: mirror_matrix_inner_top
+            shift: [0,-0.7cy]
+          - ref: mirror_thumb_inner_thumb
+          - ref: thumb_inner_thumb
+    _top_center:
+      - type: keys
+        side: left
+        size: sf
+      - type: keys
+        side: right
+        size: sf
+      - type: outline
+        name: _center_base
+      - operation: intersect
+        type: polygon
+        points:
+          - ref: matrix_inner_top
+            shift: [-cx, 0]
+          - ref: mirror_matrix_inner_top
+            shift: [-cx, 0]
+          - ref: mirror_matrix_inner_home
+          - ref: matrix_inner_home
+    _bottom_center:
+      - type: outline
+        name: _center_base
+      - operation: subtract
+        type: circle
+        anchor:
+          ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
+          shift: [0, -60 + 0.5cy]
+        radius: 60
+    _combined:
+      - type: outline
+        name: _top_center
+        fillet: 3
+      - type: outline
+        name: _bottom_center
+      - type: keys
+        side: left
+        size: sf
+      - type: keys
+        side: right
+        size: sf
+    switch_cutouts:
+      - type: keys
+        side: left
+        size: 14
+        bound: false
+      - type: keys
+        side: right
+        size: 14
+        bound: false
+    panel:
+      - type: outline
+        name: _combined
+        fillet: 1
+    switch_plate:
+      main:
+        type: outline
+        name: _combined
+        fillet: 1
+      keyholes:
+        type: outline
+        name: switch_cutouts
+        operation: subtract
+        fillet: 0.5
+pcbs:
+  humbingbird:
+    outlines:
+      main:
+        outline: panel
+    footprints:
+      - type: xiao
+        anchor:
+          ref: [matrix_inner_top, mirror_matrix_inner_top]
+          shift: [-(xiao_x / 2), -0.7cy - xiao_y]
