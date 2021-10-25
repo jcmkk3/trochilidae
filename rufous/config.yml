@@ -163,25 +163,6 @@ points:
         thumb.mirror:
           row_net: P5
           column_net: P10
-  key:
-    footprints:
-      choc:
-        type: choc
-        nets:
-          from: =row_net
-          to: =colrow
-        params:
-          keycaps: true
-      diode:
-        type: diode
-        anchor:
-          shift: [0, -4.7]
-          rotate: 180
-        nets:
-          from: =colrow
-          to: =column_net
-        params:
-          through_hole: false
 outlines:
   glue:
     center:
@@ -243,6 +224,25 @@ outlines:
       - operation: subtract
         name: _switch_cutouts
         fillet: 0.5
+points.key:
+  footprints:
+    choc:
+      type: choc
+      nets:
+        from: =row_net
+        to: =colrow
+      params:
+        keycaps: true
+    diode:
+      type: diode
+      anchor:
+        shift: [0, -4.7]
+        rotate: 180
+      nets:
+        from: =colrow
+        to: =column_net
+      params:
+        through_hole: false
 pcbs:
   humbingbird:
     outlines:
