@@ -1,6 +1,7 @@
 #+title: To Dos
 
 - Adjust the spacing between halves to be anchored from the top corner of the inner columns so that it can ensure that there is always ample space for usb cable regardless of angle
+- Make sure that the rotation of the pinky column is anchoring from the home key and not the disabled bottom key
 - Add switch footprints that include the diode in the correct position and have it already pre-routed within the switch
 - Add MCU footprint that includes pre-routing for the pins that need to be accessed from the opposite side of the MCU
 - Add a tray case to the ergogen configuration
