@@ -124,10 +124,14 @@ points:
           bind: [0,0,0.5cy,0.5cx]
           row_net: P0
           column_net: P8
+          tags:
+            center_top: true
         home:
           bind: [0.5cy,0,0.5cy,0.5cx]
           row_net: P2
           column_net: P8
+          tags:
+            center_top: true
         top.mirror:
           row_net: P1
           column_net: P8
@@ -179,37 +183,40 @@ points:
         params:
           through_hole: false
 outlines:
+  glue:
+    center:
+      top:
+        left:
+          ref: matrix_inner_top
+          orient: angle
+          shift: [0,-0.7cy]
+        right:
+          ref: mirror_matrix_inner_top
+          shift: [0,-0.7cy]
+      bottom:
+        left:
+          ref: thumb_inner_thumb
+          orient: angle
+        right:
+          ref: mirror_thumb_inner_thumb
   exports:
-    _center_base:
-      - type: polygon
-        points:
-          - ref: matrix_inner_top
-            shift: [0,-0.7cy]
-          - ref: mirror_matrix_inner_top
-            shift: [0,-0.7cy]
-          - ref: mirror_thumb_inner_thumb
-          - ref: thumb_inner_thumb
-    _top_center:
+    _outer_raw:
       - type: keys
         side: left
         size: sf
       - type: keys
         side: right
         size: sf
+    _center_raw:
+      - type: keys
+        side: both
+        size: sf
+        glue: center
+        tags: [center_top]  # Include the top center keys in addition to the glue outline
+    _center:
       - type: outline
-        name: _center_base
-      - operation: intersect
-        type: polygon
-        points:
-          - ref: matrix_inner_top
-            shift: [-cx, 0]
-          - ref: mirror_matrix_inner_top
-            shift: [-cx, 0]
-          - ref: mirror_matrix_inner_home
-          - ref: matrix_inner_home
-    _bottom_center:
-      - type: outline
-        name: _center_base
+        name: _center_raw
+        fillet: 3  # The inner rounding where the glue meets the top center keys
       - operation: subtract
         type: circle
         anchor:
@@ -217,18 +224,9 @@ outlines:
           shift: [0, -60 + 0.5cy]
         radius: 60
     _combined:
-      - type: outline
-        name: _top_center
-        fillet: 3
-      - type: outline
-        name: _bottom_center
-      - type: keys
-        side: left
-        size: sf
-      - type: keys
-        side: right
-        size: sf
-    switch_cutouts:
+      - _outer_raw
+      - _center
+    _switch_cutouts:
       - type: keys
         side: left
         size: 14
@@ -242,13 +240,11 @@ outlines:
         name: _combined
         fillet: 1
     switch_plate:
-      main:
-        type: outline
+      - type: outline
         name: _combined
         fillet: 1
-      keyholes:
-        type: outline
-        name: switch_cutouts
+      - type: outline
+        name: _switch_cutouts
         operation: subtract
         fillet: 0.5
 pcbs:
