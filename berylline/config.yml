@@ -1,21 +1,48 @@
 units:
   # Parameters
-  # *Note:* not all supported changes are parameterized
+  # ==========
   cx: 18.5        # Key spacing horizontal
   cy: 17.5        # Key spacing vertical
   sf: 16          # Switch footprint (square)
   angle: 25       # Angle between halves
   pinky_splay: 3  # Degrees of splay between pinky and ring columns
   ring_splay: 2   # Degrees of splay between ring and index columns
+  
+  # *Note:* not all supported changes are parameterized
 
   # Constants
+  # =========
   xiao_x: 17.5
   xiao_y: 20
+
 points:
   rotate: -angle + pinky_splay + ring_splay
   mirror:
     ref: matrix_inner_top
-    distance: 15.5 + cx + 1
+    shift: [0.5cx, 0.5cx]
+    distance: 13
+
+  # Zones
+  # =====
+  # There are two zones defined: `matrix` and `thumb`
+  # - The `matrix` covers all keys used by the pinky - index fingers
+  # - The `thumb` zone sits below the matrix keys
+  #
+  # Top level attributes of `spread`, `stagger`, and `rotate` are defined at the column level
+  # - `spread` determines the distance between columns and uses the parameter `cx`
+  # - `stagger` is the vertical differences between columns
+  #   It is typically based on a fraction of the vertical key spacing `cy`
+  # - `rotate` is the "splay" of the column
+  #   This should be controlled with the appropriate parameters and not overriden directly
+  #
+  # Row level attributes serve various utility purposes
+  # - `row.skip` is used to remove the bottom key in the pinky and inner columns
+  # - `bind` is used to apply extra padding to specific keys in order to fill gaps
+  #   or shape the outline produced by `type: keys` in the outline section
+  # - `row_net` and `column_net` are used to define the connections between the keys
+  #   and other components as defined in the `key.footprints` or `pcb` sections of the config
+  # - `tags` are helpers that allow later sections like `outlines` filter selections
+  #   to those specific keys
   zones.matrix:
     rows:
       bottom.padding: cy
@@ -40,8 +67,9 @@ points:
           row_net: P3
           column_net: P10
     columns.ring:
+      origin: [0, cy]
       spread: cx
-      stagger: 0.55cy
+      stagger: 0.5cy
       rotate: -pinky_splay
       rows:
         top:
@@ -93,7 +121,7 @@ points:
           column_net: P9
     columns.index:
       spread: cx
-      stagger: cy / -3
+      stagger: -cy / 3
       rows:
         top:
           bind: [0,0,0.5cy,0.5cx]
@@ -116,6 +144,7 @@ points:
           row_net: P5
           column_net: P8
     columns.inner:
+      origin: [0, cy]
       spread: cx
       stagger: -0.5cy
       rows:
@@ -124,10 +153,14 @@ points:
           bind: [0,0,0.5cy,0.5cx]
           row_net: P0
           column_net: P8
+          tags:
+            center_top: true
         home:
           bind: [0.5cy,0,0.5cy,0.5cx]
           row_net: P2
           column_net: P8
+          tags:
+            center_top: true
         top.mirror:
           row_net: P1
           column_net: P8
@@ -159,76 +192,53 @@ points:
         thumb.mirror:
           row_net: P5
           column_net: P10
-  key:
-    footprints:
-      choc:
-        type: choc
-        nets:
-          from: =row_net
-          to: =colrow
-        params:
-          keycaps: true
-      diode:
-        type: diode
-        anchor:
-          shift: [0, -4.7]
-          rotate: 180
-        nets:
-          from: =colrow
-          to: =column_net
-        params:
-          through_hole: false
 outlines:
+  glue:
+    center:
+    # View the output of this glue in the `exports._center_raw` export below
+      top:
+        left:
+          ref: matrix_inner_top
+          orient: angle
+          shift: [0,-0.7cy]
+        right:
+          ref: mirror_matrix_inner_top
+          shift: [0,-0.7cy]
+      bottom:
+        left:
+          ref: thumb_inner_thumb
+          orient: angle
+        right:
+          ref: mirror_thumb_inner_thumb
   exports:
-    _center_base:
-      - type: polygon
-        points:
-          - ref: matrix_inner_top
-            shift: [0,-0.7cy]
-          - ref: mirror_matrix_inner_top
-            shift: [0,-0.7cy]
-          - ref: mirror_thumb_inner_thumb
-          - ref: thumb_inner_thumb
-    _top_center:
+    # The below outlines are intentionally split out in order
+    # to view the intermediate steps during transformation
+    _outer_raw:
       - type: keys
         side: left
         size: sf
       - type: keys
         side: right
         size: sf
-      - type: outline
-        name: _center_base
-      - operation: intersect
-        type: polygon
-        points:
-          - ref: matrix_inner_top
-            shift: [-cx, 0]
-          - ref: mirror_matrix_inner_top
-            shift: [-cx, 0]
-          - ref: mirror_matrix_inner_home
-          - ref: matrix_inner_home
-    _bottom_center:
-      - type: outline
-        name: _center_base
+    _center_raw:
+      - type: keys
+        side: both
+        size: sf
+        glue: center
+        tags: [center_top]  # Include the top center keys in addition to the glue outline
+    _center:
+      - name: _center_raw
+        fillet: 3  # The inner rounding where the glue meets the top center keys
       - operation: subtract
         type: circle
         anchor:
           ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
-          shift: [0, -60 + 0.5cy]
-        radius: 60
+          shift: [0, 0.5cy - 60]
+        radius: 60  # Should be the same as the last number in `shift` above
     _combined:
-      - type: outline
-        name: _top_center
-        fillet: 3
-      - type: outline
-        name: _bottom_center
-      - type: keys
-        side: left
-        size: sf
-      - type: keys
-        side: right
-        size: sf
-    switch_cutouts:
+      - _outer_raw
+      - _center
+    _switch_cutouts:
       - type: keys
         side: left
         size: 14
@@ -238,19 +248,33 @@ outlines:
         size: 14
         bound: false
     panel:
-      - type: outline
-        name: _combined
+      - name: _combined
         fillet: 1
     switch_plate:
-      main:
-        type: outline
-        name: _combined
+      - name: _combined
         fillet: 1
-      keyholes:
-        type: outline
-        name: switch_cutouts
-        operation: subtract
+      - operation: subtract
+        name: _switch_cutouts
         fillet: 0.5
+points.key:
+  footprints:
+    choc:
+      type: choc
+      nets:
+        from: =row_net
+        to: =colrow
+      params:
+        keycaps: true
+    diode:
+      type: diode
+      anchor:
+        shift: [0, -4.7]
+        rotate: 180
+      nets:
+        from: =colrow
+        to: =column_net
+      params:
+        through_hole: false
 pcbs:
   humbingbird:
     outlines:
@@ -260,4 +284,6 @@ pcbs:
       - type: xiao
         anchor:
           ref: [matrix_inner_top, mirror_matrix_inner_top]
-          shift: [-(xiao_x / 2), -0.7cy - xiao_y]
+          shift: [-(xiao_x / 2), -xiao_y - 0.05cy - 0.7cy]
+          # Final vertical shift should be the same as the vertical shift from
+          # `glue.top.left` and `glue.top.right` in the outline section above
