@@ -1,12 +1,16 @@
 units:
+  # Parameters
+  # *Note:* not all supported changes are parameterized
   cx: 18.5        # Key spacing horizontal
   cy: 17.5        # Key spacing vertical
   sf: 16          # Switch footprint (square)
   angle: 23       # Angle between halves
-  xiao_x: 17.5
-  xiao_y: 20
   pinky_splay: 0  # Degrees of splay between pinky and ring columns
   ring_splay: 0   # Degrees of splay between ring and index columns
+
+  # Constants
+  xiao_x: 17.5
+  xiao_y: 20
 points:
   rotate: -angle + pinky_splay + ring_splay
   mirror:
@@ -175,7 +179,7 @@ points:
           through_hole: false
 outlines:
   exports:
-    _center:
+    _center_base:
       - type: polygon
         points:
           - ref: matrix_inner_top
@@ -192,7 +196,7 @@ outlines:
         side: right
         size: sf
       - type: outline
-        name: _center
+        name: _center_base
       - operation: intersect
         type: polygon
         points:
@@ -204,7 +208,7 @@ outlines:
           - ref: matrix_inner_home
     _bottom_center:
       - type: outline
-        name: _center
+        name: _center_base
       - operation: subtract
         type: circle
         anchor:
