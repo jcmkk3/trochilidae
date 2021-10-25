@@ -26,11 +26,11 @@ points:
       rows:
         bottom.skip: true
         top:
-          bind: [0,cx,cy,0]
+          bind: [0,0.5cx,0.5cy,0]
           row_net: P0
           column_net: P6
         home:
-          bind: [cy,cx,0,0]
+          bind: [0.5cy,0.5cx,0,0]
           row_net: P2
           column_net: P6
         top.mirror:
@@ -45,15 +45,15 @@ points:
       rotate: -pinky_splay
       rows:
         top:
-          bind: [0,cx,cy,0]
+          bind: [0,0.5cx,0.5cy,0]
           row_net: P1
           column_net: P6
         home:
-          bind: [0,cx,0,0]
+          bind: [0,0.5cx,0,0]
           row_net: P3
           column_net: P6
         bottom:
-          bind: [cy,0,0,0]
+          bind: [0.5cy,0,0,0]
           row_net: P4
           column_net: P6
         top.mirror:
@@ -71,15 +71,15 @@ points:
       rotate: -ring_splay
       rows:
         top:
-          bind: [0,0,cy,0]
+          bind: [0,0,0.5cy,0]
           row_net: P0
           column_net: P7
         home:
-          bind: [0,cx,0,0]
+          bind: [0,0.5cx,0,0]
           row_net: P2
           column_net: P7
         bottom:
-          bind: [cy,cx,0,cx]
+          bind: [0.5cy,0.5cx,0,0.5cx]
           row_net: P5
           column_net: P6
         top.mirror:
@@ -96,14 +96,14 @@ points:
       stagger: -0.25cy
       rows:
         top:
-          bind: [0,0,cy,cx]
+          bind: [0,0,0.5cy,0.5cx]
           row_net: P1
           column_net: P7
         home:
           row_net: P3
           column_net: P7
         bottom:
-          bind: [cy,0,0,0]
+          bind: [0.5cy,0,0,0]
           row_net: P4
           column_net: P7
         top.mirror:
@@ -121,11 +121,11 @@ points:
       rows:
         bottom.skip: true
         top:
-          bind: [0,0,cy,cx]
+          bind: [0,0,0.5cy,0.5cx]
           row_net: P0
           column_net: P8
         home:
-          bind: [cy,0,cy,cx]
+          bind: [0.5cy,0,0.5cy,0.5cx]
           row_net: P2
           column_net: P8
         top.mirror:
@@ -142,7 +142,7 @@ points:
     columns.outer:
       rows:
         thumb:
-          bind: [cy, cx, 0, 0]
+          bind: [0.5cy, 0.5cx, 0, 0]
           row_net: P5
           column_net: P7
         thumb.mirror:
