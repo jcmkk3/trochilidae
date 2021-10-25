@@ -172,9 +172,10 @@ points:
         type: diode
         anchor:
           shift: [0, -4.7]
+          rotate: 180
         nets:
-          from: =column_net
-          to: =colrow
+          from: =colrow
+          to: =column_net
         params:
           through_hole: false
 outlines:
