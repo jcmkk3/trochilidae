@@ -1,6 +1,8 @@
 # 🐦trochilidae
 A from-scratch re-creation of the [Hummingbird keyboard](https://github.com/PJE66/hummingbird) using ergogen
 
+**NOTE:** *These boards are still a work-in-progress. They are awaiting the last few adjustments before the final routing and slikscreens are added.*
+
 ## The Family
 ### Rufous
 *Selasphorus rufus*
