@@ -19,7 +19,8 @@ points:
   rotate: -angle + pinky_splay + ring_splay
   mirror:
     ref: matrix_inner_top
-    distance: 15.5 + cx
+    shift: [0.5cx, 0.5cx]
+    distance: 13
 
   # Zones
   # =====
