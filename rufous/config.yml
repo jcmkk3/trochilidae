@@ -193,23 +193,6 @@ points:
           row_net: P5
           column_net: P10
 outlines:
-  glue:
-    center:
-    # View the output of this glue in the `exports._center_raw` export below
-      top:
-        left:
-          ref: matrix_inner_top
-          orient: angle
-          shift: [0,-0.7cy]
-        right:
-          ref: mirror_matrix_inner_top
-          shift: [0,-0.7cy]
-      bottom:
-        left:
-          ref: thumb_inner_thumb
-          orient: angle
-        right:
-          ref: mirror_thumb_inner_thumb
   exports:
     # The below outlines are intentionally split out in order
     # to view the intermediate steps during transformation
@@ -221,10 +204,21 @@ outlines:
         side: right
         size: sf
     _center_raw:
+      - type: polygon
+        points:
+        - ref: matrix_inner_top
+          shift: [0,-0.7cy]
+        - ref: mirror_matrix_inner_top
+          shift: [0,-0.7cy]
+        - ref: mirror_thumb_inner_thumb
+        - ref: thumb_inner_thumb
       - type: keys
-        side: both
+        side: left
         size: sf
-        glue: center
+        tags: [center_top]  # Include the top center keys in addition to the glue outline
+      - type: keys
+        side: right
+        size: sf
         tags: [center_top]  # Include the top center keys in addition to the glue outline
     _center:
       - name: _center_raw
@@ -284,6 +278,6 @@ pcbs:
       - type: xiao
         anchor:
           ref: [matrix_inner_top, mirror_matrix_inner_top]
-          shift: [-(xiao_x / 2), -xiao_y - 0.05cy - 0.7cy]
+          shift: [-(xiao_x / 2), -xiao_y - 0.7cy]
           # Final vertical shift should be the same as the vertical shift from
           # `glue.top.left` and `glue.top.right` in the outline section above
