@@ -270,7 +270,7 @@ points.key:
       params:
         through_hole: false
 pcbs:
-  humbingbird:
+  rufous:
     outlines:
       main:
         outline: panel
