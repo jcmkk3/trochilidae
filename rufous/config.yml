@@ -215,11 +215,11 @@ outlines:
       - type: keys
         side: left
         size: sf
-        tags: [center_top]  # Include the top center keys in addition to the glue outline
+        tags: [center_top]  # Include the top center keys in addition to the center polygon
       - type: keys
         side: right
         size: sf
-        tags: [center_top]  # Include the top center keys in addition to the glue outline
+        tags: [center_top]
     _center:
       - name: _center_raw
         fillet: 3  # The inner rounding where the glue meets the top center keys
