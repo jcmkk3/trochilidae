@@ -4,7 +4,7 @@ units:
   cx: 18.5        # Key spacing horizontal
   cy: 17.5        # Key spacing vertical
   sf: 16          # Switch footprint (square)
-  angle: 25       # Angle between halves
+  angle: 24       # Angle between halves
   pinky_splay: 3  # Degrees of splay between pinky and ring columns
   ring_splay: 2   # Degrees of splay between ring and index columns
   
@@ -69,7 +69,7 @@ points:
     columns.ring:
       origin: [0, cy]
       spread: cx
-      stagger: 0.5cy
+      stagger: 0.55cy
       rotate: -pinky_splay
       rows:
         top:
@@ -95,7 +95,7 @@ points:
           column_net: P9
     columns.middle:
       spread: cx
-      stagger: cy / 3
+      stagger: 0.30cy
       rotate: -ring_splay
       rows:
         top:
@@ -121,7 +121,7 @@ points:
           column_net: P9
     columns.index:
       spread: cx
-      stagger: -cy / 3
+      stagger: -0.30cy
       rows:
         top:
           bind: [0,0,0.5cy,0.5cx]
@@ -170,7 +170,7 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [cx / 3, -22]
+      shift: [0.30cx, -22]
     rows.thumb:
     columns.outer:
       rows:
@@ -193,23 +193,6 @@ points:
           row_net: P5
           column_net: P10
 outlines:
-  glue:
-    center:
-    # View the output of this glue in the `exports._center_raw` export below
-      top:
-        left:
-          ref: matrix_inner_top
-          orient: angle
-          shift: [0,-0.7cy]
-        right:
-          ref: mirror_matrix_inner_top
-          shift: [0,-0.7cy]
-      bottom:
-        left:
-          ref: thumb_inner_thumb
-          orient: angle
-        right:
-          ref: mirror_thumb_inner_thumb
   exports:
     # The below outlines are intentionally split out in order
     # to view the intermediate steps during transformation
@@ -221,11 +204,22 @@ outlines:
         side: right
         size: sf
     _center_raw:
+      - type: polygon
+        points:
+        - ref: matrix_inner_top
+          shift: [0,-0.7cy]
+        - ref: mirror_matrix_inner_top
+          shift: [0,-0.7cy]
+        - ref: mirror_thumb_inner_thumb
+        - ref: thumb_inner_thumb
       - type: keys
-        side: both
+        side: left
         size: sf
-        glue: center
-        tags: [center_top]  # Include the top center keys in addition to the glue outline
+        tags: [center_top]  # Include the top center keys in addition to the center polygon
+      - type: keys
+        side: right
+        size: sf
+        tags: [center_top]
     _center:
       - name: _center_raw
         fillet: 3  # The inner rounding where the glue meets the top center keys
@@ -276,7 +270,7 @@ points.key:
       params:
         through_hole: false
 pcbs:
-  humbingbird:
+  berylline:
     outlines:
       main:
         outline: panel
@@ -284,6 +278,6 @@ pcbs:
       - type: xiao
         anchor:
           ref: [matrix_inner_top, mirror_matrix_inner_top]
-          shift: [-(xiao_x / 2), -xiao_y - 0.05cy - 0.7cy]
+          shift: [-xiao_x / 2, -xiao_y - 0.7cy]
           # Final vertical shift should be the same as the vertical shift from
-          # `glue.top.left` and `glue.top.right` in the outline section above
+          # `_center_raw` polygon defined in the outline section above
