@@ -19,7 +19,7 @@ points:
   rotate: -angle + pinky_splay + ring_splay
   mirror:
     ref: matrix_inner_top
-    shift: [0.5cx, 0.5cx]
+    shift: [0.5sf, 0.5sf]
     distance: 13
 
   # Zones
@@ -227,7 +227,7 @@ outlines:
         type: circle
         anchor:
           ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
-          shift: [0, 0.5cy - 60]
+          shift: [0, 0.5sf - 60]
         radius: 60  # Should be the same as the last number in `shift` above
     _combined:
       - _outer_raw
