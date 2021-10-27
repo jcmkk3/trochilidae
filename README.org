@@ -7,13 +7,15 @@ A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummin
 * The Family
 ** Rufous
 /Selasphorus rufus/
-[[rufous/rufous.jpg]]
+
+[[rufous/rufous_thumb.jpg]]
 [[rufous/rufous_pcb.png]]
 This board is the basis of all other boards in this repo. It is modeled after the original hummingbird.
 
 ** Berylline
 /Saucerottia beryllina/
-[[berylline/berylline.jpg]]
+
+[[berylline/berylline_thumb.jpg]]
 [[berylline/berylline_pcb.png]]
 This board features some adjustments to the key placement from the Rufous
 - A slight increase in angle between the halves 22 -> 24 degrees
