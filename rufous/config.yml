@@ -288,3 +288,11 @@ pcbs:
           shift: [-xiao_x / 2, -xiao_y - 0.7cy]
           # Final vertical shift should be the same as the vertical shift from
           # `_center_raw` polygon defined in the outline section above
+      - type: mountinghole
+        anchor:
+          ref: matrix_inner_home
+          shift: [-0.5cx + 4, -cy + 4]
+      - type: mountinghole
+        anchor:
+          ref: mirror_matrix_inner_home
+          shift: [-0.5cx + 4, -cy + 4]
