@@ -258,24 +258,15 @@ points.key:
         to: =colrow
       params:
         keycaps: true
-    - type: pad
+    - type: diode
       anchor:
-        shift: [-3.3 / 2, -4.7]
+        shift: [0, -4.7]
+        rotate: 180
       nets:
-        net: =colrow
+        from: =colrow
+        to: =column_net
       params:
-        back: false
-        text: ">"
-        align: right
-    - type: pad
-      anchor:
-        shift: [3.3 / 2, -4.7]
-      nets:
-        net: =column_net
-      params:
-        back: false
-        text: "-"
-        align: left
+        through_hole: false
 pcbs:
   rufous:
     outlines:
