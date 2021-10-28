@@ -252,23 +252,30 @@ outlines:
         fillet: 0.5
 points.key:
   footprints:
-    choc:
-      type: choc
+    - type: choc
       nets:
         from: =row_net
         to: =colrow
       params:
         keycaps: true
-    diode:
-      type: diode
+    - type: pad
       anchor:
-        shift: [0, -4.7]
-        rotate: 180
+        shift: [-3.3 / 2, -4.7]
       nets:
-        from: =colrow
-        to: =column_net
+        net: =colrow
       params:
-        through_hole: false
+        back: false
+        text: ">"
+        align: right
+    - type: pad
+      anchor:
+        shift: [3.3 / 2, -4.7]
+      nets:
+        net: =column_net
+      params:
+        back: false
+        text: "-"
+        align: left
 pcbs:
   rufous:
     outlines:
