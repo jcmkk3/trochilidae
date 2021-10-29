@@ -14,6 +14,13 @@ units:
   # =========
   xiao_x: 17.5
   xiao_y: 20
+  p0: -0.5sf + 1
+  p1: -0.5sf + 0
+  p2: -0.5sf - 1
+  p3: -0.5sf - 2
+  p4: -0.5sf - 3
+  vleft: 0.5cx + 0
+  vright: 0.5cx + 1
 
 points:
   rotate: -angle + pinky_splay + ring_splay
@@ -287,3 +294,87 @@ pcbs:
         anchor:
           ref: mirror_matrix_inner_home
           shift: [-0.5cx + 4, -cy + 4]
+      - type: via
+        anchor:
+          ref: matrix_ring_home
+          shift: [vleft, p3]
+        nets:
+          net: P3
+      - type: via
+        anchor:
+          ref: matrix_ring_home
+          shift: [vright, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: matrix_middle_home
+          shift: [vleft, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: matrix_middle_home
+          shift: [vright, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: matrix_index_home
+          shift: [vleft, p3]
+        nets:
+          net: P3
+      - type: via
+        anchor:
+          ref: matrix_index_home
+          shift: [vright, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: matrix_inner_top
+          shift: [vleft, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_home
+          shift: [-vright, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_home
+          shift: [-vleft, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: mirror_matrix_middle_home
+          shift: [-vright, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: mirror_matrix_middle_home
+          shift: [-vleft, p3]
+        nets:
+          net: P3
+      - type: via
+        anchor:
+          ref: mirror_matrix_index_home
+          shift: [-vright, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: mirror_matrix_index_home
+          shift: [-vleft, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: mirror_matrix_inner_top
+          shift: [-vright, p1]
+        nets:
+          net: P1
