@@ -308,13 +308,13 @@ pcbs:
           net: P1
       - type: via
         anchor:
-          ref: matrix_middle_home
+          ref: [matrix_ring_home, matrix_index_home]
           shift: [vleft, p2]
         nets:
           net: P2
       - type: via
         anchor:
-          ref: matrix_middle_home
+          ref: [matrix_ring_home, matrix_index_home]
           shift: [vright, p0]
         nets:
           net: P0
@@ -350,13 +350,13 @@ pcbs:
           net: P2
       - type: via
         anchor:
-          ref: mirror_matrix_middle_home
+          ref: [mirror_matrix_ring_home, mirror_matrix_index_home]
           shift: [-vright, p1]
         nets:
           net: P1
       - type: via
         anchor:
-          ref: mirror_matrix_middle_home
+          ref: [mirror_matrix_ring_home, mirror_matrix_index_home]
           shift: [-vleft, p3]
         nets:
           net: P3
