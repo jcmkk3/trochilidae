@@ -14,13 +14,13 @@ units:
   # =========
   xiao_x: 17.5
   xiao_y: 20
-  p0: -0.25sf + 1
-  p1: -0.25sf + 0
-  p2: -0.25sf - 1
-  p3: -0.25sf - 2
-  p4: -0.25sf - 3
-  vleft: 0.5cx + 0
-  vright: 0.5cx + 1
+  p0: -0.25sf - 0
+  p1: -0.25sf - 1
+  p2: -0.25sf - 2
+  p3: -0.25sf - 3
+  p4: -0.25sf - 4
+  vleft: 0.25sf + 1
+  vright: 0.25sf + 0
 
 points:
   rotate: -angle + pinky_splay + ring_splay
@@ -296,97 +296,109 @@ pcbs:
           shift: [-0.5cx + 4, -cy + 4]
       - type: via
         anchor:
-          ref: matrix_ring_home
-          shift: [vright - cx, p0]
-        nets:
-          net: P0
-      - type: via
-        anchor:
-          ref: matrix_ring_home
-          shift: [vleft, p3]
-        nets:
-          net: P3
-      - type: via
-        anchor:
-          ref: matrix_ring_home
-          shift: [vright, p1]
-        nets:
-          net: P1
-      - type: via
-        anchor:
-          ref: [matrix_ring_home, matrix_index_home]
+          ref: matrix_pinky_top
           shift: [vleft, p2]
         nets:
           net: P2
       - type: via
         anchor:
-          ref: [matrix_ring_home, matrix_index_home]
+          ref: matrix_pinky_top
           shift: [vright, p0]
         nets:
           net: P0
       - type: via
         anchor:
-          ref: matrix_index_home
+          ref: matrix_ring_top
           shift: [vleft, p3]
         nets:
           net: P3
       - type: via
         anchor:
-          ref: matrix_index_home
+          ref: matrix_ring_top
           shift: [vright, p1]
         nets:
           net: P1
       - type: via
         anchor:
-          ref: matrix_index_home
-          shift: [vright + cx, p0]
+          ref: matrix_middle_top
+          shift: [vleft, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: matrix_middle_top
+          shift: [vright, p0]
         nets:
           net: P0
       - type: via
         anchor:
-          ref: mirror_matrix_ring_home
+          ref: matrix_index_top
+          shift: [vleft, p3]
+        nets:
+          net: P3
+      - type: via
+        anchor:
+          ref: matrix_index_top
+          shift: [vright, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: matrix_inner_top
+          shift: [vleft, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: matrix_inner_top
+          shift: [vright, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_top
           shift: [-vright + cx, p1]
         nets:
           net: P1
       - type: via
         anchor:
-          ref: mirror_matrix_ring_home
+          ref: mirror_matrix_ring_top
           shift: [-vleft + cx, p3]
         nets:
           net: P3
       - type: via
         anchor:
-          ref: mirror_matrix_ring_home
+          ref: mirror_matrix_ring_top
           shift: [-vright, p0]
         nets:
           net: P0
       - type: via
         anchor:
-          ref: mirror_matrix_ring_home
+          ref: mirror_matrix_ring_top
           shift: [-vleft, p2]
         nets:
           net: P2
       - type: via
         anchor:
-          ref: [mirror_matrix_ring_home, mirror_matrix_index_home]
+          ref: mirror_matrix_middle_top
           shift: [-vright, p1]
         nets:
           net: P1
       - type: via
         anchor:
-          ref: [mirror_matrix_ring_home, mirror_matrix_index_home]
+          ref: mirror_matrix_ring_top
           shift: [-vleft, p3]
         nets:
           net: P3
       - type: via
         anchor:
-          ref: mirror_matrix_index_home
+          ref: mirror_matrix_index_top
           shift: [-vright, p0]
         nets:
           net: P0
       - type: via
         anchor:
-          ref: mirror_matrix_index_home
+          ref: mirror_matrix_index_top
           shift: [-vleft, p2]
         nets:
           net: P2
