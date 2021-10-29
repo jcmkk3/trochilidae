@@ -14,11 +14,11 @@ units:
   # =========
   xiao_x: 17.5
   xiao_y: 20
-  p0: -0.5sf + 1
-  p1: -0.5sf + 0
-  p2: -0.5sf - 1
-  p3: -0.5sf - 2
-  p4: -0.5sf - 3
+  p0: -0.25sf + 1
+  p1: -0.25sf + 0
+  p2: -0.25sf - 1
+  p3: -0.25sf - 2
+  p4: -0.25sf - 3
   vleft: 0.5cx + 0
   vright: 0.5cx + 1
 
@@ -297,6 +297,12 @@ pcbs:
       - type: via
         anchor:
           ref: matrix_ring_home
+          shift: [vright - cx, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: matrix_ring_home
           shift: [vleft, p3]
         nets:
           net: P3
@@ -332,10 +338,22 @@ pcbs:
           net: P1
       - type: via
         anchor:
-          ref: matrix_inner_top
-          shift: [vleft, p0]
+          ref: matrix_index_home
+          shift: [vright + cx, p0]
         nets:
           net: P0
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_home
+          shift: [-vright + cx, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_home
+          shift: [-vleft + cx, p3]
+        nets:
+          net: P3
       - type: via
         anchor:
           ref: mirror_matrix_ring_home
