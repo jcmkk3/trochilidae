@@ -1,7 +1,5 @@
 #+title: To Dos
 
-- Add switch footprints that include the diode in the correct position and have it already pre-routed within the switch
-- Add MCU footprint that includes pre-routing for the pins that need to be accessed from the opposite side of the MCU
 - Add a tray case to the ergogen configuration 
 - Investigate and add a license to the repo
 - Custom footprints
