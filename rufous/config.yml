@@ -91,7 +91,6 @@ points:
           row_net: P3
           column_net: P10
     columns.ring:
-      origin: [0, cy]
       spread: cx
       stagger: 0.5cy
       rotate: -pinky_splay
@@ -168,7 +167,6 @@ points:
           row_net: P5
           column_net: P8
     columns.inner:
-      origin: [0, cy]
       spread: cx
       stagger: -0.5cy
       rows:
