@@ -9,7 +9,7 @@ A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummin
 /Selasphorus rufus/
 
 [[rufous/rufous_thumb.jpg]]
-[[rufous/rufous_pcb.png]]
+[[rufous/rufous_mx_pcb.png]]
 This board is the basis of all other boards in this repo. It is modeled after the original hummingbird.
 
 ** Berylline
