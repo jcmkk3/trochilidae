@@ -9,3 +9,4 @@
     - MCU (with pre-routing)
     - Mounting holes (smaller than ergogen provided)
     - Silkscreen art
+- Evaluate using multiple fill zones for some parts of the routing (maybe columns)
