@@ -192,7 +192,7 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [0.35cx, -23]
+      shift: [0.35cx, -22]
     rows.thumb:
     columns.outer:
       rows:
@@ -205,7 +205,7 @@ points:
           column_net: P10
     columns.inner:
       spread: cx
-      stagger: -0.25cy
+      stagger: -0.3cy
       rows:
         thumb:
           bind: [1.5cy, 0, 0, 0]
