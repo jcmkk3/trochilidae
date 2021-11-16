@@ -259,10 +259,12 @@ outlines:
         side: left
         size: 14
         bound: false
+        tags: [center_bottom]
       - type: keys
         side: right
         size: 14
         bound: false
+        tags: [center_bottom]
     panel:
       - name: _combined
         fillet: 1
