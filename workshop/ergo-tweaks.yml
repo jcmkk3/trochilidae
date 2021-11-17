@@ -265,10 +265,10 @@ outlines:
         bound: false
     panel:
       - name: _combined
-        fillet: 1
+        fillet: 2
     switch_plate:
       - name: _combined
-        fillet: 1
+        fillet: 2
       - operation: subtract
         name: _switch_cutouts
         fillet: 0.5
