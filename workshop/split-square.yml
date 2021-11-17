@@ -133,21 +133,20 @@ outlines:
         side: left
         size: [18, 17]
         bound: false
+    panel:
+      - name: _outer
+        fillet: 3
     _mock_switches:
-      - name: _outer
-        fillet: 3
-      - operation: stack
-        name: _switches
+      - panel
+      - ^_switches
     _mock_keycaps:
-      - name: _outer
-        fillet: 3
-      - operation: stack
-        name: _keycaps
+      - _outer
+      - ^_keycaps
 points.key:
   footprints:
     - type: choc
       nets:
-        from: =col_net
+        from: GND
         to: GND
       params:
         keycaps: true
@@ -159,7 +158,8 @@ pcbs:
     footprints:
       - type: xiao
         anchor:
-          ref: [matrix_inner_top, mirror_matrix_inner_top]
-          shift: [-xiao_x / 2, -xiao_y - 0.7cy]
+          ref: matrix_ring_bottom
+          shift: [0, -1.5cy]
+          rotate: 90
           # Final vertical shift should be the same as the vertical shift from
           # `_center_raw` polygon defined in the outline section above
