@@ -2,27 +2,12 @@
 
 A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummingbird keyboard]] using ergogen
 
-*NOTE:* /These boards are still a work-in-progress. They are awaiting the last few adjustments before the final routing and slikscreens are added./
-
 * The Family
 ** Rufous
 /Selasphorus rufus/
 
 [[rufous/rufous_thumb.jpg]]
-[[rufous/rufous_mx_pcb.png]]
-This board is the basis of all other boards in this repo. It is modeled after the original hummingbird.
-
-** Berylline
-/Saucerottia beryllina/
-
-[[berylline/berylline_thumb.jpg]]
-[[berylline/berylline_pcb.png]]
-This board features some adjustments to the key placement from the Rufous
-- A slight increase in angle between the halves 22 -> 24 degrees
-- 3 degrees of splay between pinky and ring columns
-- 2 degrees of splay between ring and middle columns
-- Slightly increased stagger for all columns
-- Thumb keys are moved slightly towards the center
+[[rufous/rufous_splay_pcb.png]]
 
 ** Possible Future Variants
 - Rectangular variant with side mounted MCU and USB port facing the side, intended for use on top of an existing laptop keyboard
