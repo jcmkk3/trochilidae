@@ -1,0 +1,548 @@
+units:
+  # Parameters
+  # ==========
+  cx: 18.5        # Key spacing horizontal
+  cy: 17.5        # Key spacing vertical
+  sf: 16          # Switch footprint (square)
+  angle: 24       # Angle between halves
+  pinky_splay: 3  # Degrees of splay between pinky and ring columns
+  ring_splay: 2   # Degrees of splay between ring and index columns
+  
+  # *Note:* not all supported changes are parameterized
+
+  # Constants
+  # =========
+  xiao_x: 17.5
+  xiao_y: 20
+
+  via_x: -0.25cx
+  via_y: 0.25sf
+  
+  p0: via_x - 0
+  p1: via_x - 1
+  p2: via_x - 2
+  p3: via_x - 3
+  
+  p4l: via_x - 0
+  p5l: via_x - 1
+  p8l: via_x - 2
+  p6l: via_x - 2
+  p7l: via_x - 3
+
+  p10r: via_x - 0
+  p4r: via_x - 1
+  p9r: via_x - 2
+  p5r: via_x - 3
+  p8r: via_x - 4
+  
+  via_left: via_y + 0
+  via_middle: via_y + 1
+  via_right: via_y + 2
+
+points:
+  rotate: -angle + pinky_splay + ring_splay
+  mirror:
+    ref: matrix_inner_top
+    shift: [0.5sf, 0.5sf]
+    distance: 13
+
+  # Zones
+  # =====
+  # There are two zones defined: `matrix` and `thumb`
+  # - The `matrix` covers all keys used by the pinky - index fingers
+  # - The `thumb` zone sits below the matrix keys
+  #
+  # Top level attributes of `spread`, `stagger`, and `rotate` are defined at the column level
+  # - `spread` determines the distance between columns and uses the parameter `cx`
+  # - `stagger` is the vertical differences between columns
+  #   It is typically based on a fraction of the vertical key spacing `cy`
+  # - `rotate` is the "splay" of the column
+  #   This should be controlled with the appropriate parameters and not overriden directly
+  #
+  # Row level attributes serve various utility purposes
+  # - `row.skip` is used to remove the bottom key in the pinky and inner columns
+  # - `bind` is used to apply extra padding to specific keys in order to fill gaps
+  #   or shape the outline produced by `type: keys` in the outline section
+  # - `row_net` and `column_net` are used to define the connections between the keys
+  #   and other components as defined in the `key.footprints` or `pcb` sections of the config
+  # - `tags` are helpers that allow later sections like `outlines` filter selections
+  #   to those specific keys
+  zones.matrix:
+    rows:
+      bottom.padding: cy
+      home.padding: cy
+      top.padding: cy
+    columns.pinky:
+      spread: cx
+      rows:
+        bottom.skip: true
+        top:
+          bind: [0,0.5cx,0.5cy,0]
+          row_net: P0
+          column_net: P6
+        home:
+          bind: [0.5cy,0.5cx,0,0]
+          row_net: P2
+          column_net: P6
+        top.mirror:
+          row_net: P1
+          column_net: P10
+        home.mirror:
+          row_net: P3
+          column_net: P10
+    columns.ring:
+      spread: cx
+      stagger: 0.55cy
+      rotate: -pinky_splay
+      rows:
+        top:
+          bind: [0,0.5cx,0.5cy,0]
+          row_net: P1
+          column_net: P6
+        home:
+          bind: [0,0.5cx,0,0]
+          row_net: P3
+          column_net: P6
+        bottom:
+          bind: [0.5cy,0,0,0]
+          row_net: P4
+          column_net: P6
+        top.mirror:
+          row_net: P0
+          column_net: P10
+        home.mirror:
+          row_net: P2
+          column_net: P10
+        bottom.mirror:
+          row_net: P5
+          column_net: P9
+    columns.middle:
+      spread: cx
+      stagger: 0.25cy
+      rotate: -ring_splay
+      rows:
+        top:
+          bind: [0,0,0.5cy,0]
+          row_net: P0
+          column_net: P7
+        home:
+          bind: [0,0.5cx,0,0]
+          row_net: P2
+          column_net: P7
+        bottom:
+          bind: [0.5cy,0.5cx,0,0.5cx]
+          row_net: P5
+          column_net: P6
+        top.mirror:
+          row_net: P1
+          column_net: P9
+        home.mirror:
+          row_net: P3
+          column_net: P9
+        bottom.mirror:
+          row_net: P4
+          column_net: P9
+    columns.index:
+      spread: cx
+      stagger: -0.3cy
+      rows:
+        top:
+          bind: [0,0,0.5cy,0.5cx]
+          row_net: P1
+          column_net: P7
+        home:
+          row_net: P3
+          column_net: P7
+        bottom:
+          bind: [0.5cy,0,0,0]
+          row_net: P4
+          column_net: P7
+        top.mirror:
+          row_net: P0
+          column_net: P9
+        home.mirror:
+          row_net: P2
+          column_net: P9
+        bottom.mirror:
+          row_net: P5
+          column_net: P8
+    columns.inner:
+      spread: cx
+      stagger: -0.5cy
+      rows:
+        bottom.skip: true
+        top:
+          bind: [0,0,0.5cy,0.5cx]
+          row_net: P0
+          column_net: P8
+          tags:
+            center_top: true
+        home:
+          bind: [0.5cy,0,0.5cy,0.5cx]
+          row_net: P2
+          column_net: P8
+          tags:
+            center_top: true
+        top.mirror:
+          row_net: P1
+          column_net: P8
+        home.mirror:
+          row_net: P3
+          column_net: P8
+  zones.thumb:
+    anchor:
+      ref: matrix_index_bottom
+      shift: [0.35cx, -22]
+    rows.thumb:
+    columns.outer:
+      rows:
+        thumb:
+          bind: [0.5cy, 0.5cx, 0, 0]
+          row_net: P5
+          column_net: P7
+        thumb.mirror:
+          row_net: P4
+          column_net: P10
+    columns.inner:
+      spread: cx
+      stagger: -0.3cy
+      rows:
+        thumb:
+          bind: [1.5cy, 0, 0, 0]
+          row_net: P4
+          column_net: P8
+        thumb.mirror:
+          row_net: P5
+          column_net: P10
+outlines:
+  exports:
+    # The below outlines are intentionally split out in order
+    # to view the intermediate steps during transformation
+    _outer_raw:
+      - type: keys
+        side: left
+        size: sf
+      - type: keys
+        side: right
+        size: sf
+    _center_raw:
+      - type: polygon
+        points:
+        - ref: matrix_inner_top
+          shift: [0,-0.7cy]
+        - ref: mirror_matrix_inner_top
+          shift: [0,-0.7cy]
+        - ref: mirror_thumb_inner_thumb
+        - ref: thumb_inner_thumb
+      - type: keys
+        side: left
+        size: sf
+        tags: [center_top]  # Include the top center keys in addition to the center polygon
+      - type: keys
+        side: right
+        size: sf
+        tags: [center_top]
+    _center:
+      - name: _center_raw
+        fillet: 3  # The inner rounding where the glue meets the top center keys
+      - operation: subtract
+        type: circle
+        anchor:
+          ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
+          shift: [0, 0.5sf - 60]
+        radius: 60  # Should be the same as the last number in `shift` above
+    _combined:
+      - _outer_raw
+      - _center
+    _switch_cutouts:
+      - type: keys
+        side: left
+        size: 14
+        bound: false
+      - type: keys
+        side: right
+        size: 14
+        bound: false
+    panel:
+      - name: _combined
+        fillet: 1.5
+    switch_plate:
+      - name: _combined
+        fillet: 1.5
+      - operation: subtract
+        name: _switch_cutouts
+        fillet: 0.5
+points.key:
+  footprints:
+    - type: choc
+      nets:
+        from: =row_net
+        to: =colrow
+      params:
+        keycaps: true
+    - type: diode
+      anchor:
+        shift: [0, -4.7]
+        rotate: 180
+      nets:
+        from: =colrow
+        to: =column_net
+      params:
+        through_hole: false
+pcbs:
+  rufous:
+    outlines:
+      main:
+        outline: panel
+    footprints:
+      - type: xiao
+        anchor:
+          ref: [matrix_inner_top, mirror_matrix_inner_top]
+          shift: [-xiao_x / 2, -xiao_y - 0.7cy]
+          # Final vertical shift should be the same as the vertical shift from
+          # `_center_raw` polygon defined in the outline section above
+      - type: mountinghole
+        anchor:
+          ref: matrix_inner_home
+          shift: [-0.5cx + 4, -cy + 4]
+      - type: mountinghole
+        anchor:
+          ref: mirror_matrix_inner_home
+          shift: [-0.5cx + 4, -cy + 4]
+
+      # Vias
+      # ====
+      #
+      # Left Top
+      # --------
+      - type: via
+        anchor:
+          ref: matrix_pinky_top
+          shift: [via_middle, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: matrix_pinky_top
+          shift: [via_left, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: matrix_ring_top
+          shift: [via_middle, p3]
+        nets:
+          net: P3
+      - type: via
+        anchor:
+          ref: matrix_ring_top
+          shift: [via_left, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: matrix_middle_top
+          shift: [via_middle, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: matrix_middle_top
+          shift: [via_left, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: matrix_index_top
+          shift: [via_middle, p3]
+        nets:
+          net: P3
+      - type: via
+        anchor:
+          ref: matrix_index_top
+          shift: [via_left, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: matrix_inner_top
+          shift: [via_middle, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: matrix_inner_top
+          shift: [via_left, p0]
+        nets:
+          net: P0
+
+      # Right Top
+      # ---------
+      - type: via
+        anchor:
+          ref: mirror_matrix_pinky_top
+          shift: [-via_left, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: mirror_matrix_pinky_top
+          shift: [-via_middle, p3]
+        nets:
+          net: P3
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_top
+          shift: [-via_left, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_top
+          shift: [-via_middle, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: mirror_matrix_middle_top
+          shift: [-via_left, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: mirror_matrix_middle_top
+          shift: [-via_middle, p3]
+        nets:
+          net: P3
+      - type: via
+        anchor:
+          ref: mirror_matrix_index_top
+          shift: [-via_left, p0]
+        nets:
+          net: P0
+      - type: via
+        anchor:
+          ref: mirror_matrix_index_top
+          shift: [-via_middle, p2]
+        nets:
+          net: P2
+      - type: via
+        anchor:
+          ref: mirror_matrix_inner_top
+          shift: [-via_left, p1]
+        nets:
+          net: P1
+      - type: via
+        anchor:
+          ref: mirror_matrix_inner_top
+          shift: [-via_middle, p3]
+        nets:
+          net: P3
+
+      # Left Bottom
+      # --------
+      - type: via
+        anchor:
+          ref: matrix_ring_home
+          shift: [via_middle, p4l]
+        nets:
+          net: P4
+      - type: via
+        anchor:
+          ref: matrix_ring_home
+          shift: [via_left, p6l]
+        nets:
+          net: P6
+      - type: via
+        anchor:
+          ref: matrix_middle_home
+          shift: [via_middle, p5l]
+        nets:
+          net: P5
+      - type: via
+        anchor:
+          ref: matrix_middle_home
+          shift: [via_left, p7l]
+        nets:
+          net: P7
+      - type: via
+        anchor:
+          ref: matrix_index_home
+          shift: [via_middle, p4l]
+        nets:
+          net: P4
+      - type: via
+        anchor:
+          ref: matrix_index_home
+          shift: [via_right, p5l]
+        nets:
+          net: P5
+      - type: via
+        anchor:
+          ref: matrix_inner_home
+          shift: [via_middle, p4l]
+        nets:
+          net: P4
+      - type: via
+        anchor:
+          ref: matrix_inner_home
+          shift: [via_left, p8l]
+        nets:
+          net: P8
+
+      # Right Bottom
+      # ---------
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_home
+          shift: [-via_middle, p5r]
+        nets:
+          net: P5
+      - type: via
+        anchor:
+          ref: mirror_matrix_ring_home
+          shift: [-via_left, p10r]
+        nets:
+          net: P10
+      - type: via
+        anchor:
+          ref: mirror_matrix_middle_home
+          shift: [-via_middle, p4r]
+        nets:
+          net: P4
+      - type: via
+        anchor:
+          ref: mirror_matrix_middle_home
+          shift: [-via_left, p9r]
+        nets:
+          net: P9
+      - type: via
+        anchor:
+          ref: mirror_matrix_index_home
+          shift: [-via_middle, p5r]
+        nets:
+          net: P5
+      - type: via
+        anchor:
+          ref: mirror_matrix_index_home
+          shift: [-via_left, p8r]
+        nets:
+          net: P8
+      - type: via
+        anchor:
+          ref: mirror_matrix_inner_home
+          shift: [-via_right, p10r]
+        nets:
+          net: P10
+      - type: via
+        anchor:
+          ref: mirror_matrix_inner_home
+          shift: [-via_middle, p8r]
+        nets:
+          net: P8
+      - type: via
+        anchor:
+          ref: mirror_thumb_inner_thumb
+          shift: [-via_middle, 0.5cx]
+        nets:
+          net: P5
