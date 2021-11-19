@@ -15,3 +15,4 @@ A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummin
 - Deconstructed 3D-ish variant with negative sloping main keys flat thumbs and pinky keys with reverse slope of main board
 - Split variant
 - Wireless variant(s)
+- Scooped keycap spaced (18x18)
