@@ -7,7 +7,9 @@ A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummin
 /Selasphorus rufus/
 
 [[rufous/rufous_thumb.jpg]]
-[[rufous/rufous_splay_pcb.png]]
+[[rufous/rufous_splay_pcb_front.png]]
+[[rufous/rufous_splay_pcb_back.png]]
+
 
 ** Possible Future Variants
 - Rectangular variant with side mounted MCU and USB port facing the side, intended for use on top of an existing laptop keyboard
