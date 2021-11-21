@@ -272,6 +272,52 @@ outlines:
       - operation: subtract
         name: _switch_cutouts
         fillet: 0.5
+
+    # Case outlines
+    _outer_case_raw:
+      - type: keys
+        side: left
+        size: sf + 3
+      - type: keys
+        side: right
+        size: sf + 3
+    _center_case_raw:
+      - type: polygon
+        points:
+        - ref: matrix_inner_top
+          shift: [0 + 3,-0.7cy + 3]
+        - ref: mirror_matrix_inner_top
+          shift: [0 + 3,-0.7cy + 3]
+        - ref: mirror_thumb_inner_thumb
+          shift: [3, -3]
+        - ref: thumb_inner_thumb
+          shift: [3, -3]
+      - type: keys
+        side: left
+        size: sf + 3
+        tags: [center_top]  # Include the top center keys in addition to the center polygon
+      - type: keys
+        side: right
+        size: sf + 3
+        tags: [center_top]
+    _center_case:
+      - name: _center_case_raw
+        fillet: 2  # The inner rounding where the glue meets the top center keys
+      - operation: subtract
+        type: circle
+        anchor:
+          ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
+          shift: [0, 0.5sf - 60 - 2]
+        radius: 60  # Should be the same as the last number in `shift` above
+    _combined_case:
+      - _outer_case_raw
+      - _center_case
+    case_panel:
+      - name: _combined_case
+        fillet: 1.75
+    case_lip:
+      - case_panel
+      - -panel
 points.key:
   footprints:
     - type: choc
@@ -289,6 +335,12 @@ points.key:
         to: =column_net
       params:
         through_hole: false
+cases:
+  tray_case:
+    - name: case_panel
+      extrude: 3
+    - name: case_lip
+      extrude: 6
 pcbs:
   rufous:
     outlines:
