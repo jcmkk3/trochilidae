@@ -7,6 +7,7 @@ units:
   angle: 24       # Angle between halves
   pinky_splay: 3  # Degrees of splay between pinky and ring columns
   ring_splay: 2   # Degrees of splay between ring and index columns
+  rim_width: 3    # Width of case rim
   
   # *Note:* not all supported changes are parameterized
 
@@ -277,28 +278,28 @@ outlines:
     _outer_case_raw:
       - type: keys
         side: left
-        size: sf + 3
+        size: sf + rim_width
       - type: keys
         side: right
-        size: sf + 3
+        size: sf + rim_width
     _center_case_raw:
       - type: polygon
         points:
         - ref: matrix_inner_top
-          shift: [0 + 3,-0.7cy + 3]
+          shift: [0 + rim_width,-0.7cy + rim_width]
         - ref: mirror_matrix_inner_top
-          shift: [0 + 3,-0.7cy + 3]
+          shift: [0 + rim_width,-0.7cy + rim_width]
         - ref: mirror_thumb_inner_thumb
-          shift: [3, -3]
+          shift: [rim_width, -rim_width]
         - ref: thumb_inner_thumb
-          shift: [3, -3]
+          shift: [rim_width, -rim_width]
       - type: keys
         side: left
-        size: sf + 3
+        size: sf + rim_width
         tags: [center_top]  # Include the top center keys in addition to the center polygon
       - type: keys
         side: right
-        size: sf + 3
+        size: sf + rim_width
         tags: [center_top]
     _center_case:
       - name: _center_case_raw
