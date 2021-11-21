@@ -329,7 +329,15 @@ outlines:
         radius: 4
         anchor:
           ref: mirror_matrix_inner_home
-          shift: [-0.5cx + 4, -cy + 4]    
+          shift: [-0.5cx + 4, -cy + 4]
+cases:
+  tray_case:
+    - name: case_panel
+      extrude: 3
+    - name: case_lip
+      extrude: 8
+    - name: mounting_points
+      extrude: 5
 points.key:
   footprints:
     - type: choc
@@ -347,14 +355,6 @@ points.key:
         to: =column_net
       params:
         through_hole: false
-cases:
-  tray_case:
-    - name: case_panel
-      extrude: 3
-    - name: case_lip
-      extrude: 8
-    - name: mounting_points
-      extrude: 5
 pcbs:
   rufous:
     outlines:
