@@ -4,9 +4,9 @@ units:
   cx: 18.5        # Key spacing horizontal
   cy: 17.5        # Key spacing vertical
   sf: 16          # Switch footprint (square)
-  angle: 24       # Angle between halves
-  pinky_splay: 3  # Degrees of splay between pinky and ring columns
-  ring_splay: 2   # Degrees of splay between ring and index columns
+  angle: 26       # Angle between halves
+  pinky_splay: 8  # Degrees of splay between pinky and ring columns
+  ring_splay: 3   # Degrees of splay between ring and index columns
   rim_width: 3    # Width of case rim
   
   # *Note:* not all supported changes are parameterized
@@ -93,8 +93,9 @@ points:
           column_net: P10
     columns.ring:
       spread: cx
-      stagger: 0.55cy
+      stagger: 0.65cy
       rotate: -pinky_splay
+      origin: [0,-4]
       rows:
         top:
           bind: [0,0.5cx,0.5cy,0]
@@ -121,6 +122,7 @@ points:
       spread: cx
       stagger: 0.25cy
       rotate: -ring_splay
+      origin: [0,-11]
       rows:
         top:
           bind: [0,0,0.5cy,0]
@@ -193,7 +195,7 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [0.35cx, -22]
+      shift: [0.5cx, -22]
     rows.thumb:
     columns.outer:
       rows:
@@ -205,7 +207,7 @@ points:
           row_net: P4
           column_net: P10
     columns.inner:
-      spread: cx
+      spread: cx - 0.5
       stagger: -0.3cy
       rows:
         thumb:
