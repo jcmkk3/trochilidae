@@ -5,7 +5,7 @@ units:
   cy: 17.5        # Key spacing vertical
   sf: 16          # Switch footprint (square)
   angle: 26       # Angle between halves
-  pinky_splay: 8  # Degrees of splay between pinky and ring columns
+  pinky_splay: 7  # Degrees of splay between pinky and ring columns
   ring_splay: 3   # Degrees of splay between ring and index columns
   rim_width: 3    # Width of case rim
   
