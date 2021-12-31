@@ -4,10 +4,9 @@ units:
   cx: 18.5        # Key spacing horizontal
   cy: 17.5        # Key spacing vertical
   sf: 16          # Switch footprint (square)
-  angle: 26       # Angle between halves
-  pinky_splay: 7  # Degrees of splay between pinky and ring columns
+  angle: 22       # Angle between halves
+  pinky_splay: 5  # Degrees of splay between pinky and ring columns
   ring_splay: 3   # Degrees of splay between ring and index columns
-  rim_width: 3    # Width of case rim
   
   # *Note:* not all supported changes are parameterized
 
@@ -93,9 +92,9 @@ points:
           column_net: P10
     columns.ring:
       spread: cx
-      stagger: 0.65cy
+      stagger: 2/3cy
       rotate: -pinky_splay
-      origin: [0,-4]
+      origin: [0,-3]
       rows:
         top:
           bind: [0,0.5cx,0.5cy,0]
@@ -122,7 +121,7 @@ points:
       spread: cx
       stagger: 0.25cy
       rotate: -ring_splay
-      origin: [0,-11]
+      origin: [0,-8]
       rows:
         top:
           bind: [0,0,0.5cy,0]
@@ -147,7 +146,7 @@ points:
           column_net: P9
     columns.index:
       spread: cx
-      stagger: -0.3cy
+      stagger: -0.25cy
       rows:
         top:
           bind: [0,0,0.5cy,0.5cx]
@@ -195,7 +194,7 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [0.5cx, -22]
+      shift: [0.25cx, -22]
     rows.thumb:
     columns.outer:
       rows:
@@ -207,8 +206,8 @@ points:
           row_net: P4
           column_net: P10
     columns.inner:
-      spread: cx - 0.5
-      stagger: -0.3cy
+      spread: cx
+      stagger: -0.25cy
       rows:
         thumb:
           bind: [1.5cy, 0, 0, 0]
@@ -268,78 +267,13 @@ outlines:
         bound: false
     panel:
       - name: _combined
-        fillet: 1.5
+        fillet: 1
     switch_plate:
       - name: _combined
-        fillet: 1.5
+        fillet: 1
       - operation: subtract
         name: _switch_cutouts
         fillet: 0.5
-
-    # Case outlines
-    _outer_case_raw:
-      - type: keys
-        side: left
-        size: sf + rim_width
-      - type: keys
-        side: right
-        size: sf + rim_width
-    _center_case_raw:
-      - type: polygon
-        points:
-        - ref: matrix_inner_top
-          shift: [0 + rim_width,-0.7cy + rim_width]
-        - ref: mirror_matrix_inner_top
-          shift: [0 + rim_width,-0.7cy + rim_width]
-        - ref: mirror_thumb_inner_thumb
-          shift: [rim_width, -rim_width]
-        - ref: thumb_inner_thumb
-          shift: [rim_width, -rim_width]
-      - type: keys
-        side: left
-        size: sf + rim_width
-        tags: [center_top]  # Include the top center keys in addition to the center polygon
-      - type: keys
-        side: right
-        size: sf + rim_width
-        tags: [center_top]
-    _center_case:
-      - name: _center_case_raw
-        fillet: 2  # The inner rounding where the glue meets the top center keys
-      - operation: subtract
-        type: circle
-        anchor:
-          ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
-          shift: [0, 0.5sf - 60 - 2]
-        radius: 60  # Should be the same as the last number in `shift` above
-    _combined_case:
-      - _outer_case_raw
-      - _center_case
-    case_panel:
-      - name: _combined_case
-        fillet: 1.75
-    case_lip:
-      - case_panel
-      - -panel
-    mounting_points:
-      - type: circle
-        radius: 4
-        anchor:
-          ref: matrix_inner_home
-          shift: [-0.5cx + 4, -cy + 4]
-      - type: circle
-        radius: 4
-        anchor:
-          ref: mirror_matrix_inner_home
-          shift: [-0.5cx + 4, -cy + 4]
-cases:
-  tray_case:
-    - name: case_panel
-      extrude: 3
-    - name: case_lip
-      extrude: 8
-    - name: mounting_points
-      extrude: 5
 points.key:
   footprints:
     - type: choc
@@ -358,7 +292,7 @@ points.key:
       params:
         through_hole: false
 pcbs:
-  rufous:
+  rufous_splay:
     outlines:
       main:
         outline: panel
