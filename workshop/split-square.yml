@@ -36,6 +36,7 @@ points:
   # - `tags` are helpers that allow later sections like `outlines` filter selections
   #   to those specific keys
   zones.matrix:
+    rotate: 8
     rows:
       bottom.padding: cy
       home.padding: cy
@@ -50,7 +51,8 @@ points:
           column_net: P6
     columns.ring:
       spread: cx
-      stagger: 0.5cy
+      stagger: 2/3cy
+      rotate: -5
       rows:
         top:
           column_net: P6
@@ -61,6 +63,7 @@ points:
     columns.middle:
       spread: cx
       stagger: 0.25cy
+      rotate: -3
       rows:
         top:
           column_net: P7
@@ -119,7 +122,7 @@ outlines:
           shift: [0, -0.5sf]
         - ref: matrix_pinky_home
           affect: x
-          shift: [-0.5sf, 0]
+          shift: [-0.75sf, 0]
         - ref: matrix_middle_top
           affect: y
           shift: [0, 0.5sf]
@@ -140,7 +143,7 @@ outlines:
       - panel
       - ^_switches
     _mock_keycaps:
-      - _outer
+      - panel
       - ^_keycaps
 points.key:
   footprints:
@@ -156,10 +159,8 @@ pcbs:
       main:
         outline: panel
     footprints:
-      - type: xiao
+      - type: promicro
         anchor:
           ref: matrix_ring_bottom
           shift: [0, -1.5cy]
           rotate: 90
-          # Final vertical shift should be the same as the vertical shift from
-          # `_center_raw` polygon defined in the outline section above
