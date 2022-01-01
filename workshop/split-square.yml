@@ -4,7 +4,8 @@ units:
   cx: 18.5        # Key spacing horizontal
   cy: 17.5        # Key spacing vertical
   sf: 15          # Switch footprint (square)
-  
+  pinky_splay: 5  # Degrees of splay between pinky and ring columns
+  ring_splay: 3   # Degrees of splay between ring and index columns  
   # *Note:* not all supported changes are parameterized
 
   # Constants
@@ -36,7 +37,7 @@ points:
   # - `tags` are helpers that allow later sections like `outlines` filter selections
   #   to those specific keys
   zones.matrix:
-    rotate: 8
+    rotate: pinky_splay + ring_splay
     rows:
       bottom.padding: cy
       home.padding: cy
@@ -46,31 +47,31 @@ points:
       rows:
         bottom.skip: true
         top:
-          column_net: P6
+          column_net: P21
         home:
-          column_net: P6
+          column_net: P20
     columns.ring:
       spread: cx
       stagger: 2/3cy
-      rotate: -5
+      rotate: -pinky_splay
       rows:
         top:
-          column_net: P6
+          column_net: P19
         home:
-          column_net: P6
+          column_net: P18
         bottom:
-          column_net: P6
+          column_net: P15
     columns.middle:
       spread: cx
       stagger: 0.25cy
-      rotate: -3
+      rotate: -ring_splay
       rows:
         top:
-          column_net: P7
+          column_net: P14
         home:
-          column_net: P7
+          column_net: P16
         bottom:
-          column_net: P6
+          column_net: P10
     columns.index:
       spread: cx
       stagger: -0.25cy
@@ -78,18 +79,18 @@ points:
         top:
           column_net: P7
         home:
-          column_net: P7
+          column_net: P8
         bottom:
-          column_net: P7
+          column_net: P9
     columns.inner:
       spread: cx
       stagger: -0.5cy
       rows:
         bottom.skip: true
         top:
-          column_net: P8
+          column_net: P4
         home:
-          column_net: P8
+          column_net: P5
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
@@ -98,13 +99,13 @@ points:
     columns.outer:
       rows:
         thumb:
-          column_net: P7
+          column_net: P6
     columns.inner:
       spread: cx
       stagger: -0.25cy
       rows:
         thumb:
-          column_net: P8
+          column_net: P3
 outlines:
   exports:
     # The below outlines are intentionally split out in order
@@ -148,19 +149,26 @@ outlines:
 points.key:
   footprints:
     - type: choc
+      anchor:
+        rotate: 180
       nets:
-        from: GND
+        from: =column_net
         to: GND
       params:
+        reverse: true
         keycaps: true
 pcbs:
-  rufous:
+  square-split:
     outlines:
       main:
         outline: panel
     footprints:
       - type: promicro
         anchor:
-          ref: matrix_ring_bottom
-          shift: [0, -1.5cy]
-          rotate: 90
+          - ref: matrix_pinky_home
+            shift: [-0.75sf + 24, 0]
+            rotate: -pinky_splay - ring_splay
+          - ref: thumb_outer_thumb
+            affect: y
+        params:
+          orientation: up
