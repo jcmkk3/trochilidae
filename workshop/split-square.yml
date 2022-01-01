@@ -47,9 +47,9 @@ points:
       rows:
         bottom.skip: true
         top:
-          column_net: P21
-        home:
           column_net: P20
+        home:
+          column_net: P21
     columns.ring:
       spread: cx
       stagger: 2/3cy
