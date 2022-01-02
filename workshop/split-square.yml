@@ -56,22 +56,22 @@ points:
       rotate: -pinky_splay
       rows:
         top:
-          column_net: P19
+          column_net: P14
         home:
-          column_net: P18
+          column_net: P16
         bottom:
-          column_net: P15
+          column_net: P10
     columns.middle:
       spread: cx
       stagger: 0.25cy
       rotate: -ring_splay
       rows:
         top:
-          column_net: P14
+          column_net: P19
         home:
-          column_net: P16
+          column_net: P18
         bottom:
-          column_net: P10
+          column_net: P15
     columns.index:
       spread: cx
       stagger: -0.25cy
@@ -152,8 +152,8 @@ points.key:
       anchor:
         rotate: 180
       nets:
-        from: =column_net
-        to: GND
+        from: GND
+        to: =column_net
       params:
         reverse: true
         keycaps: true
@@ -166,7 +166,7 @@ pcbs:
       - type: promicro
         anchor:
           - ref: matrix_pinky_home
-            shift: [-0.75sf + 24, 0]
+            shift: [-0.75sf + 18, 0]
             rotate: -pinky_splay - ring_splay
           - ref: thumb_outer_thumb
             affect: y
