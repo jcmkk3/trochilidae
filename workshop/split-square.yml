@@ -172,3 +172,36 @@ pcbs:
             affect: y
         params:
           orientation: up
+      - type: jumper  # Power jumper
+        anchor:
+          - ref: matrix_ring_bottom
+            shift: [6, 0]
+            rotate: -ring_splay + 90
+          - ref: thumb_outer_thumb
+            shift: [0, 0.5cy - 3]
+            affect: y
+        nets:
+          from: RAW
+          to: RAW
+      - type: jumper  # Battery pads
+        anchor:
+          - ref: matrix_ring_bottom
+            shift: [6, 0]
+            rotate: -ring_splay
+          - ref: thumb_outer_thumb
+            shift: [0, -0.5cy + 1]
+            affect: y
+        nets:
+          from: RAW
+          to: GND
+      - type: jumper  # Reset
+        anchor:
+          - ref: matrix_pinky_home
+            shift: [-0.75sf + 8, 0]
+            rotate: -pinky_splay - ring_splay
+          - ref: thumb_inner_thumb
+            shift: [0, -0.5sf + 1.5]
+            affect: y
+        nets:
+          from: RST
+          to: GND
