@@ -178,7 +178,7 @@ pcbs:
             shift: [6, 0]
             rotate: -ring_splay + 90
           - ref: thumb_outer_thumb
-            shift: [0, 0.5cy - 3]
+            shift: [0, -0.5cy + 3]
             affect: y
         nets:
           from: RAW
@@ -189,7 +189,7 @@ pcbs:
             shift: [6, 0]
             rotate: -ring_splay
           - ref: thumb_outer_thumb
-            shift: [0, -0.5cy + 1]
+            shift: [0, 0.5cy - 1]
             affect: y
         nets:
           from: RAW
@@ -197,11 +197,8 @@ pcbs:
       - type: jumper  # Reset
         anchor:
           - ref: matrix_pinky_home
-            shift: [-0.75sf + 8, 0]
-            rotate: -pinky_splay - ring_splay
-          - ref: thumb_inner_thumb
-            shift: [0, -0.5sf + 1.5]
-            affect: y
+            shift: [-0.75sf + 1, -0.5cy -2]
+            rotate: -pinky_splay - ring_splay + 90
         nets:
           from: RST
           to: GND
