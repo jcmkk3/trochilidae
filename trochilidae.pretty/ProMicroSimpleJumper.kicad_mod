@@ -1,6 +1,6 @@
 (footprint "ProMicroSimpleJumper" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
-  (tedit 61D387BE)
+  (tedit 61D4FEF7)
   (attr through_hole)
   (fp_text reference "MCU1" (at 0 0) (layer "F.SilkS") hide
     (effects (font (size 1.27 1.27) (thickness 0.15)))
@@ -14,7 +14,7 @@
     (effects (font (size 0.8 0.8) (thickness 0.15)) (justify mirror))
     (tstamp 38df9810-0b24-4435-9dd8-1e6fd30f016c)
   )
-  (fp_text user "RAW" (at -11.438059 -1.553464 -270 unlocked) (layer "B.SilkS")
+  (fp_text user "GND" (at -11.438059 -1.553464 -270 unlocked) (layer "B.SilkS")
     (effects (font (size 0.8 0.8) (thickness 0.15)) (justify mirror))
     (tstamp 45758cae-24d4-4439-b187-9521e1a95c35)
   )
@@ -22,7 +22,7 @@
     (effects (font (size 0.8 0.8) (thickness 0.15)) (justify mirror))
     (tstamp f21b38da-7f34-46c2-ad96-22d62a68aec2)
   )
-  (fp_text user "RAW" (at -11.43 1.460714 90 unlocked) (layer "F.SilkS")
+  (fp_text user "GND" (at -11.43 1.460714 90 unlocked) (layer "F.SilkS")
     (effects (font (size 0.8 0.8) (thickness 0.15)))
     (tstamp 0f69fabf-ad9d-4f6f-b97a-86379c1c7944)
   )
@@ -270,11 +270,4 @@
   (pad "22" thru_hole circle (at 8.89 7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.Mask) (tstamp 8afefa03-006b-4e40-b19e-6596c7cc472e))
   (pad "23" thru_hole circle (at 11.43 7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.Mask) (tstamp 01600802-66c5-45a2-be7f-4fa2327d845b))
   (pad "24" thru_hole circle (at 13.97 7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.Mask) (tstamp 200b738a-50e9-4f57-b197-9a6a0ae11af3))
-  (group "" (id 048a2e7a-2654-45ea-800d-89fd7b446794)
-    (members
-      0f69fabf-ad9d-4f6f-b97a-86379c1c7944
-      d712b392-f96a-4fce-aa86-79a8b3ea2961
-      f00765b5-a701-4b33-8f36-a91bcbf42e8b
-    )
-  )
 )
