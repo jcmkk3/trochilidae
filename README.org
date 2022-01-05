@@ -8,8 +8,21 @@ A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummin
 
 [[rufous/rufous_thumb.jpg]]
 [[rufous/rufous_splay_pcb_front.png]]
-[[rufous/rufous_splay_pcb_back.png]]
 
+** Berylline
+/Saucerottia beryllina/
+
+[[berylline/berylline_thumb.jpg]]
+
+*** Features
+- Same key layout as my latest rufous splay unibody
+- Meant for tented/puck usage
+- MCU footprint to allow both controllers to be component side up
+- Reset pads for easy tweezering
+- Battery wire window in case you want to run the wires under the board (should be nice for builds with a case)
+- A couple of holes for header pins meant to be used with a physical jumper to disconnect power if needed
+
+[[berylline/berylline_pcb.png]]
 
 ** Possible Future Variants
 - Rectangular variant with side mounted MCU and USB port facing the side, intended for use on top of an existing laptop keyboard
