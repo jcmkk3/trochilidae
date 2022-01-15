@@ -1,204 +1,228 @@
 units:
   # Parameters
   # ==========
-  cx: 18.5        # Key spacing horizontal
-  cy: 17.5        # Key spacing vertical
+  kx: cx + 0.5    # Key spacing horizontal
+  ky: cy + 0.5    # Key spacing vertical
   sf: 15          # Switch footprint (square)
   pinky_splay: 5  # Degrees of splay between pinky and ring columns
   ring_splay: 3   # Degrees of splay between ring and index columns  
-  # *Note:* not all supported changes are parameterized
 
   # Constants
   # =========
-  xiao_x: 17.5
-  xiao_y: 20
+  mcu_h: 18
+  mcu_w: 33
+  power_jumper_h: 4.4
+  power_jumper_w: 1.8
+  battery_pads_h: 2.1
+  battery_pads_w: 3.8
+  reset_h: 3.8
+  reset_w: 2.1
 
-points:
+templates:
+  key: &key_attributes
+    tags:
+      key_switch: true
+    footprints:
+      - type: choc
+        anchor:
+          rotate: 180
+        nets:
+          from: GND
+          to: =key_net
+        params:
+          reverse: true
+          keycaps: true
 
-  # Zones
-  # =====
-  # There are two zones defined: `matrix` and `thumb`
-  # - The `matrix` covers all keys used by the pinky - index fingers
-  # - The `thumb` zone sits below the matrix keys
-  #
-  # Top level attributes of `spread`, `stagger`, and `rotate` are defined at the column level
-  # - `spread` determines the distance between columns and uses the parameter `cx`
-  # - `stagger` is the vertical differences between columns
-  #   It is typically based on a fraction of the vertical key spacing `cy`
-  # - `rotate` is the "splay" of the column
-  #   This should be controlled with the appropriate parameters and not overriden directly
-  #
-  # Row level attributes serve various utility purposes
-  # - `row.skip` is used to remove the bottom key in the pinky and inner columns
-  # - `bind` is used to apply extra padding to specific keys in order to fill gaps
-  #   or shape the outline produced by `type: keys` in the outline section
-  # - `row_net` and `column_net` are used to define the connections between the keys
-  #   and other components as defined in the `key.footprints` or `pcb` sections of the config
-  # - `tags` are helpers that allow later sections like `outlines` filter selections
-  #   to those specific keys
-  zones.matrix:
+points.zones:
+
+  # Key Switches
+  # ============
+  matrix:
+    key: *key_attributes
     rotate: pinky_splay + ring_splay
     rows:
-      bottom.padding: cy
-      home.padding: cy
-      top.padding: cy
+      bottom.padding: ky
+      home.padding: ky
+      top.padding: ky
     columns.pinky:
-      spread: cx
+      spread: kx
       rows:
         bottom.skip: true
-        top:
-          column_net: P20
-        home:
-          column_net: P21
+        top.key_net: P20
+        home.key_net: P21
     columns.ring:
-      spread: cx
-      stagger: 2/3cy
+      spread: kx
+      stagger: 2/3ky
       rotate: -pinky_splay
       rows:
-        top:
-          column_net: P14
-        home:
-          column_net: P16
-        bottom:
-          column_net: P10
+        top.key_net: P14
+        home.key_net: P16
+        bottom.key_net: P10
     columns.middle:
-      spread: cx
-      stagger: 0.25cy
+      spread: kx
+      stagger: 0.25ky
       rotate: -ring_splay
       rows:
-        top:
-          column_net: P19
-        home:
-          column_net: P18
-        bottom:
-          column_net: P15
+        top.key_net: P19
+        home.key_net: P18
+        bottom.key_net: P15
     columns.index:
-      spread: cx
-      stagger: -0.25cy
+      spread: kx
+      stagger: -0.25ky
       rows:
-        top:
-          column_net: P7
-        home:
-          column_net: P8
-        bottom:
-          column_net: P9
+        top.key_net: P7
+        home.key_net: P8
+        bottom.key_net: P9
     columns.inner:
-      spread: cx
-      stagger: -0.5cy
+      spread: kx
+      stagger: -0.5ky
       rows:
         bottom.skip: true
-        top:
-          column_net: P4
-        home:
-          column_net: P5
-  zones.thumb:
+        top.key_net: P4
+        home.key_net: P5
+  thumb:
+    key: *key_attributes
     anchor:
       ref: matrix_index_bottom
-      shift: [0.25cx, -22]
-    rows.thumb:
-    columns.outer:
-      rows:
-        thumb:
-          column_net: P6
-    columns.inner:
-      spread: cx
-      stagger: -0.25cy
-      rows:
-        thumb:
-          column_net: P3
-outlines:
-  exports:
-    # The below outlines are intentionally split out in order
-    # to view the intermediate steps during transformation
-    _outer:
-      - type: polygon
-        points:
-        - ref: matrix_middle_top
-          shift: [0, 0.5sf]
-        - ref: thumb_inner_thumb
-          affect: x
-          shift: [0.5sf, 0]
-        - ref: thumb_inner_thumb
-          affect: y
-          shift: [0, -0.5sf]
-        - ref: matrix_pinky_home
-          affect: x
-          shift: [-0.75sf, 0]
-        - ref: matrix_middle_top
-          affect: y
-          shift: [0, 0.5sf]
-    _switches:
-      - type: keys
-        side: left
-        size: 15
-        bound: false
-    _keycaps:
-      - type: keys
-        side: left
-        size: [18, 17]
-        bound: false
-    panel:
-      - name: _outer
-        fillet: 3
-    _mock_switches:
-      - panel
-      - ^_switches
-    _mock_keycaps:
-      - panel
-      - ^_keycaps
-points.key:
-  footprints:
-    - type: choc
+      shift: [0.25kx, -22]
+    columns.tucky:
+      key:
+        name: thumb_tucky
+        key_net: P6
+    columns.reachy:
+      spread: kx
+      stagger: -0.25ky
+      key:
+        name: thumb_reachy
+        key_net: P3
+
+  # Footprint Positions
+  # ============
+  mcu:
+    key.name: mcu
+    anchor:
+      - ref: matrix_pinky_home
+        shift: [-0.75sf + 18, 0]
+        rotate: -pinky_splay - ring_splay
+      - ref: thumb_tucky
+        affect: y
+  power_jumper:
+    key.name: power_jumper
+    anchor:
+      - ref: matrix_ring_bottom
+        shift: [6, 0]
+        rotate: -ring_splay + 90
+      - ref: thumb_tucky
+        shift: [0, -0.5ky + 3]
+        affect: y
+  battery_pads:
+    key.name: battery_pads
+    anchor:
+      - ref: matrix_ring_bottom
+        shift: [6, 0]
+        rotate: -ring_splay
+      - ref: thumb_tucky
+        shift: [0, 0.5ky - 1]
+        affect: y
+  reset:
+    key.name: reset
+    anchor:
+    - ref: matrix_pinky_home
+      shift: [-0.75sf + 1, -0.5ky -2]
+      rotate: -pinky_splay - ring_splay + 90
+
+outlines.exports:
+  _outer:
+    - type: polygon
+      points:
+      - ref: matrix_middle_top
+        shift: [0, 0.5sf]
+      - ref: thumb_reachy
+        affect: x
+        shift: [0.5sf, 0]
+      - ref: thumb_reachy
+        affect: y
+        shift: [0, -0.5sf]
+      - ref: matrix_pinky_home
+        affect: x
+        shift: [-0.75sf, 0]
+      - ref: matrix_middle_top
+        affect: y
+        shift: [0, 0.5sf]
+  _panel:
+    - name: _outer
+      fillet: 3
+  _switches:
+    - type: keys
+      side: left
+      size: 15
+      bound: false
+      tags: [key_switch]
+  _keycaps:
+    - type: keys
+      side: left
+      size: [cx, cy]
+      bound: false
+      tags: [key_switch]
+  _mcu:
+    - type: rectangle
       anchor:
-        rotate: 180
-      nets:
-        from: GND
-        to: =column_net
-      params:
-        reverse: true
-        keycaps: true
+        ref: mcu
+        shift: [mcu_w / -2, mcu_h / -2]
+      size: [mcu_w, mcu_h]
+  _power_jumper:
+    - type: rectangle
+      anchor:
+        ref: power_jumper
+        shift: [power_jumper_w / -2, power_jumper_h / -2]
+        rotate: -90
+      size: [power_jumper_w, power_jumper_h]
+  _battery_pads:
+    - type: rectangle
+      anchor:
+        ref: battery_pads
+        shift: [battery_pads_w / -2, battery_pads_h / -2]
+      size: [battery_pads_w, battery_pads_h]        
+  _reset:
+    - type: rectangle
+      anchor:
+        ref: reset
+        shift: [reset_h / -2, reset_w / -2]
+      size: [reset_h, reset_w]        
+  _demo:
+    - _panel
+    - ^_mcu
+    - ^_power_jumper
+    - ^_battery_pads
+    - ^_reset
+  demo_switches:
+    - _demo
+    - ^_switches
+  demo_keycaps:
+    - _demo
+    - ^_keycaps
 pcbs:
-  square-split:
+  berylline:
     outlines:
       main:
-        outline: panel
+        outline: _panel
     footprints:
       - type: promicro
-        anchor:
-          - ref: matrix_pinky_home
-            shift: [-0.75sf + 18, 0]
-            rotate: -pinky_splay - ring_splay
-          - ref: thumb_outer_thumb
-            affect: y
+        anchor.ref: mcu
         params:
           orientation: up
-      - type: jumper  # Power jumper
-        anchor:
-          - ref: matrix_ring_bottom
-            shift: [6, 0]
-            rotate: -ring_splay + 90
-          - ref: thumb_outer_thumb
-            shift: [0, -0.5cy + 3]
-            affect: y
+      - type: jumper
+        anchor.ref: power_jumper
         nets:
           from: RAW
           to: RAW
-      - type: jumper  # Battery pads
-        anchor:
-          - ref: matrix_ring_bottom
-            shift: [6, 0]
-            rotate: -ring_splay
-          - ref: thumb_outer_thumb
-            shift: [0, 0.5cy - 1]
-            affect: y
+      - type: jumper
+        anchor.ref: battery_pads
         nets:
           from: RAW
           to: GND
-      - type: jumper  # Reset
-        anchor:
-          - ref: matrix_pinky_home
-            shift: [-0.75sf + 1, -0.5cy -2]
-            rotate: -pinky_splay - ring_splay + 90
+      - type: jumper
+        anchor.ref: reset
         nets:
           from: RST
           to: GND
