@@ -96,14 +96,44 @@ points.zones:
         name: thumb_reachy
         key_net: P3
 
+  # Outline Extents
+  # ===================
+  o_top_left:
+    key.name: o_top_left
+    anchor:
+    - ref: matrix_middle_top
+      shift: [0, 0.5sf]
+    - ref: matrix_pinky_home
+      affect: x
+      shift: [-0.75sf, 0]
+  o_top_right:
+    key.name: o_top_right
+    anchor:
+    - ref: o_top_left
+    - ref: thumb_reachy
+      affect: x
+      shift: [0.5sf, 0]
+  o_bottom_left:
+    key.name: o_bottom_left
+    anchor:
+    - ref: o_top_left
+    - ref: thumb_reachy
+      affect: y
+      shift: [0, -0.5sf]
+  o_bottom_right:
+    key.name: o_bottom_right
+    anchor:
+    - ref: o_top_right
+    - ref: o_bottom_left
+      affect: y
+
   # Footprint Positions
-  # ============
+  # ===================
   mcu:
     key.name: mcu
     anchor:
-      - ref: matrix_pinky_home
-        shift: [-0.75sf + 18, 0]
-        rotate: -pinky_splay - ring_splay
+      - ref: o_bottom_left
+        shift: [17.5, 0]
       - ref: thumb_tucky
         affect: y
   power_jumper:
@@ -118,37 +148,26 @@ points.zones:
   battery_pads:
     key.name: battery_pads
     anchor:
-      - ref: matrix_ring_bottom
-        shift: [6, 0]
-        rotate: -ring_splay
+      - ref: o_bottom_left
+        shift: [mcu_w + 5, 0]
       - ref: thumb_tucky
         shift: [0, 0.5ky - 1]
         affect: y
   reset:
     key.name: reset
     anchor:
-    - ref: matrix_pinky_home
-      shift: [-0.75sf + 1, -0.5ky -2]
-      rotate: -pinky_splay - ring_splay + 90
+    - ref: o_bottom_left
+      shift: [reset_w, mcu_h + 6]
+      rotate: 90
 
 outlines.exports:
   _outer:
     - type: polygon
       points:
-      - ref: matrix_middle_top
-        shift: [0, 0.5sf]
-      - ref: thumb_reachy
-        affect: x
-        shift: [0.5sf, 0]
-      - ref: thumb_reachy
-        affect: y
-        shift: [0, -0.5sf]
-      - ref: matrix_pinky_home
-        affect: x
-        shift: [-0.75sf, 0]
-      - ref: matrix_middle_top
-        affect: y
-        shift: [0, 0.5sf]
+      - ref: o_top_left
+      - ref: o_top_right
+      - ref: o_bottom_right
+      - ref: o_bottom_left
   _panel:
     - name: _outer
       fillet: 3
