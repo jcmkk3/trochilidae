@@ -28,7 +28,7 @@ templates:
           rotate: 180
         nets:
           from: GND
-          to: =column_net
+          to: =key_net
         params:
           reverse: true
           keycaps: true
@@ -48,52 +48,53 @@ points.zones:
       spread: kx
       rows:
         bottom.skip: true
-        top.column_net: P20
-        home.column_net: P21
+        top.key_net: P20
+        home.key_net: P21
     columns.ring:
       spread: kx
       stagger: 2/3ky
       rotate: -pinky_splay
       rows:
-        top.column_net: P14
-        home.column_net: P16
-        bottom.column_net: P10
+        top.key_net: P14
+        home.key_net: P16
+        bottom.key_net: P10
     columns.middle:
       spread: kx
       stagger: 0.25ky
       rotate: -ring_splay
       rows:
-        top.column_net: P19
-        home.column_net: P18
-        bottom.column_net: P15
+        top.key_net: P19
+        home.key_net: P18
+        bottom.key_net: P15
     columns.index:
       spread: kx
       stagger: -0.25ky
       rows:
-        top.column_net: P7
-        home.column_net: P8
-        bottom.column_net: P9
+        top.key_net: P7
+        home.key_net: P8
+        bottom.key_net: P9
     columns.inner:
       spread: kx
       stagger: -0.5ky
       rows:
         bottom.skip: true
-        top.column_net: P4
-        home.column_net: P5
+        top.key_net: P4
+        home.key_net: P5
   thumb:
     key: *key_attributes
     anchor:
       ref: matrix_index_bottom
       shift: [0.25kx, -22]
-    rows.thumb:
-    columns.outer:
-      rows:
-        thumb.column_net: P6
-    columns.inner:
+    columns.tucky:
+      key:
+        name: thumb_tucky
+        key_net: P6
+    columns.reachy:
       spread: kx
       stagger: -0.25ky
-      rows:
-        thumb.column_net: P3
+      key:
+        name: thumb_reachy
+        key_net: P3
 
   # Footprint Positions
   # ============
@@ -103,7 +104,7 @@ points.zones:
       - ref: matrix_pinky_home
         shift: [-0.75sf + 18, 0]
         rotate: -pinky_splay - ring_splay
-      - ref: thumb_outer_thumb
+      - ref: thumb_tucky
         affect: y
   power_jumper:
     key.name: power_jumper
@@ -111,7 +112,7 @@ points.zones:
       - ref: matrix_ring_bottom
         shift: [6, 0]
         rotate: -ring_splay + 90
-      - ref: thumb_outer_thumb
+      - ref: thumb_tucky
         shift: [0, -0.5ky + 3]
         affect: y
   battery_pads:
@@ -120,7 +121,7 @@ points.zones:
       - ref: matrix_ring_bottom
         shift: [6, 0]
         rotate: -ring_splay
-      - ref: thumb_outer_thumb
+      - ref: thumb_tucky
         shift: [0, 0.5ky - 1]
         affect: y
   reset:
@@ -136,10 +137,10 @@ outlines.exports:
       points:
       - ref: matrix_middle_top
         shift: [0, 0.5sf]
-      - ref: thumb_inner_thumb
+      - ref: thumb_reachy
         affect: x
         shift: [0.5sf, 0]
-      - ref: thumb_inner_thumb
+      - ref: thumb_reachy
         affect: y
         shift: [0, -0.5sf]
       - ref: matrix_pinky_home
