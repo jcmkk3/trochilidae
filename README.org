@@ -23,11 +23,3 @@ A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummin
 - A couple of holes for header pins meant to be used with a physical jumper to disconnect power if needed
 
 [[berylline/photos/berylline_focus.jpg]]
-
-** Possible Future Variants
-- Rectangular variant with side mounted MCU and USB port facing the side, intended for use on top of an existing laptop keyboard
-- Choc mini/choc v1 pinky hybrid variant
-- Deconstructed 3D-ish variant with negative sloping main keys flat thumbs and pinky keys with reverse slope of main board
-- Split variant
-- Wireless variant(s)
-- Scooped keycap spaced (18x18)
