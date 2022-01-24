@@ -7,7 +7,7 @@ A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummin
 /Selasphorus rufus/
 
 [[rufous/rufous_thumb.jpg]]
-[[rufous/rufous_splay_pcb_front.png]]
+[[rufous/photos/rufous_three_quarter.jpg]]
 
 ** Berylline
 /Saucerottia beryllina/
@@ -22,7 +22,7 @@ A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummin
 - Battery wire window in case you want to run the wires under the board (should be nice for builds with a case)
 - A couple of holes for header pins meant to be used with a physical jumper to disconnect power if needed
 
-[[berylline/berylline_pcb.png]]
+[[berylline/photos/berylline_focus.jpg]]
 
 ** Possible Future Variants
 - Rectangular variant with side mounted MCU and USB port facing the side, intended for use on top of an existing laptop keyboard
