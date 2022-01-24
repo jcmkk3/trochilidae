@@ -88,9 +88,9 @@ points.zones:
 
   # Outline Extents
   # ===================
-  o_top_left:
+  outline_top_left:
     key:
-      name: o_top_left
+      name: outline_top_left
       height: 0
       width: 0
     anchor:
@@ -99,34 +99,34 @@ points.zones:
     - ref: matrix_pinky_home
       affect: x
       shift: [-0.75sf, 0]
-  o_top_right:
+  outline_top_right:
     key:
-      name: o_top_right
+      name: outline_top_right
       height: 0
       width: 0
     anchor:
-    - ref: o_top_left
+    - ref: outline_top_left
     - ref: thumb_reachy
       affect: x
       shift: [0.5sf, 0]
-  o_bottom_left:
+  outline_bottom_left:
     key:
-      name: o_bottom_left
+      name: outline_bottom_left
       height: 0
       width: 0      
     anchor:
-    - ref: o_top_left
+    - ref: outline_top_left
     - ref: thumb_reachy
       affect: y
       shift: [0, -0.5sf]
-  o_bottom_right:
+  outline_bottom_right:
     key:
-      name: o_bottom_right
+      name: outline_bottom_right
       height: 0
       width: 0      
     anchor:
-    - ref: o_top_right
-    - ref: o_bottom_left
+    - ref: outline_top_right
+    - ref: outline_bottom_left
       affect: y
 
   # Footprint Positions
@@ -137,7 +137,7 @@ points.zones:
       height: &mcu_h 18
       width: &mcu_w 33
     anchor:
-      - ref: o_bottom_left
+      - ref: outline_bottom_left
         shift: [17.5, 0]
       - ref: thumb_tucky
         affect: y
@@ -159,7 +159,7 @@ points.zones:
       height: &battery_pads_h 2.1
       width: &battery_pads_w 3.8
     anchor:
-      - ref: o_bottom_left
+      - ref: outline_bottom_left
         shift: [*mcu_w, 0]
       - shift: [5, 0]
       - ref: thumb_tucky
@@ -171,7 +171,7 @@ points.zones:
       height: &reset_h 3.8
       width: &reset_w 2.1
     anchor:
-    - ref: o_bottom_left
+    - ref: outline_bottom_left
       shift: [*reset_w, *mcu_h]
       rotate: 90
     - shift: [0, 6]
@@ -180,10 +180,10 @@ outlines.exports:
   _outer:
     - type: polygon
       points:
-      - ref: o_top_left
-      - ref: o_top_right
-      - ref: o_bottom_right
-      - ref: o_bottom_left
+      - ref: outline_top_left
+      - ref: outline_top_right
+      - ref: outline_bottom_right
+      - ref: outline_bottom_left
   _panel:
     - name: _outer
       fillet: 3
