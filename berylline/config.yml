@@ -16,8 +16,8 @@ points.zones:
   matrix:
     rotate: pinky_splay + ring_splay
     key: &key_attributes
-      width: 18
-      height: 17
+      width: &key_width 18
+      height: &key_height 17
       tags:
         key_switch: true
       footprints:
@@ -138,7 +138,7 @@ points.zones:
       width: &mcu_w 33
     anchor:
       - ref: outline_bottom_left
-        shift: [17.5, 0]
+        shift: [18, 0]
       - ref: thumb_tucky
         affect: y
   power_jumper:
@@ -147,34 +147,27 @@ points.zones:
       height: &power_jumper_h 4.4
       width: &power_jumper_w 1.8  
     anchor:
-      - ref: matrix_ring_bottom
-        shift: [6, 0]
-        rotate: -ring_splay + 90
-      - ref: thumb_tucky
-        shift: [0, -0.5ky + 3]
-        affect: y
+      - ref: mcu
+        shift: [16.5, -8]
+      - shift: [3, 3]
   battery_pads:
     key:
       name: battery_pads
       height: &battery_pads_h 2.1
       width: &battery_pads_w 3.8
     anchor:
-      - ref: outline_bottom_left
-        shift: [*mcu_w, 0]
-      - shift: [5, 0]
-      - ref: thumb_tucky
-        shift: [0, 0.5ky - 1]
-        affect: y
+      - ref: mcu
+        shift: [16.5, 8]
+      - shift: [3, 0]
   reset:
     key:
       name: reset
       height: &reset_h 3.8
       width: &reset_w 2.1
     anchor:
-    - ref: outline_bottom_left
-      shift: [*reset_w, *mcu_h]
-      rotate: 90
-    - shift: [0, 6]
+    - ref: mcu
+      shift: [-15.5, 9]
+    - shift: [0, 3]
 
 outlines.exports:
   _outer:
@@ -187,8 +180,13 @@ outlines.exports:
   _panel:
     - name: _outer
       fillet: 3
-  total_demo:
+  key_demo:
     - _panel
+    - operation: stack
+      type: keys
+      side: left
+      tags: [key_switch]
+      size: [*key_width, *key_height]
 pcbs:
   berylline:
     outlines:
