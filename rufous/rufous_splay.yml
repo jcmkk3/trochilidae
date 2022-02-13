@@ -167,8 +167,6 @@ points:
           column_net: P10
 outlines:
   exports:
-    # The below outlines are intentionally split out in order
-    # to view the intermediate steps during transformation
     _outer_raw:
       - type: keys
         side: left
@@ -193,7 +191,7 @@ outlines:
         side: right
         size: sf
         tags: [center_top]
-    _center:
+    _panel:
       - name: _center_raw
         fillet: 3  # The inner rounding where the glue meets the top center keys
       - operation: subtract
@@ -202,10 +200,12 @@ outlines:
           ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
           shift: [0, 0.5sf - 60]
         radius: 60  # Should be the same as the last number in `shift` above
-    _combined:
-      - _outer_raw
-      - _center
-    _switch_cutouts:
+      - operation: add
+        name: _outer_raw
+    panel:
+      - name: _panel
+        fillet: 1.5
+    _switches:
       - type: keys
         side: left
         size: 14
@@ -213,15 +213,11 @@ outlines:
       - type: keys
         side: right
         size: 14
-        bound: false
-    panel:
-      - name: _combined
-        fillet: 1.5
-    switch_plate:
-      - name: _combined
-        fillet: 1.5
+        bound: false        
+    demo_switches:
+      - name: panel
       - operation: subtract
-        name: _switch_cutouts
+        name: _switches
         fillet: 0.5
 points.key:
   footprints:
