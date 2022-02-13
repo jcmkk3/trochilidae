@@ -200,8 +200,7 @@ outlines:
           ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
           shift: [0, 0.5sf - 60]
         radius: 60  # Should be the same as the last number in `shift` above
-      - operation: add
-        name: _outer_raw
+      - name: _outer_raw
     panel:
       - name: _panel
         fillet: 1.5
