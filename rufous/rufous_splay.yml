@@ -215,9 +215,22 @@ outlines:
         bound: false        
     demo_switches:
       - name: panel
-      - operation: subtract
+      - operation: stack
         name: _switches
         fillet: 0.5
+    _keycaps:
+      - type: keys
+        side: left
+        size: [visual_x, visual_y]
+        bound: false
+      - type: keys
+        side: right
+        size: [visual_x, visual_y]
+        bound: false
+    demo_keycaps:
+      - name: panel
+      - operation: stack
+        name: _keycaps  
 points.key:
   footprints:
     - type: choc
