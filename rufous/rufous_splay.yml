@@ -144,27 +144,26 @@ points:
     anchor:
       ref: matrix_index_bottom
       shift: [0.25kx, -22]
-    rows.thumb:
-    columns.outer:
-      rows:
-        thumb:
-          bind: [0.5ky, 0.5kx, 0, 0]
-          row_net: P5
-          column_net: P7
-        thumb.mirror:
-          row_net: P4
-          column_net: P10
-    columns.inner:
+    columns.tucky:
+      key:
+        name: thumb_tucky
+        bind: [0.5ky, 0.5kx, 0, 0]
+        row_net: P5
+        column_net: P7
+      key.mirror:
+        row_net: P4
+        column_net: P10
+    columns.reachy:
       spread: kx
       stagger: -0.25ky
-      rows:
-        thumb:
-          bind: [1.5ky, 0, 0, 0]
-          row_net: P4
-          column_net: P8
-        thumb.mirror:
-          row_net: P5
-          column_net: P10
+      key:
+        name: thumb_reachy
+        bind: [1.5ky, 0, 0, 0]
+        row_net: P4
+        column_net: P8
+      key.mirror:
+        row_net: P5
+        column_net: P10
 outlines:
   exports:
     _outer_raw:
@@ -181,8 +180,8 @@ outlines:
           shift: &top_offset [0,-0.7ky]
         - ref: mirror_matrix_inner_top
           shift: *top_offset
-        - ref: mirror_thumb_inner_thumb
-        - ref: thumb_inner_thumb
+        - ref: mirror_thumb_reachy
+        - ref: thumb_reachy
       - type: keys
         side: left
         size: sf
@@ -197,7 +196,7 @@ outlines:
       - operation: subtract
         type: circle
         anchor:
-          ref: [thumb_inner_thumb, mirror_thumb_inner_thumb]
+          ref: [thumb_reachy, mirror_thumb_reachy]
           shift: [0, 0.5sf - 60]
         radius: 60  # Should be the same as the last number in `shift` above
       - name: _outer_raw
