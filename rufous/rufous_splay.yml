@@ -25,19 +25,19 @@ points:
       spread: kx
       rows:
         bottom.skip: true
-        top:
-          bind: [0,0.5kx,0.5ky,0]
-          row_net: P0
-          column_net: P6
         home:
           bind: [0.5ky,0.5kx,0,0]
           row_net: P2
           column_net: P6
-        top.mirror:
-          row_net: P1
-          column_net: P10
+        top:
+          bind: [0,0.5kx,0.5ky,0]
+          row_net: P0
+          column_net: P6
         home.mirror:
           row_net: P3
+          column_net: P10
+        top.mirror:
+          row_net: P1
           column_net: P10
     columns.ring:
       spread: kx
@@ -45,100 +45,100 @@ points:
       rotate: -pinky_splay
       origin: [0,-3]
       rows:
-        top:
-          bind: [0,0.5kx,0.5ky,0]
-          row_net: P1
+        bottom:
+          bind: [0.5ky,0,0,0]
+          row_net: P4
           column_net: P6
         home:
           bind: [0,0.5kx,0,0]
           row_net: P3
           column_net: P6
-        bottom:
-          bind: [0.5ky,0,0,0]
-          row_net: P4
+        top:
+          bind: [0,0.5kx,0.5ky,0]
+          row_net: P1
           column_net: P6
-        top.mirror:
-          row_net: P0
-          column_net: P10
-        home.mirror:
-          row_net: P2
-          column_net: P10
         bottom.mirror:
           row_net: P5
           column_net: P9
+        home.mirror:
+          row_net: P2
+          column_net: P10
+        top.mirror:
+          row_net: P0
+          column_net: P10
     columns.middle:
       spread: kx
       stagger: 0.25ky
       rotate: -ring_splay
       origin: [0,-8]
       rows:
-        top:
-          bind: [0,0,0.5ky,0]
-          row_net: P0
-          column_net: P7
-        home:
-          bind: [0,0.5kx,0,0]
-          row_net: P2
-          column_net: P7
         bottom:
           bind: [0.5ky,0.5kx,0,0.5kx]
           row_net: P5
           column_net: P6
-        top.mirror:
-          row_net: P1
+        home:
+          bind: [0,0.5kx,0,0]
+          row_net: P2
+          column_net: P7
+        top:
+          bind: [0,0,0.5ky,0]
+          row_net: P0
+          column_net: P7
+        bottom.mirror:
+          row_net: P4
           column_net: P9
         home.mirror:
           row_net: P3
           column_net: P9
-        bottom.mirror:
-          row_net: P4
+        top.mirror:
+          row_net: P1
           column_net: P9
     columns.index:
       spread: kx
       stagger: -0.25ky
       rows:
-        top:
-          bind: [0,0,0.5ky,0.5kx]
-          row_net: P1
-          column_net: P7
-        home:
-          row_net: P3
-          column_net: P7
         bottom:
           bind: [0.5ky,0,0,0]
           row_net: P4
           column_net: P7
-        top.mirror:
-          row_net: P0
-          column_net: P9
-        home.mirror:
-          row_net: P2
-          column_net: P9
+        home:
+          row_net: P3
+          column_net: P7
+        top:
+          bind: [0,0,0.5ky,0.5kx]
+          row_net: P1
+          column_net: P7
         bottom.mirror:
           row_net: P5
           column_net: P8
+        home.mirror:
+          row_net: P2
+          column_net: P9
+        top.mirror:
+          row_net: P0
+          column_net: P9
     columns.inner:
       spread: kx
       stagger: -0.5ky
       rows:
         bottom.skip: true
-        top:
-          bind: [0,0,0.5ky,0.5kx]
-          row_net: P0
-          column_net: P8
-          tags:
-            center_top: true
         home:
           bind: [0.5ky,0,0.5ky,0.5kx]
           row_net: P2
           column_net: P8
           tags:
             center_top: true
-        top.mirror:
-          row_net: P1
+        top:
+          bind: [0,0,0.5ky,0.5kx]
+          row_net: P0
           column_net: P8
+          tags:
+            center_top: true
         home.mirror:
           row_net: P3
+          column_net: P8
+        top.mirror:
+          row_net: P1
           column_net: P8
   zones.thumb:
     anchor:
