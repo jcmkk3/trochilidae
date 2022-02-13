@@ -180,9 +180,9 @@ outlines:
       - type: polygon
         points:
         - ref: matrix_inner_top
-          shift: [0,-0.7ky]
+          shift: &top_offset [0,-0.7ky]
         - ref: mirror_matrix_inner_top
-          shift: [0,-0.7ky]
+          shift: *top_offset
         - ref: mirror_thumb_inner_thumb
         - ref: thumb_inner_thumb
       - type: keys
@@ -248,15 +248,14 @@ pcbs:
     footprints:
       - type: xiao
         anchor:
-          ref: [matrix_inner_top, mirror_matrix_inner_top]
-          shift: [-xiao_x / 2, -xiao_y - 0.7ky]
-          # Final vertical shift should be the same as the vertical shift from
-          # `_center_raw` polygon defined in the outline section above
+          - ref: [matrix_inner_top, mirror_matrix_inner_top]
+            shift: [-xiao_x / 2, -xiao_y]
+          - shift: *top_offset
       - type: mountinghole
         anchor:
           ref: matrix_inner_home
-          shift: [-0.5kx + 4, -ky + 4]
+          shift: &mounting_position [-0.5kx + 4, -ky + 4]
       - type: mountinghole
         anchor:
           ref: mirror_matrix_inner_home
-          shift: [-0.5kx + 4, -ky + 4]
+          shift: *mounting_position
