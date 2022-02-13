@@ -212,7 +212,7 @@ outlines:
       - type: keys
         side: right
         size: 14
-        bound: false        
+        bound: false
     demo_switches:
       - name: panel
       - operation: stack
@@ -230,7 +230,7 @@ outlines:
     demo_keycaps:
       - name: panel
       - operation: stack
-        name: _keycaps  
+        name: _keycaps
 points.key:
   footprints:
     - type: choc
