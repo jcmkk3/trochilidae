@@ -1,14 +1,14 @@
 units:
   # Parameters
   # ==========
-  cx: 18.5        # Key spacing horizontal
-  cy: 17.5        # Key spacing vertical
+  kx: cx + 0.5    # Key spacing horizontal
+  ky: cy + 0.5    # Key spacing vertical
   sf: 16          # Switch footprint (square)
   angle: 22       # Angle between halves
   pinky_splay: 5  # Degrees of splay between pinky and ring columns
   ring_splay: 3   # Degrees of splay between ring and index columns
-  visual_x: 18
-  visual_y: 17
+  visual_x: cx
+  visual_y: cy
 
 points:
   rotate: -angle + pinky_splay + ring_splay
@@ -18,19 +18,19 @@ points:
     distance: 13
   zones.matrix:
     rows:
-      bottom.padding: cy
-      home.padding: cy
-      top.padding: cy
+      bottom.padding: ky
+      home.padding: ky
+      top.padding: ky
     columns.pinky:
-      spread: cx
+      spread: kx
       rows:
         bottom.skip: true
         top:
-          bind: [0,0.5cx,0.5cy,0]
+          bind: [0,0.5kx,0.5ky,0]
           row_net: P0
           column_net: P6
         home:
-          bind: [0.5cy,0.5cx,0,0]
+          bind: [0.5ky,0.5kx,0,0]
           row_net: P2
           column_net: P6
         top.mirror:
@@ -40,21 +40,21 @@ points:
           row_net: P3
           column_net: P10
     columns.ring:
-      spread: cx
-      stagger: 2/3cy
+      spread: kx
+      stagger: 2/3ky
       rotate: -pinky_splay
       origin: [0,-3]
       rows:
         top:
-          bind: [0,0.5cx,0.5cy,0]
+          bind: [0,0.5kx,0.5ky,0]
           row_net: P1
           column_net: P6
         home:
-          bind: [0,0.5cx,0,0]
+          bind: [0,0.5kx,0,0]
           row_net: P3
           column_net: P6
         bottom:
-          bind: [0.5cy,0,0,0]
+          bind: [0.5ky,0,0,0]
           row_net: P4
           column_net: P6
         top.mirror:
@@ -67,21 +67,21 @@ points:
           row_net: P5
           column_net: P9
     columns.middle:
-      spread: cx
-      stagger: 0.25cy
+      spread: kx
+      stagger: 0.25ky
       rotate: -ring_splay
       origin: [0,-8]
       rows:
         top:
-          bind: [0,0,0.5cy,0]
+          bind: [0,0,0.5ky,0]
           row_net: P0
           column_net: P7
         home:
-          bind: [0,0.5cx,0,0]
+          bind: [0,0.5kx,0,0]
           row_net: P2
           column_net: P7
         bottom:
-          bind: [0.5cy,0.5cx,0,0.5cx]
+          bind: [0.5ky,0.5kx,0,0.5kx]
           row_net: P5
           column_net: P6
         top.mirror:
@@ -94,18 +94,18 @@ points:
           row_net: P4
           column_net: P9
     columns.index:
-      spread: cx
-      stagger: -0.25cy
+      spread: kx
+      stagger: -0.25ky
       rows:
         top:
-          bind: [0,0,0.5cy,0.5cx]
+          bind: [0,0,0.5ky,0.5kx]
           row_net: P1
           column_net: P7
         home:
           row_net: P3
           column_net: P7
         bottom:
-          bind: [0.5cy,0,0,0]
+          bind: [0.5ky,0,0,0]
           row_net: P4
           column_net: P7
         top.mirror:
@@ -118,18 +118,18 @@ points:
           row_net: P5
           column_net: P8
     columns.inner:
-      spread: cx
-      stagger: -0.5cy
+      spread: kx
+      stagger: -0.5ky
       rows:
         bottom.skip: true
         top:
-          bind: [0,0,0.5cy,0.5cx]
+          bind: [0,0,0.5ky,0.5kx]
           row_net: P0
           column_net: P8
           tags:
             center_top: true
         home:
-          bind: [0.5cy,0,0.5cy,0.5cx]
+          bind: [0.5ky,0,0.5ky,0.5kx]
           row_net: P2
           column_net: P8
           tags:
@@ -143,23 +143,23 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [0.25cx, -22]
+      shift: [0.25kx, -22]
     rows.thumb:
     columns.outer:
       rows:
         thumb:
-          bind: [0.5cy, 0.5cx, 0, 0]
+          bind: [0.5ky, 0.5kx, 0, 0]
           row_net: P5
           column_net: P7
         thumb.mirror:
           row_net: P4
           column_net: P10
     columns.inner:
-      spread: cx
-      stagger: -0.25cy
+      spread: kx
+      stagger: -0.25ky
       rows:
         thumb:
-          bind: [1.5cy, 0, 0, 0]
+          bind: [1.5ky, 0, 0, 0]
           row_net: P4
           column_net: P8
         thumb.mirror:
@@ -180,9 +180,9 @@ outlines:
       - type: polygon
         points:
         - ref: matrix_inner_top
-          shift: [0,-0.7cy]
+          shift: [0,-0.7ky]
         - ref: mirror_matrix_inner_top
-          shift: [0,-0.7cy]
+          shift: [0,-0.7ky]
         - ref: mirror_thumb_inner_thumb
         - ref: thumb_inner_thumb
       - type: keys
@@ -249,14 +249,14 @@ pcbs:
       - type: xiao
         anchor:
           ref: [matrix_inner_top, mirror_matrix_inner_top]
-          shift: [-xiao_x / 2, -xiao_y - 0.7cy]
+          shift: [-xiao_x / 2, -xiao_y - 0.7ky]
           # Final vertical shift should be the same as the vertical shift from
           # `_center_raw` polygon defined in the outline section above
       - type: mountinghole
         anchor:
           ref: matrix_inner_home
-          shift: [-0.5cx + 4, -cy + 4]
+          shift: [-0.5kx + 4, -ky + 4]
       - type: mountinghole
         anchor:
           ref: mirror_matrix_inner_home
-          shift: [-0.5cx + 4, -cy + 4]
+          shift: [-0.5kx + 4, -ky + 4]
