@@ -7,8 +7,8 @@ units:
   angle: 22       # Angle between halves
   pinky_splay: 5  # Degrees of splay between pinky and ring columns
   ring_splay: 3   # Degrees of splay between ring and index columns
-  visual_x: cx
-  visual_y: cy
+  visual_x: cx    # Visual representation of keycaps horizontal
+  visual_y: cy    # Visual representation of keycaps vertical
 
 points:
   rotate: -angle + pinky_splay + ring_splay
