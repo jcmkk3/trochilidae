@@ -143,22 +143,24 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [0.25kx, -22]
+      shift: [1/3ky, -22]
     columns.tucky:
       key:
         name: thumb_tucky
-        bind: [0.5ky, 0.5kx, 0, 0]
+        rotate: 90
+        bind: [0, 0.5ky, 0.5kx, 0]
         row_net: P5
         column_net: P7
       key.mirror:
         row_net: P4
         column_net: P10
     columns.reachy:
-      spread: kx
-      stagger: -0.25ky
+      spread: ky
+      stagger: -0.25kx
       key:
         name: thumb_reachy
-        bind: [1.5ky, 0, 0, 0]
+        rotate: 90
+        bind: [0, 1.5ky, 0, 0]
         row_net: P4
         column_net: P8
       key.mirror:
