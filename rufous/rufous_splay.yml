@@ -17,6 +17,25 @@ points:
     shift: [0.5sf, 0.5sf]
     distance: 13
   zones.matrix:
+    key:
+      tags:
+        matrix: true
+      footprints:
+        - type: choc
+          nets:
+            from: =row_net
+            to: =colrow
+          params:
+            keycaps: true
+        - type: diode
+          anchor:
+            shift: [0, -4.7]
+            rotate: 180
+          nets:
+            from: =colrow
+            to: =column_net
+          params:
+            through_hole: false        
     rows:
       bottom.padding: ky
       home.padding: ky
@@ -144,11 +163,15 @@ points:
     anchor:
       ref: matrix_index_bottom
       shift: [1/3ky, -22]
+    key:
+      height: 1 / visual_y * visual_x
+      width: 1 / visual_x * visual_y
+      tags:
+        thumb: true
     columns.tucky:
       key:
         name: thumb_tucky
-        rotate: 90
-        bind: [0, 0.5ky, 0.5kx, 0]
+        bind: [0.5ky, 0.5kx, 0, 0]
         row_net: P5
         column_net: P7
       key.mirror:
@@ -156,11 +179,10 @@ points:
         column_net: P10
     columns.reachy:
       spread: ky
-      stagger: -0.25kx
+      stagger: -0.25ky
       key:
         name: thumb_reachy
-        rotate: 90
-        bind: [0, 1.5ky, 0, 0]
+        bind: [1.5ky, 0, 0, 0]
         row_net: P4
         column_net: P8
       key.mirror:
@@ -224,31 +246,26 @@ outlines:
         side: left
         size: [visual_x, visual_y]
         bound: false
+        tags: [matrix]        
       - type: keys
         side: right
         size: [visual_x, visual_y]
         bound: false
+        tags: [matrix]
+      - type: keys
+        side: left
+        size: [visual_y, visual_x]
+        bound: false
+        tags: [thumb]        
+      - type: keys
+        side: right
+        size: [visual_y, visual_x]
+        bound: false
+        tags: [thumb]
     demo_keycaps:
       - name: panel
       - operation: stack
         name: _keycaps
-points.key:
-  footprints:
-    - type: choc
-      nets:
-        from: =row_net
-        to: =colrow
-      params:
-        keycaps: true
-    - type: diode
-      anchor:
-        shift: [0, -4.7]
-        rotate: 180
-      nets:
-        from: =colrow
-        to: =column_net
-      params:
-        through_hole: false
 pcbs:
   rufous_splay:
     outlines:
