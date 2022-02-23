@@ -1,41 +1,46 @@
 units:
   # Parameters
   # ==========
-  kx: cx + 0.5    # Key spacing horizontal
-  ky: cy + 0.5    # Key spacing vertical
+
+  # ## Choc Splay
+  # capx: cx        # Key cap size horizontal
+  # capy: cy        # Key cap size vertical
+  # kx: cx + 0.5    # Key spacing horizontal
+  # ky: cy + 0.5    # Key spacing vertical
+  # angle: 22       # Angle between halves
+  # pinky_stagger: 2/3ky
+  # pinky_splay: 5  # Degrees of splay between pinky and ring columns
+  # pinky_adj: -3   # Adjustment to compensate for splay spacing
+  # ring_splay: 3
+  # ring_adj: -8
+
+  # Constants
+  # =========
+  xiao_x: 17.5
+  xiao_y: 20
+  visual_x: 1     # Visual representation of keycaps horizontal
+  visual_y: 1     # Visual representation of keycaps vertical
   sf: 16          # Switch footprint (square)
-  angle: 22       # Angle between halves
-  pinky_splay: 5  # Degrees of splay between pinky and ring columns
-  ring_splay: 3   # Degrees of splay between ring and index columns
-  visual_x: cx    # Visual representation of keycaps horizontal
-  visual_y: cy    # Visual representation of keycaps vertical
 
 points:
-  rotate: -angle + pinky_splay + ring_splay
-  mirror:
-    ref: matrix_inner_top
-    shift: [0.5sf, 0.5sf]
-    distance: 13
   zones.matrix:
-    key:
+    rotate: -angle + pinky_splay + ring_splay
+    mirror: &mirror
+      ref: matrix_inner_top
+      shift: [0.5sf, 0.5sf]
+      distance: 13
+    key: &key
+      width: capx
+      height: capy
       tags:
-        matrix: true
+        keys: true
       footprints:
-        - type: choc
-          nets:
-            from: =row_net
-            to: =colrow
-          params:
-            keycaps: true
-        - type: diode
-          anchor:
-            shift: [0, -4.7]
-            rotate: 180
-          nets:
-            from: =colrow
-            to: =column_net
-          params:
-            through_hole: false        
+      - type: mx
+        nets:
+          from: =row_net
+          to: =column_net
+        params:
+          keycaps: true
     rows:
       bottom.padding: ky
       home.padding: ky
@@ -45,11 +50,11 @@ points:
       rows:
         bottom.skip: true
         home:
-          bind: [0.5ky,0.5kx,0,0]
+          bind: [0.5ky, 0.5kx, 0, 0]
           row_net: P2
           column_net: P6
         top:
-          bind: [0,0.5kx,0.5ky,0]
+          bind: [0, 0.5kx, 0.5ky, 0]
           row_net: P0
           column_net: P6
         home.mirror:
@@ -60,20 +65,20 @@ points:
           column_net: P10
     columns.ring:
       spread: kx
-      stagger: 2/3ky
+      stagger: pinky_stagger
       rotate: -pinky_splay
-      origin: [0,-3]
+      origin: [0, pinky_adj]
       rows:
         bottom:
-          bind: [0.5ky,0,0,0]
+          bind: [0.5ky, 0, 0, 0]
           row_net: P4
           column_net: P6
         home:
-          bind: [0,0.5kx,0,0]
+          bind: [0, 0.5kx, 0, 0]
           row_net: P3
           column_net: P6
         top:
-          bind: [0,0.5kx,0.5ky,0]
+          bind: [0, 0.5kx, 0.5ky, 0]
           row_net: P1
           column_net: P6
         bottom.mirror:
@@ -89,18 +94,18 @@ points:
       spread: kx
       stagger: 0.25ky
       rotate: -ring_splay
-      origin: [0,-8]
+      origin: [0, ring_adj]
       rows:
         bottom:
-          bind: [0.5ky,0.5kx,0,0.5kx]
+          bind: [0.5ky, 0.5kx, 0, 0.5kx]
           row_net: P5
           column_net: P6
         home:
-          bind: [0,0.5kx,0,0]
+          bind: [0, 0.5kx, 0, 0]
           row_net: P2
           column_net: P7
         top:
-          bind: [0,0,0.5ky,0]
+          bind: [0, 0, 0.5ky, 0]
           row_net: P0
           column_net: P7
         bottom.mirror:
@@ -117,14 +122,14 @@ points:
       stagger: -0.25ky
       rows:
         bottom:
-          bind: [0.5ky,0,0,0]
+          bind: [0.5ky, 0, 0, 0]
           row_net: P4
           column_net: P7
         home:
           row_net: P3
           column_net: P7
         top:
-          bind: [0,0,0.5ky,0.5kx]
+          bind: [0, 0, 0.5ky, 0.5kx]
           row_net: P1
           column_net: P7
         bottom.mirror:
@@ -142,17 +147,17 @@ points:
       rows:
         bottom.skip: true
         home:
-          bind: [0.5ky,0,0.5ky,0.5kx]
+          bind: [0.5ky, 0, 0.5ky, 0.5kx]
           row_net: P2
           column_net: P8
           tags:
-            center_top: true
+            matrix_inner: true
         top:
-          bind: [0,0,0.5ky,0.5kx]
+          bind: [0, 0, 0.5ky, 0.5kx]
           row_net: P0
           column_net: P8
           tags:
-            center_top: true
+            matrix_inner: true
         home.mirror:
           row_net: P3
           column_net: P8
@@ -162,60 +167,83 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [1/3ky, -22]
+      shift: [0.25kx, -22]
+    mirror: *mirror
+    key: *key
+    columns:
+      tucky:
+        key:
+          name: thumb_tucky
+          bind: [0.5ky, 0.5kx, 0, 0]
+          row_net: P5
+          column_net: P7
+        key.mirror:
+          row_net: P5
+          column_net: P10
+      reachy:
+        spread: kx
+        stagger: -0.25ky
+        key:
+          name: thumb_reachy
+          bind: [1.5ky, 0, 0, 0]
+          row_net: P4
+          column_net: P8
+        key.mirror:
+          row_net: P5
+          column_net: P10
+  zones.mcu:
+    anchor:
+      ref: [matrix_inner_top, mirror_matrix_inner_top]
+      shift: [0, -0.7ky - 0.5xiao_y]
     key:
-      height: 1 / visual_y * visual_x
-      width: 1 / visual_x * visual_y
-      tags:
-        thumb: true
-    columns.tucky:
-      key:
-        name: thumb_tucky
-        bind: [0.5ky, 0.5kx, 0, 0]
-        row_net: P5
-        column_net: P7
-      key.mirror:
-        row_net: P4
-        column_net: P10
-    columns.reachy:
-      spread: ky
-      stagger: -0.25ky
-      key:
-        name: thumb_reachy
-        bind: [1.5ky, 0, 0, 0]
-        row_net: P4
-        column_net: P8
-      key.mirror:
-        row_net: P5
-        column_net: P10
+      name: mcu
+      width: xiao_x
+      height: xiao_y
+      footprints:
+      - type: xiao
+        anchor:
+          shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
+  zones.mounting_hole:
+    anchor:
+      ref: matrix_inner_home
+      shift: [-0.5kx + 4, -ky + 4]
+    mirror: *mirror
+    key:
+      name: mounting_hole
+      width: 1
+      height: 1
+      footprints:
+      - type: mountinghole
 outlines:
   exports:
-    _outer_raw:
+    _key_outline:
       - type: keys
         side: left
         size: sf
+        tags: [keys]
       - type: keys
         side: right
         size: sf
-    _center_raw:
+        tags: [keys]
+    _center:
       - type: polygon
         points:
         - ref: matrix_inner_top
-          shift: &top_offset [0,-0.7ky]
+          shift: [0, -0.7ky]
         - ref: mirror_matrix_inner_top
-          shift: *top_offset
+          shift: [0, -0.7ky]
         - ref: mirror_thumb_reachy
         - ref: thumb_reachy
       - type: keys
         side: left
         size: sf
-        tags: [center_top]  # Include the top center keys in addition to the center polygon
+        tags: [matrix_inner]  # Include the inner keys in addition to the center polygon
       - type: keys
         side: right
         size: sf
-        tags: [center_top]
+        tags: [matrix_inner]
     _panel:
-      - name: _center_raw
+      - name: _center
         fillet: 3  # The inner rounding where the glue meets the top center keys
       - operation: subtract
         type: circle
@@ -223,7 +251,7 @@ outlines:
           ref: [thumb_reachy, mirror_thumb_reachy]
           shift: [0, 0.5sf - 60]
         radius: 60  # Should be the same as the last number in `shift` above
-      - name: _outer_raw
+      - _key_outline
     panel:
       - name: _panel
         fillet: 1.5
@@ -232,56 +260,48 @@ outlines:
         side: left
         size: 14
         bound: false
+        tags: [keys]
       - type: keys
         side: right
         size: 14
         bound: false
-    demo_switches:
-      - name: panel
-      - operation: stack
-        name: _switches
-        fillet: 0.5
+        tags: [keys]
     _keycaps:
       - type: keys
         side: left
-        size: [visual_x, visual_y]
+        size: [capx, capy]
         bound: false
-        tags: [matrix]        
+        tags: [keys]
       - type: keys
         side: right
-        size: [visual_x, visual_y]
+        size: [capx, capy]
         bound: false
-        tags: [matrix]
-      - type: keys
-        side: left
-        size: [visual_y, visual_x]
-        bound: false
-        tags: [thumb]        
-      - type: keys
-        side: right
-        size: [visual_y, visual_x]
-        bound: false
-        tags: [thumb]
+        tags: [keys]
+    _mcu:
+      - type: rectangle
+        anchor:
+          ref: mcu
+          shift: [-0.5sx, -0.5sy]
+        size: [xiao_x, xiao_y]
+    _mounting_holes:
+      - type: circle
+        anchor.ref: mounting_hole
+        radius: 1
+      - type: circle
+        anchor.ref: mirror_mounting_hole
+        radius: 1
+    demo_switches:
+      - panel
+      - ^_switches
+      - ^_mcu
+      - ^_mounting_holes
     demo_keycaps:
-      - name: panel
-      - operation: stack
-        name: _keycaps
+      - panel
+      - ^_keycaps
+      - ^_mcu
+      - ^_mounting_holes
 pcbs:
   rufous_splay:
     outlines:
       main:
         outline: panel
-    footprints:
-      - type: xiao
-        anchor:
-          - ref: [matrix_inner_top, mirror_matrix_inner_top]
-            shift: [-xiao_x / 2, -xiao_y]
-          - shift: *top_offset
-      - type: mountinghole
-        anchor:
-          ref: matrix_inner_home
-          shift: &mounting_position [-0.5kx + 4, -ky + 4]
-      - type: mountinghole
-        anchor:
-          ref: mirror_matrix_inner_home
-          shift: *mounting_position
