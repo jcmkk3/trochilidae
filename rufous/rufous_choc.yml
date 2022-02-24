@@ -1,8 +1,6 @@
 units:
   # Parameters
   # ==========
-
-  ## Choc Splay
   capx: cx        # Key cap size horizontal
   capy: cy        # Key cap size vertical
   kx: cx + 0.5    # Key spacing horizontal
