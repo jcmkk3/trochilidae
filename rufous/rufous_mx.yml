@@ -1,18 +1,16 @@
 units:
   # Parameters
   # ==========
-
-  # ## Choc Splay
-  # capx: cx        # Key cap size horizontal
-  # capy: cy        # Key cap size vertical
-  # kx: cx + 0.5    # Key spacing horizontal
-  # ky: cy + 0.5    # Key spacing vertical
-  # angle: 22       # Angle between halves
-  # pinky_stagger: 2/3ky
-  # pinky_splay: 5  # Degrees of splay between pinky and ring columns
-  # pinky_adj: -3   # Adjustment to compensate for splay spacing
-  # ring_splay: 3
-  # ring_adj: -8
+  capx: cx        # Key cap size horizontal
+  capy: cy        # Key cap size vertical
+  kx: cx + 0.5    # Key spacing horizontal
+  ky: cy + 0.5    # Key spacing vertical
+  angle: 22       # Angle between halves
+  pinky_stagger: 2/3ky
+  pinky_splay: 5  # Degrees of splay between pinky and ring columns
+  pinky_adj: -3   # Adjustment to compensate for splay spacing
+  ring_splay: 3
+  ring_adj: -8
 
   # Constants
   # =========
