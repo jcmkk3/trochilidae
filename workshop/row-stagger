@@ -41,11 +41,11 @@ points:
         params:
           keycaps: true
     rows:
-      bottom.padding: ky
-      home.padding: ky
-      top.padding: ky
+      bottom.padding: ky + 1.5
+      home.padding: ky + 1.5
+      top.padding: ky + 1.5
     columns.pinky:
-      spread: kx
+      spread: kx - 1
       rows:
         bottom.skip: true
         home:
@@ -64,7 +64,7 @@ points:
           row_net: P1
           column_net: P10
     columns.ring:
-      spread: kx
+      spread: kx - 1
       stagger: pinky_stagger
       rotate: -pinky_splay
       origin: [0, pinky_adj]
@@ -73,7 +73,7 @@ points:
           bind: [0.5ky, 0, 0, 0]
           row_net: P4
           column_net: P6
-          width: 1.75kx
+          width: 1.5kx
         home:
           bind: [0, 0.5kx, 0, 0]
           row_net: P3
@@ -92,8 +92,8 @@ points:
           row_net: P0
           column_net: P10
     columns.middle:
-      spread: kx
-      stagger: 0.45ky
+      spread: kx - 1
+      stagger: 0.4ky
       rotate: -ring_splay
       origin: [0, ring_adj]
       rows:
@@ -119,8 +119,8 @@ points:
           row_net: P1
           column_net: P9
     columns.index:
-      spread: kx
-      stagger: 0.45ky
+      spread: kx - 1
+      stagger: 0.4ky
       rows:
         bottom:
           bind: [0.5ky, 0, 0, 0]
@@ -143,8 +143,8 @@ points:
           row_net: P0
           column_net: P9
     columns.inner:
-      spread: kx
-      stagger: -0.6ky
+      spread: kx - 1
+      stagger: -0.65ky
       rows:
         bottom.skip: true
         home:
@@ -193,38 +193,16 @@ points:
           row_net: P5
           column_net: P10
       reachy:
-        spread: kx
+        spread: kx + 4
         key:
           name: thumb_reachy
           bind: [1.5ky, 0, 0, 0]
           row_net: P4
           column_net: P8
+          width: 1.5kx
         key.mirror:
           row_net: P5
           column_net: P10
-  zones.mcu:
-    anchor:
-      ref: [matrix_inner_top, mirror_matrix_inner_top]
-      shift: [0, -0.7ky - 0.5xiao_y]
-    key:
-      name: mcu
-      width: xiao_x
-      height: xiao_y
-      footprints:
-      - type: xiao
-        anchor:
-          shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
-  zones.mounting_hole:
-    anchor:
-      ref: matrix_inner_home
-      shift: [-0.5kx + 4, -ky + 4]
-    mirror: *mirror
-    key:
-      name: mounting_hole
-      width: 1
-      height: 1
-      footprints:
-      - type: mountinghole
 outlines:
   exports:
     _key_outline:
@@ -288,31 +266,3 @@ outlines:
         size: [capx, capy]
         bound: false
         tags: [keys]
-    _mcu:
-      - type: rectangle
-        anchor:
-          ref: mcu
-          shift: [-0.5sx, -0.5sy]
-        size: [xiao_x, xiao_y]
-    _mounting_holes:
-      - type: circle
-        anchor.ref: mounting_hole
-        radius: 1
-      - type: circle
-        anchor.ref: mirror_mounting_hole
-        radius: 1
-    demo_switches:
-      - panel
-      - ^_switches
-      - ^_mcu
-      - ^_mounting_holes
-    demo_keycaps:
-      - panel
-      - ^_keycaps
-      - ^_mcu
-      - ^_mounting_holes
-pcbs:
-  rufous_splay:
-    outlines:
-      main:
-        outline: panel
