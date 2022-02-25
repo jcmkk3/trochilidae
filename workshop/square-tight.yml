@@ -48,19 +48,11 @@ points:
       rows:
         bottom.skip: true
         home:
-          bind: [0.5ky, 0.5kx, 0, 0]
-          row_net: P2
-          column_net: P6
-        top:
-          bind: [0, 0.5kx, 0.5ky, 0]
           row_net: P0
           column_net: P6
-        home.mirror:
-          row_net: P3
-          column_net: P10
-        top.mirror:
+        top:
           row_net: P1
-          column_net: P10
+          column_net: P6
     columns.ring:
       spread: kx
       stagger: pinky_stagger
@@ -68,26 +60,14 @@ points:
       origin: [0, pinky_adj]
       rows:
         bottom:
-          bind: [0.5ky, 0, 0, 0]
-          row_net: P4
-          column_net: P6
-        home:
-          bind: [0, 0.5kx, 0, 0]
-          row_net: P3
-          column_net: P6
-        top:
-          bind: [0, 0.5kx, 0.5ky, 0]
           row_net: P1
-          column_net: P6
-        bottom.mirror:
-          row_net: P5
-          column_net: P9
-        home.mirror:
-          row_net: P2
-          column_net: P10
-        top.mirror:
+          column_net: P7
+        home:
           row_net: P0
-          column_net: P10
+          column_net: P4
+        top:
+          row_net: P0
+          column_net: P4
     columns.middle:
       spread: kx
       stagger: 0.25ky
@@ -95,73 +75,38 @@ points:
       origin: [0, ring_adj]
       rows:
         bottom:
-          bind: [0.5ky, 0.5kx, 0, 0.5kx]
-          row_net: P5
-          column_net: P6
-        home:
-          bind: [0, 0.5kx, 0, 0]
-          row_net: P2
-          column_net: P7
-        top:
-          bind: [0, 0, 0.5ky, 0]
           row_net: P0
           column_net: P7
-        bottom.mirror:
-          row_net: P4
-          column_net: P9
-        home.mirror:
-          row_net: P3
-          column_net: P9
-        top.mirror:
+        home:
+          row_net: P0
+          column_net: P2
+        top:
           row_net: P1
-          column_net: P9
+          column_net: P2
     columns.index:
       spread: kx
       stagger: -0.25ky
       rows:
         bottom:
-          bind: [0.5ky, 0, 0, 0]
-          row_net: P4
-          column_net: P7
-        home:
-          row_net: P3
-          column_net: P7
-        top:
-          bind: [0, 0, 0.5ky, 0.5kx]
           row_net: P1
-          column_net: P7
-        bottom.mirror:
-          row_net: P5
           column_net: P8
-        home.mirror:
-          row_net: P2
-          column_net: P9
-        top.mirror:
+        home:
           row_net: P0
-          column_net: P9
+          column_net: P3
+        top:
+          row_net: P1
+          column_net: P3
     columns.inner:
       spread: kx
       stagger: -0.5ky
       rows:
         bottom.skip: true
         home:
-          bind: [0.5ky, 0, 0.5ky, 0.5kx]
-          row_net: P2
-          column_net: P8
-          tags:
-            matrix_inner: true
-        top:
-          bind: [0, 0, 0.5ky, 0.5kx]
           row_net: P0
-          column_net: P8
-          tags:
-            matrix_inner: true
-        home.mirror:
-          row_net: P3
-          column_net: P8
-        top.mirror:
+          column_net: P5
+        top:
           row_net: P1
-          column_net: P8
+          column_net: P5
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
@@ -172,23 +117,17 @@ points:
       tucky:
         key:
           name: thumb_tucky
-          bind: [0.5ky, 0.5kx, 0, 0]
-          row_net: P5
-          column_net: P7
-        key.mirror:
-          row_net: P5
-          column_net: P10
+          row_net: P0
+          column_net: P8
       reachy:
         spread: kx
         stagger: -0.25ky
         key:
           name: thumb_reachy
-          bind: [1.5ky, 0, 0, 0]
-          row_net: P4
-          column_net: P8
+          row_net: P1
+          column_net: P9
         key.mirror:
-          row_net: P5
-          column_net: P10
+          row_net: P0
   zones.mcu:
     anchor:
       ref: [matrix_inner_top, mirror_matrix_inner_top]
@@ -198,7 +137,7 @@ points:
       width: promicro_x
       height: promicro_y
       footprints:
-      - type: xiao
+      - type: promicro
         anchor:
           shift: [-0.5promicro_x, -0.5promicro_y]  # Anchor is topleft corner
   zones.mounting_hole:
