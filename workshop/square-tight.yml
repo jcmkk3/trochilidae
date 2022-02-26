@@ -21,6 +21,9 @@ units:
   sf: 15          # Switch footprint (square)
 
 points:
+  key:
+    width: 0
+    height: 0
   zones.matrix:
     rotate: -angle + pinky_splay + ring_splay
     mirror: &mirror
@@ -40,73 +43,66 @@ points:
         params:
           keycaps: true
     rows:
-      bottom.padding: ky
-      home.padding: ky
-      top.padding: ky
+      bottom:
+        padding: ky
+        row_net: P1
+      home:
+        padding: ky
+        row_net: P0
+      top:
+        padding: ky
+        row_net: P1
     columns.pinky:
       spread: kx
       rows:
         bottom.skip: true
-        home:
-          row_net: P0
-          column_net: P6
-        top:
-          row_net: P1
-          column_net: P6
+        home.column_net: P8
+        top.column_net: P8
+        home.mirror.column_net: P16
+        top.mirror.column_net: P16
     columns.ring:
       spread: kx
       stagger: pinky_stagger
       rotate: -pinky_splay
       origin: [0, pinky_adj]
       rows:
-        bottom:
-          row_net: P1
-          column_net: P7
-        home:
-          row_net: P0
-          column_net: P4
-        top:
-          row_net: P1
-          column_net: P4
+        bottom.column_net: P6
+        home.column_net: P5
+        top.column_net: P5
+        bottom.mirror.column_net: P15
+        home.mirror.column_net: P18
+        top.mirror.column_net: P18
     columns.middle:
       spread: kx
       stagger: 0.25ky
       rotate: -ring_splay
       origin: [0, ring_adj]
       rows:
-        bottom:
-          row_net: P0
-          column_net: P7
-        home:
-          row_net: P0
-          column_net: P2
-        top:
-          row_net: P1
-          column_net: P2
+        bottom.column_net: P7
+        home.column_net: P4
+        top.column_net: P4
+        bottom.mirror.column_net: P14
+        home.mirror.column_net: P19
+        top.mirror.column_net: P19
     columns.index:
       spread: kx
       stagger: -0.25ky
       rows:
-        bottom:
-          row_net: P1
-          column_net: P8
-        home:
-          row_net: P0
-          column_net: P3
-        top:
-          row_net: P1
-          column_net: P3
+        bottom.column_net: P9
+        home.column_net: P3
+        top.column_net: P3
+        bottom.mirror.column_net: P10
+        home.mirror.column_net: P20
+        top.mirror.column_net: P20
     columns.inner:
       spread: kx
       stagger: -0.5ky
       rows:
         bottom.skip: true
-        home:
-          row_net: P0
-          column_net: P5
-        top:
-          row_net: P1
-          column_net: P5
+        home.column_net: P2
+        top.column_net: P2
+        home.mirror.column_net: P21
+        top.mirror.column_net: P21
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
@@ -118,16 +114,18 @@ points:
         key:
           name: thumb_tucky
           row_net: P0
-          column_net: P8
+          column_net: P7
+        key.mirror:
+          column_net: P14
       reachy:
         spread: kx
         stagger: -0.25ky
         key:
           name: thumb_reachy
-          row_net: P1
+          row_net: P0
           column_net: P9
         key.mirror:
-          row_net: P0
+          column_net: P10
   zones.mcu:
     anchor:
       ref: [matrix_inner_top, mirror_matrix_inner_top]
@@ -139,7 +137,9 @@ points:
       footprints:
       - type: promicro
         anchor:
-          shift: [-0.5promicro_x, -0.5promicro_y]  # Anchor is topleft corner
+          rotate: -90
+        params:
+          orientation: up          
   zones.mounting_hole:
     anchor:
       ref: matrix_inner_home
@@ -238,7 +238,7 @@ outlines:
       - ^_mcu
       - ^_mounting_holes
 pcbs:
-  rufous_splay:
+  square_tight:
     outlines:
       main:
         outline: panel
