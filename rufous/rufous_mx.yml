@@ -176,7 +176,7 @@ points:
           row_net: P5
           column_net: P7
         key.mirror:
-          row_net: P5
+          row_net: P4
           column_net: P10
       reachy:
         spread: kx
