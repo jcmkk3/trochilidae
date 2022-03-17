@@ -1,0 +1,124 @@
+units:
+  # Parameters
+  # ==========
+  capx: cx        # Key cap size horizontal
+  capy: cy        # Key cap size vertical
+  kx: cx + 0.5    # Key spacing horizontal
+  ky: cy + 0.5    # Key spacing vertical
+
+  # Constants
+  # =========
+  xiao_x: 17.5
+  xiao_y: 20
+  visual_x: 1     # Visual representation of keycaps horizontal
+  visual_y: 1     # Visual representation of keycaps vertical
+  sf: 16          # Switch footprint (square)
+
+points:
+  zones.matrix:
+    rotate: 5
+    key:
+      width: capx
+      height: capy
+      tags:
+        keys: true
+      footprints:
+      - type: choc
+        nets:
+          from: =row_net
+          to: =column_net
+        params:
+          keycaps: true
+    rows:
+      bottom.padding: ky
+      top.padding: ky
+    columns.pinky:
+      spread: kx
+    columns.ring:
+      spread: kx
+      stagger: 0.25ky
+      rotate: -5
+      origin: [0, -6]
+    columns.middle:
+      spread: kx
+    columns.index:
+      spread: kx
+    columns.thumb:
+      spread: kx
+      stagger: -0.25ky
+      rows:
+        top.skip: true
+  zones.mcu:
+    anchor:
+      - ref: matrix_index_top
+        shift: [0, 0.5ky]
+        affect: y
+      - ref: matrix_thumb_bottom
+        affect: x
+      - shift: [0, -0.5xiao_y - 1]
+    key:
+      name: mcu
+      width: xiao_x
+      height: xiao_y
+      footprints:
+      - type: xiao
+        anchor:
+          shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
+outlines:
+  exports:
+    _panel:
+      - type: polygon
+        points:
+          - ref: matrix_middle_top
+            shift: [0, 0.5ky]
+          - ref: matrix_thumb_bottom
+            shift: [0.5kx, 0]
+            affect: x
+          - ref: matrix_pinky_bottom
+            shift: [0, -0.5ky]
+            affect: y
+          - ref: matrix_pinky_top
+            shift: [-0.5kx, 0]
+            affect: x
+          - ref: matrix_middle_top
+            shift: [0, 0.5ky]
+            affect: y
+    panel:
+      - name: _panel
+        fillet: 2
+    _switches:
+      - type: keys
+        side: left
+        size: 14
+        bound: false
+        tags: [keys]
+    _keycaps:
+      - type: keys
+        side: left
+        size: [capx, capy]
+        bound: false
+        tags: [keys]
+    _mcu:
+      - type: rectangle
+        anchor:
+          ref: mcu
+          shift: [-0.5sx, -0.5sy]
+        size: [xiao_x, xiao_y]
+    demo_switches:
+      - panel
+      - ^_switches
+      - ^_mcu
+    demo_keycaps:
+      - panel
+      - ^_keycaps
+      - ^_mcu
+    switchplate:
+      - panel
+      - operation: subtract
+        name: _switches
+        fillet: 0.5
+pcbs:
+  artsey:
+    outlines:
+      main:
+        outline: panel
