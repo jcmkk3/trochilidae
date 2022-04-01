@@ -20,7 +20,6 @@ units:
   sf: 16          # Switch footprint (square)
 
 points:
-
   # Key Switches
   # ============
   zones.matrix:
@@ -183,6 +182,32 @@ points:
     - ref: top_right
     - ref: bottom_left
       affect: y
+
+  # Components
+  # ==========
+  zones.mcu:
+    anchor:
+      ref: top_right
+      shift: [-0.5xiao_x - 2, -0.5xiao_y]
+    key:
+      name: mcu
+      width: xiao_x
+      height: xiao_y
+      footprints:
+      - type: xiao
+        anchor:
+          shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
+  zones.battery:
+    anchor:
+      - ref: [matrix_ring_home, matrix_middle_home]
+      - ref: thumb_tucky
+        affect: y
+        shift: [0, 0.25cy]
+    key:
+      name: battery
+      width: 24
+      height: 24
+
 outlines.exports:
   _outer:
     - type: polygon
@@ -194,8 +219,20 @@ outlines.exports:
   _panel:
     - name: _outer
       fillet: 3
+  _mcu:
+    - type: rectangle
+      anchor:
+        ref: mcu
+        shift: [-0.5sx, -0.5sy]
+      size: [xiao_x, xiao_y]
+  _battery:
+    - type: circle
+      anchor.ref: battery
+      radius: 12
   key_demo:
     - _panel
+    - ^_mcu
+    - ^_battery
     - operation: stack
       type: keys
       side: left
