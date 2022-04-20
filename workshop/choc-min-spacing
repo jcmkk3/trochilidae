@@ -163,7 +163,7 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [0.25kx + 1.5, -22 - 1.5]
+      shift: [0.25kx + 1.5, -22]
     key: *key
     columns:
       tucky:
