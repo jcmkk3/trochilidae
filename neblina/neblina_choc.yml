@@ -1,0 +1,274 @@
+units:
+  # Parameters
+  # ==========
+  capx: 14.5      # Key cap size horizontal
+  capy: 14.5      # Key cap size vertical
+  kx: 15 + 0.5    # Key spacing horizontal
+  ky: 15 + 0.5    # Key spacing vertical
+  pinky_splay: 5  # Degrees of splay between pinky and ring columns
+  pinky_adj: -3   # Adjustment to compensate for splay spacing
+  ring_splay: 3
+  ring_adj: -8
+  middle_splay: 3
+  middle_adj: -7
+
+  # Constants
+  # =========
+  xiao_x: 17.5
+  xiao_y: 20
+  visual_x: 1     # Visual representation of keycaps horizontal
+  visual_y: 1     # Visual representation of keycaps vertical
+  sf: 15          # Switch footprint (square)
+
+points:
+  zones.matrix:
+    rotate: pinky_splay + ring_splay + middle_splay
+    key: &key
+      width: capx
+      height: capy
+      tags:
+        keys: true
+      footprints:
+      - type: choc
+        nets:
+          from: =row_net
+          to: =column_net
+        params:
+          keycaps: true
+    rows:
+      bottom.padding: ky
+      home.padding: ky
+      top.padding: ky
+    columns.pinky:
+      spread: kx
+      rows:
+        bottom.skip: true
+        home:
+          bind: [0.5ky, 0.5kx, 0, 0]
+          row_net: P2
+          column_net: P6
+        top:
+          bind: [0, 0.5kx, 0.5ky, 0]
+          row_net: P0
+          column_net: P6
+        home.mirror:
+          row_net: P3
+          column_net: P10
+        top.mirror:
+          row_net: P1
+          column_net: P10
+    columns.ring:
+      spread: kx
+      stagger: 2/3ky
+      rotate: -pinky_splay
+      origin: [0, pinky_adj]
+      rows:
+        bottom:
+          bind: [0.5ky, 0, 0, 0]
+          row_net: P4
+          column_net: P6
+        home:
+          bind: [0, 0.5kx, 0, 0]
+          row_net: P3
+          column_net: P6
+        top:
+          bind: [0, 0.5kx, 0.5ky, 0]
+          row_net: P1
+          column_net: P6
+        bottom.mirror:
+          row_net: P5
+          column_net: P9
+        home.mirror:
+          row_net: P2
+          column_net: P10
+        top.mirror:
+          row_net: P0
+          column_net: P10
+    columns.middle:
+      spread: kx
+      stagger: 0.25ky
+      rotate: -ring_splay
+      origin: [0, ring_adj]
+      rows:
+        bottom:
+          bind: [0.5ky, 0.5kx, 0, 0.5kx]
+          row_net: P5
+          column_net: P6
+        home:
+          bind: [0, 0.5kx, 0, 0]
+          row_net: P2
+          column_net: P7
+        top:
+          bind: [0, 0, 0.5ky, 0]
+          row_net: P0
+          column_net: P7
+        bottom.mirror:
+          row_net: P4
+          column_net: P9
+        home.mirror:
+          row_net: P3
+          column_net: P9
+        top.mirror:
+          row_net: P1
+          column_net: P9
+    columns.index:
+      spread: kx
+      stagger: -0.25ky
+      rotate: -middle_splay
+      origin: [0, middle_adj]
+      rows:
+        bottom:
+          bind: [0.5ky, 0, 0, 0]
+          row_net: P4
+          column_net: P7
+        home:
+          row_net: P3
+          column_net: P7
+        top:
+          bind: [0, 0, 0.5ky, 0.5kx]
+          row_net: P1
+          column_net: P7
+        bottom.mirror:
+          row_net: P5
+          column_net: P8
+        home.mirror:
+          row_net: P2
+          column_net: P9
+        top.mirror:
+          row_net: P0
+          column_net: P9
+    columns.inner:
+      spread: kx
+      stagger: -0.5ky
+      rows:
+        bottom.skip: true
+        home:
+          bind: [0.5ky, 0, 0.5ky, 0.5kx]
+          row_net: P2
+          column_net: P8
+          tags:
+            matrix_inner: true
+        top:
+          bind: [0, 0, 0.5ky, 0.5kx]
+          row_net: P0
+          column_net: P8
+          tags:
+            matrix_inner: true
+        home.mirror:
+          row_net: P3
+          column_net: P8
+        top.mirror:
+          row_net: P1
+          column_net: P8
+  zones.thumb:
+    anchor:
+      ref: matrix_index_bottom
+      shift: [0.25kx + 1.5, -22]
+    key: *key
+    columns:
+      tucky:
+        key:
+          name: thumb_tucky
+          bind: [0.5ky + 3, 0.5kx, 0, 0]
+          row_net: P5
+          column_net: P7
+        key.mirror:
+          row_net: P4
+          column_net: P10
+      reachy:
+        spread: kx
+        stagger: -0.25ky
+        key:
+          name: thumb_reachy
+          bind: [1.5ky + 3, 0, 0, 0]
+          row_net: P4
+          column_net: P8
+        key.mirror:
+          row_net: P5
+          column_net: P10
+  zones.mcu:
+    anchor:
+      - ref: matrix_pinky_top
+        shift: [0.5kx, 0.5ky]
+        rotate: -pinky_splay - ring_splay - middle_splay
+      - shift: [-0.5xiao_x + 1, 0.5xiao_y]
+    key:
+      name: mcu
+      width: xiao_x
+      height: xiao_y
+      footprints:
+      - type: promicro
+        anchor:
+          shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
+
+  # Outline Extents
+  # ===================
+  zones.outline_top_left:
+    key:
+      name: outline_top_left
+      height: 0
+      width: 0
+    anchor:
+    - ref: mcu
+      shift: [-0.5xiao_x, 0.5xiao_y]
+  zones.outline_top_right:
+    key:
+      name: outline_top_right
+      height: 0
+      width: 0
+    anchor:
+    - ref: outline_top_left
+    - ref: thumb_reachy
+      affect: x
+      shift: [0.5sf + 1.5, 0]
+  zones.outline_bottom_left:
+    key:
+      name: outline_bottom_left
+      height: 0
+      width: 0      
+    anchor:
+    - ref: outline_top_left
+    - ref: thumb_reachy
+      affect: y
+      shift: [0, -0.5sf - 1.5]
+  zones.outline_bottom_right:
+    key:
+      name: outline_bottom_right
+      height: 0
+      width: 0      
+    anchor:
+    - ref: outline_top_right
+    - ref: outline_bottom_left
+      affect: y
+
+outlines.exports:
+  _outer:
+    - type: polygon
+      points:
+      - ref: outline_top_left
+      - ref: outline_top_right
+      - ref: outline_bottom_right
+      - ref: outline_bottom_left
+  panel:
+    - name: _outer
+      fillet: 3
+  _mcu:
+    - type: rectangle
+      size: [xiao_x, xiao_y]
+      anchor:
+        ref: mcu
+        shift: [-0.5xiao_x, -0.5xiao_y]
+  key_demo:
+    - panel
+    - ^_mcu
+    - operation: stack
+      type: keys
+      side: left
+      tags: [keys]
+      size: [capx, capy]
+      bound: false
+pcbs:
+  choc_min:
+    outlines:
+      main:
+        outline: panel
