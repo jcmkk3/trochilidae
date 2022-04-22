@@ -1,8 +1,8 @@
 units:
   # Parameters
   # ==========
-  capx: 15        # Key cap size horizontal
-  capy: 15        # Key cap size vertical
+  capx: 14.5      # Key cap size horizontal
+  capy: 14.5      # Key cap size vertical
   kx: 15 + 0.5    # Key spacing horizontal
   ky: 15 + 0.5    # Key spacing vertical
   pinky_splay: 5  # Degrees of splay between pinky and ring columns
@@ -10,7 +10,7 @@ units:
   ring_splay: 3
   ring_adj: -8
   middle_splay: 3
-  middle_adj: -8
+  middle_adj: -7
 
   # Constants
   # =========
@@ -18,10 +18,12 @@ units:
   xiao_y: 20
   visual_x: 1     # Visual representation of keycaps horizontal
   visual_y: 1     # Visual representation of keycaps vertical
-  sf: 16          # Switch footprint (square)
+  sf: 15          # Switch footprint (square)
 
 points:
   zones.matrix:
+    anchor:
+      shift: [150, -180]
     rotate: pinky_splay + ring_splay + middle_splay
     key: &key
       width: capx
@@ -188,14 +190,16 @@ points:
           column_net: P10
   zones.mcu:
     anchor:
-      ref: matrix_inner_top
-      shift: [0, -0.7ky - 0.5xiao_y]
+      - ref: matrix_pinky_top
+        shift: [0.5kx, 0.5ky]
+        rotate: -pinky_splay - ring_splay - middle_splay
+      - shift: [-0.5xiao_x + 1, 0.5xiao_y]
     key:
       name: mcu
       width: xiao_x
       height: xiao_y
       footprints:
-      - type: promicro
+      - type: xiao
         anchor:
           shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
 
@@ -253,8 +257,15 @@ outlines.exports:
   panel:
     - name: _outer
       fillet: 3
+  _mcu:
+    - type: rectangle
+      size: [xiao_x, xiao_y]
+      anchor:
+        ref: mcu
+        shift: [-0.5xiao_x, -0.5xiao_y]
   key_demo:
     - panel
+    - ^_mcu
     - operation: stack
       type: keys
       side: left
@@ -262,7 +273,7 @@ outlines.exports:
       size: [capx, capy]
       bound: false
 pcbs:
-  choc_min:
+  neblina_choc:
     outlines:
       main:
         outline: panel
