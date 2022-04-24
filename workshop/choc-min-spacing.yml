@@ -49,18 +49,12 @@ points:
         bottom.skip: true
         home:
           bind: [0.5ky, 0.5kx, 0, 0]
-          row_net: P2
-          column_net: P6
+          row_net: P101
+          column_net: P105
         top:
           bind: [0, 0.5kx, 0.5ky, 0]
-          row_net: P0
-          column_net: P6
-        home.mirror:
-          row_net: P3
-          column_net: P10
-        top.mirror:
-          row_net: P1
-          column_net: P10
+          row_net: P102
+          column_net: P105
     columns.ring:
       spread: kx
       stagger: 2/3ky
@@ -69,25 +63,16 @@ points:
       rows:
         bottom:
           bind: [0.5ky, 0, 0, 0]
-          row_net: P4
-          column_net: P6
+          row_net: P103
+          column_net: P105
         home:
           bind: [0, 0.5kx, 0, 0]
-          row_net: P3
-          column_net: P6
+          row_net: P101
+          column_net: P106
         top:
           bind: [0, 0.5kx, 0.5ky, 0]
-          row_net: P1
-          column_net: P6
-        bottom.mirror:
-          row_net: P5
-          column_net: P9
-        home.mirror:
-          row_net: P2
-          column_net: P10
-        top.mirror:
-          row_net: P0
-          column_net: P10
+          row_net: P102
+          column_net: P106
     columns.middle:
       spread: kx
       stagger: 0.25ky
@@ -96,25 +81,16 @@ points:
       rows:
         bottom:
           bind: [0.5ky, 0.5kx, 0, 0.5kx]
-          row_net: P5
-          column_net: P6
+          row_net: P103
+          column_net: P106
         home:
           bind: [0, 0.5kx, 0, 0]
-          row_net: P2
-          column_net: P7
+          row_net: P101
+          column_net: P107
         top:
           bind: [0, 0, 0.5ky, 0]
-          row_net: P0
-          column_net: P7
-        bottom.mirror:
-          row_net: P4
-          column_net: P9
-        home.mirror:
-          row_net: P3
-          column_net: P9
-        top.mirror:
-          row_net: P1
-          column_net: P9
+          row_net: P102
+          column_net: P107
     columns.index:
       spread: kx
       stagger: -0.25ky
@@ -123,24 +99,15 @@ points:
       rows:
         bottom:
           bind: [0.5ky, 0, 0, 0]
-          row_net: P4
-          column_net: P7
+          row_net: P103
+          column_net: P107
         home:
-          row_net: P3
-          column_net: P7
+          row_net: P101
+          column_net: P108
         top:
           bind: [0, 0, 0.5ky, 0.5kx]
-          row_net: P1
-          column_net: P7
-        bottom.mirror:
-          row_net: P5
-          column_net: P8
-        home.mirror:
-          row_net: P2
-          column_net: P9
-        top.mirror:
-          row_net: P0
-          column_net: P9
+          row_net: P102
+          column_net: P108
     columns.inner:
       spread: kx
       stagger: -0.5ky
@@ -148,22 +115,12 @@ points:
         bottom.skip: true
         home:
           bind: [0.5ky, 0, 0.5ky, 0.5kx]
-          row_net: P2
-          column_net: P8
-          tags:
-            matrix_inner: true
+          row_net: P103
+          column_net: P108
         top:
           bind: [0, 0, 0.5ky, 0.5kx]
-          row_net: P0
-          column_net: P8
-          tags:
-            matrix_inner: true
-        home.mirror:
-          row_net: P3
-          column_net: P8
-        top.mirror:
-          row_net: P1
-          column_net: P8
+          row_net: P104
+          column_net: P108
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
@@ -174,22 +131,16 @@ points:
         key:
           name: thumb_tucky
           bind: [0.5ky + 3, 0.5kx, 0, 0]
-          row_net: P5
-          column_net: P7
-        key.mirror:
-          row_net: P4
-          column_net: P10
+          row_net: P104
+          column_net: P106
       reachy:
         spread: kx
         stagger: -0.25ky
         key:
           name: thumb_reachy
           bind: [1.5ky + 3, 0, 0, 0]
-          row_net: P4
-          column_net: P8
-        key.mirror:
-          row_net: P5
-          column_net: P10
+          row_net: P104
+          column_net: P107
 
   # Outline Extents
   # ===============
