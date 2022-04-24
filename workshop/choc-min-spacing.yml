@@ -72,6 +72,8 @@ points:
     columns.inner:
       spread: kx
       stagger: -0.5ky
+      rows:
+        bottom.skip: true
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
@@ -122,7 +124,7 @@ points:
   zones.mcu:
     anchor:
       ref: outline_bottom_left
-      shift: [0.5promicro_x + 2, 0.5promicro_y + 2]
+      shift: [0.5promicro_x + 1, 0.5promicro_y + 3]
     key:
       name: mcu
       width: promicro_x
@@ -149,6 +151,48 @@ points:
           P6: thumb_tucky
           P3: thumb_reachy
 
+  zones.power_jumper:
+    anchor:
+      - ref: mcu
+        shift: [0.5promicro_x + 3, -0.5promicro_y + 3]
+    key:
+      name: power_jumper
+      height: 4.4
+      width: 1.8
+      footprints:
+        - type: jumper
+          anchor.rotate: 90
+          nets:
+            from: RAW
+            to: RAW
+  zones.battery_pads:
+    anchor:
+      - ref: mcu
+        shift: [0.5promicro_x + 3, 0.5promicro_y]
+    key:
+      name: battery_pads
+      height: 2.1
+      width: 3.8
+      footprints:
+        - type: jumper
+          nets:
+            from: RAW
+            to: GND
+  zones.reset:
+    anchor:
+      - ref: mcu
+        shift: [-0.5promicro_x, 0.5promicro_y + 3]    
+    key:
+      name: reset
+      height: 3.8
+      width: 2.1
+      footprints:
+        - type: jumper
+          anchor.rotate: -90
+          nets:
+            from: RST
+            to: GND
+
 outlines.exports:
   _outer:
     - type: polygon
@@ -166,7 +210,7 @@ outlines.exports:
       anchor:
         ref: mcu
         shift: [-0.5promicro_x, -0.5promicro_y]
-  _key_demo:
+  key_demo:
     - panel
     - ^_mcu
     - operation: stack
