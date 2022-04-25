@@ -154,7 +154,7 @@ points:
   zones.power_jumper:
     anchor:
       - ref: mcu
-        shift: [0.5promicro_x + 3, -0.5promicro_y + 3]
+        shift: [0.5promicro_x + 3.5, -0.5promicro_y + 3.25]
     key:
       name: power_jumper
       height: 4.4
@@ -168,7 +168,7 @@ points:
   zones.battery_pads:
     anchor:
       - ref: mcu
-        shift: [0.5promicro_x + 3, 0.5promicro_y]
+        shift: [0.5promicro_x + 3.5, 0.5promicro_y - 1.25]
     key:
       name: battery_pads
       height: 2.1
@@ -181,7 +181,7 @@ points:
   zones.reset:
     anchor:
       - ref: mcu
-        shift: [-0.5promicro_x, 0.5promicro_y + 3]    
+        shift: [-0.5promicro_x + 0.5, 0.5promicro_y + 3]    
     key:
       name: reset
       height: 3.8
@@ -192,6 +192,36 @@ points:
           nets:
             from: RST
             to: GND
+  zones.mounting_hole_top:
+    anchor:
+      - ref: matrix_pinky_top
+        affect: y
+        shift: [0, ky / 2 + 4.5]
+      - ref: matrix_ring_top
+        affect: x
+        shift: [-kx / 2 - 2.5, 0]
+    key:
+      name: mounting_hole_top
+      height: 1
+      width: 1
+      footprints:
+        - type: via
+          nets.net: MOUNT
+  zones.mounting_hole_bottom:
+    anchor:
+      - ref: matrix_inner_home
+        affect: y
+        shift: [0, -ky / 2 - 2.5]
+      - ref: matrix_index_bottom
+        affect: x
+        shift: [kx / 2 + 2.5, 0]
+    key:
+      name: mounting_hole_bottom
+      height: 1
+      width: 1
+      footprints:
+        - type: via
+          nets.net: MOUNT          
 
 outlines.exports:
   _outer:
@@ -201,9 +231,18 @@ outlines.exports:
       - ref: outline_top_right
       - ref: outline_bottom_right
       - ref: outline_bottom_left
+  _battery_cutout:
+    - type: rectangle
+      anchor: 
+        - ref: mcu
+          shift: [0.5promicro_x - sx, -0.5promicro_y]
+        - shift: [0, 3.5]
+      size: [5.5, 3.5]
   panel:
     - name: _outer
       fillet: 3
+    - operation: subtract
+      name: _battery_cutout
   _mcu:
     - type: rectangle
       size: [promicro_x, promicro_y]
