@@ -177,8 +177,8 @@ points:
       footprints:
         - type: jumper
           nets:
-            from: RAW
-            to: GND
+            from: GND
+            to: RAW
   zones.reset:
     anchor:
       - ref: mcu
@@ -191,8 +191,8 @@ points:
         - type: jumper
           anchor.rotate: -90
           nets:
-            from: RST
-            to: GND
+            from: GND
+            to: RST
   zones.mounting_hole_top:
     anchor:
       - ref: matrix_pinky_top
