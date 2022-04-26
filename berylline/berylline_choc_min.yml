@@ -10,8 +10,8 @@ units:
   ring_splay: 3
   ring_adj: -8
   middle_splay: 3
-  middle_adj: -7
-  thumb_offsetx: 0.25kx + 1.5
+  middle_adj: -5
+  thumb_offsetx: 1/3kx
 
   # Constants
   # =========
