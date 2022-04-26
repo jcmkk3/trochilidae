@@ -9,8 +9,8 @@ units:
   pinky_adj: -3   # Adjustment to compensate for splay spacing
   ring_splay: 3
   ring_adj: -8
-  middle_splay: 0
-  middle_adj: 0
+  middle_splay: 3
+  middle_adj: -7
   thumb_offsetx: 0.25kx + 0.5
 
   # Constants
