@@ -92,20 +92,18 @@ points:
         nets:
           from: =row_net
           to: =column_net
-        params:
-          reverse: true
-          keycaps: true
+        params.keycaps: true
       - type: diode
         anchor:
           shift: [0, -4.7]
         nets:
-          from: =colrow
-          to: =row_net
+          from: =row_net
+          to: =colrow
 pcbs:
-  simple_unibody:
+  simple_reviung41:
     footprints:
       - type: promicro
         anchor:
           - ref: [matrix_inner_top, mirror_matrix_inner_top]
-            shift: [0, 0.5U]
+            shift: [0, 22]
             rotate: angle
