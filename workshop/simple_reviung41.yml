@@ -52,7 +52,6 @@ points:
           padding: U
           row_net: P19
           mirror.row_net: P14
-
     thumb_middle:
       anchor:
         ref: [matrix_inner_bottom, mirror_matrix_inner_bottom]
