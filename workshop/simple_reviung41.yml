@@ -89,15 +89,15 @@ points:
     footprints:
       - type: mx
         nets:
-          from: =row_net
+          from: =colrow
           to: =column_net
         params.keycaps: true
       - type: diode
         anchor:
           shift: [0, -4.7]
         nets:
-          from: =row_net
-          to: =colrow
+          from: =colrow
+          to: =row_net
 pcbs:
   simple_reviung41:
     footprints:
