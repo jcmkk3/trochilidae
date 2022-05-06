@@ -1,0 +1,98 @@
+units:
+  # Parameters
+  # ==========
+  capx: 17        # Key cap size horizontal
+  capy: 16        # Key cap size vertical
+  kx: cx + 0.5    # Key spacing horizontal
+  ky: cy + 0.5    # Key spacing vertical
+
+  # Constants
+  # =========
+  visual_x: 1
+  visual_y: 1
+  sf: 20
+points:
+  zones.matrix:
+    key:
+      height: capy
+      width: capx
+      tags:
+        keys: true
+    columns:
+      pinky:
+        spread: kx
+      ring:
+        spread: kx
+        stagger: 0.5ky
+      middle:
+        spread: kx
+      index:
+        stagger: -0.5ky
+        spread: kx
+    rows:
+      bottom.padding: ky
+      top.padding: ky
+  zones.trackpad:
+    anchor:
+      ref: [matrix_ring_bottom, matrix_middle_bottom]
+      shift: [0, -.75ky - 23/2]
+    key:
+      name: trackpad
+      height: 23
+      width: 23
+
+  # Outline Extents
+  # ===============
+  zones.top_left:
+    key.name: top_left
+    anchor:
+    - ref: matrix_middle_top
+      shift: [0.5sf, 0.5sf]
+      affect: y
+    - ref: matrix_pinky_top
+      shift: [-0.5sf, 0.5sf]
+      affect: x
+  zones.top_right:
+    key.name: top_right
+    anchor:
+    - ref: top_left
+    - ref: matrix_index_top
+      shift: [0.5sf, 0.5sf]
+      affect: x
+  zones.bottom_left:
+    key.name: bottom_left
+    anchor:
+    - ref: top_left
+    - ref: trackpad
+      affect: y
+      shift: [0, -23/2 - 2]
+  zones.bottom_right:
+    key.name: bottom_right
+    anchor:
+    - ref: top_right
+    - ref: bottom_left
+      affect: y
+outlines.exports:
+  _outer:
+    - type: polygon
+      points:
+      - ref: top_left
+      - ref: top_right
+      - ref: bottom_right
+      - ref: bottom_left
+  _panel:
+    - name: _outer
+      fillet: 3
+  _trackpad:
+    - type: circle
+      anchor.ref: trackpad
+      radius: 23 / 2
+  key_demo:
+    - _panel
+    - ^_trackpad
+    - operation: stack
+      type: keys
+      side: left
+      tags: [keys]
+      size: [capx, capy]
+      bound: false
