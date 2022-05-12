@@ -82,11 +82,15 @@ points:
     key: *key
     columns:
       tucky:
-        key.name: thumb_tucky
+        key:
+          name: thumb_tucky
+          rotate: 180
       reachy:
         spread: kx
         stagger: -0.25ky
-        key.name: thumb_reachy
+        key:
+          name: thumb_reachy
+          rotate: 180
 
   # Outline Extents
   # ===============
@@ -105,14 +109,14 @@ points:
     - ref: outline_top_left
     - ref: thumb_reachy
       affect: x
-      shift: [0.5sf, -0.5sf]
+      shift: [-0.5sf, 0.5sf]
   zones.outline_bottom_left:
     key.name: outline_bottom_left
     anchor:
     - ref: outline_top_left
     - ref: thumb_reachy
       affect: y
-      shift: [0.5sf, -0.5sf]
+      shift: [-0.5sf, 0.5sf]
   zones.outline_bottom_right:
     key.name: outline_bottom_right
     anchor:
@@ -237,7 +241,7 @@ outlines.exports:
       anchor: 
         - ref: mcu
           shift: [0.5promicro_x - sx, -0.5promicro_y]
-        - shift: [0, 3.5]
+        - shift: [0.5, 3]
       size: [5.5, 3.5]
   panel:
     - name: _outer
@@ -249,7 +253,7 @@ outlines.exports:
       size: [promicro_x, promicro_y]
       anchor:
         ref: mcu
-        shift: [-0.5promicro_x, -0.5promicro_y]
+        shift: [-0.5sx, -0.5sy]
   key_demo:
     - panel
     - ^_mcu
