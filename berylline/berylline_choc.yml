@@ -82,11 +82,15 @@ points:
     key: *key
     columns:
       tucky:
-        key.name: thumb_tucky
+        key:
+          name: thumb_tucky
+          rotate: 180
       reachy:
         spread: kx
         stagger: -0.25ky
-        key.name: thumb_reachy
+        key:
+          name: thumb_reachy
+          rotate: 180
 
   # Outline Extents
   # ===============
@@ -105,14 +109,14 @@ points:
     - ref: outline_top_left
     - ref: thumb_reachy
       affect: x
-      shift: [0.5sf, -0.5sf]
+      shift: [-0.5sf, 0.5sf]
   zones.outline_bottom_left:
     key.name: outline_bottom_left
     anchor:
     - ref: outline_top_left
     - ref: thumb_reachy
       affect: y
-      shift: [0.5sf, -0.5sf]
+      shift: [-0.5sf, 0.5sf]
   zones.outline_bottom_right:
     key.name: outline_bottom_right
     anchor:
@@ -151,7 +155,6 @@ points:
           P9: matrix_index_bottom
           P6: thumb_tucky
           P3: thumb_reachy
-
   zones.power_jumper:
     anchor:
       - ref: mcu
@@ -164,7 +167,7 @@ points:
         - type: jumper
           anchor.rotate: 90
           nets:
-            from: RAW
+            from: B+
             to: RAW
   zones.battery_pads:
     anchor:
@@ -178,7 +181,7 @@ points:
         - type: jumper
           nets:
             from: GND
-            to: RAW
+            to: B+
   zones.reset:
     anchor:
       - ref: mcu
@@ -207,7 +210,7 @@ points:
       width: 1
       footprints:
         - type: via
-          nets.net: MOUNT
+          nets.net: ""
   zones.mounting_hole_bottom:
     anchor:
       - ref: matrix_inner_home
@@ -222,7 +225,7 @@ points:
       width: 1
       footprints:
         - type: via
-          nets.net: MOUNT          
+          nets.net: ""          
 
 outlines.exports:
   _outer:
@@ -237,7 +240,7 @@ outlines.exports:
       anchor: 
         - ref: mcu
           shift: [0.5promicro_x - sx, -0.5promicro_y]
-        - shift: [0, 3.5]
+        - shift: [0.5, 3]
       size: [5.5, 3.5]
   panel:
     - name: _outer
@@ -249,7 +252,7 @@ outlines.exports:
       size: [promicro_x, promicro_y]
       anchor:
         ref: mcu
-        shift: [-0.5promicro_x, -0.5promicro_y]
+        shift: [-0.5sx, -0.5sy]
   key_demo:
     - panel
     - ^_mcu
