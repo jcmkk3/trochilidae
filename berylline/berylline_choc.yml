@@ -155,7 +155,6 @@ points:
           P9: matrix_index_bottom
           P6: thumb_tucky
           P3: thumb_reachy
-
   zones.power_jumper:
     anchor:
       - ref: mcu
@@ -168,7 +167,7 @@ points:
         - type: jumper
           anchor.rotate: 90
           nets:
-            from: RAW
+            from: B+
             to: RAW
   zones.battery_pads:
     anchor:
@@ -182,7 +181,7 @@ points:
         - type: jumper
           nets:
             from: GND
-            to: RAW
+            to: B+
   zones.reset:
     anchor:
       - ref: mcu
@@ -211,7 +210,7 @@ points:
       width: 1
       footprints:
         - type: via
-          nets.net: MOUNT
+          nets.net: ""
   zones.mounting_hole_bottom:
     anchor:
       - ref: matrix_inner_home
@@ -226,7 +225,7 @@ points:
       width: 1
       footprints:
         - type: via
-          nets.net: MOUNT          
+          nets.net: ""          
 
 outlines.exports:
   _outer:
