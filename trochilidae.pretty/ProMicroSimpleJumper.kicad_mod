@@ -1,6 +1,6 @@
 (footprint "ProMicroSimpleJumper" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
-  (tedit 61D4FEF7)
+  (tedit 6265E65C)
   (attr through_hole)
   (fp_text reference "MCU1" (at 0 0) (layer "F.SilkS") hide
     (effects (font (size 1.27 1.27) (thickness 0.15)))
@@ -270,4 +270,18 @@
   (pad "22" thru_hole circle (at 8.89 7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.Mask) (tstamp 8afefa03-006b-4e40-b19e-6596c7cc472e))
   (pad "23" thru_hole circle (at 11.43 7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.Mask) (tstamp 01600802-66c5-45a2-be7f-4fa2327d845b))
   (pad "24" thru_hole circle (at 13.97 7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.Mask) (tstamp 200b738a-50e9-4f57-b197-9a6a0ae11af3))
+  (zone (net 0) (net_name "") (layers *.Cu) (tstamp 7bfa358e-260c-4864-9a10-fa815f3406de) (hatch edge 0.508)
+    (connect_pads (clearance 0))
+    (min_thickness 0.254)
+    (keepout (tracks allowed) (vias allowed) (pads allowed ) (copperpour not_allowed) (footprints allowed))
+    (fill (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (polygon
+      (pts
+        (xy 15.24 8.89)
+        (xy -15.38 8.89)
+        (xy -15.38 -8.92)
+        (xy 15.24 -8.92)
+      )
+    )
+  )
 )

@@ -1,6 +1,6 @@
 (footprint "XiaoSimplePogo" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
-  (tedit 6233BD99)
+  (tedit 627DD63D)
   (attr smd)
   (fp_text reference "Ref**" (at 0 0) (layer "F.SilkS")
     (effects (font (size 1.27 1.27) (thickness 0.15)))
@@ -49,9 +49,8 @@
   (pad "12" thru_hole circle (at 16.581 -13.03782) (size 1.524 1.524) (drill 1) (layers *.Cu *.Mask) (tstamp 8a485aef-bf82-46d3-b6ac-09179bd25a6e))
   (pad "13" thru_hole circle (at 16.581 -15.57782) (size 1.524 1.524) (drill 1) (layers *.Cu *.Mask) (tstamp 5ccdc3c8-5688-4a91-b801-f044e331f62e))
   (pad "14" thru_hole circle (at 16.581 -18.11782) (size 1.524 1.524) (drill 1) (layers *.Cu *.Mask) (tstamp 6b51363c-de07-4a2d-90c7-7b7c4c6c177a))
-  (pad "B+" thru_hole circle (at 4.4705 -10.93409) (size 0.908 0.908) (drill 0.508) (layers *.Cu *.Mask) (tstamp 311b8624-7d9a-437a-9da5-5987fabc6fde))
-  (pad "GND" thru_hole circle (at 4.4705 -12.83909) (size 0.908 0.908) (drill 0.508) (layers *.Cu *.Mask) (tstamp 55fa0900-d141-4597-990a-eda29edb12d1))
-  (zone (net 0) (net_name "") (layers F&B.Cu) (tstamp 53db68a7-14e8-4baa-ac45-daadd65513d1) (hatch edge 0.508)
+  (pad "B+" thru_hole oval (at 4.4705 -10.93409) (size 1.5 1) (drill 0.508) (layers *.Cu *.Mask) (tstamp 311b8624-7d9a-437a-9da5-5987fabc6fde))
+  (zone (net 0) (net_name "") (layers F&B.Cu) (tstamp 9d8076e4-90bf-434d-b742-fd981c971465) (hatch edge 0.508)
     (connect_pads (clearance 0))
     (min_thickness 0.254)
     (keepout (tracks allowed) (vias allowed) (pads allowed ) (copperpour not_allowed) (footprints allowed))
@@ -63,12 +62,6 @@
         (xy 0 -21)
         (xy 17.8 -21)
       )
-    )
-  )
-  (group "" (id 789fde59-6346-41c4-8bdd-f9aa5fd7f3db)
-    (members
-      311b8624-7d9a-437a-9da5-5987fabc6fde
-      55fa0900-d141-4597-990a-eda29edb12d1
     )
   )
 )

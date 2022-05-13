@@ -1,8 +1,8 @@
 (footprint "ChocV2Simple" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
-  (tedit 61682B5A)
+  (tedit 627C3A14)
   (attr through_hole)
-  (fp_text reference "SW*" (at 4 6.25 180) (layer "F.SilkS")
+  (fp_text reference "SW*" (at 4 6.25 180) (layer "F.SilkS") hide
     (effects (font (size 1 1) (thickness 0.15)))
     (tstamp 2a03ff16-63e8-44ea-8fc7-493fd6931d15)
   )
@@ -10,7 +10,7 @@
     (effects (font (size 1 1) (thickness 0.15)))
     (tstamp d8753029-5b9e-4b2d-a109-151ca5af4459)
   )
-  (fp_text user "${REFERENCE}" (at 4 6.25) (layer "B.SilkS")
+  (fp_text user "${REFERENCE}" (at 4 6.25) (layer "B.SilkS") hide
     (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
     (tstamp dd5a5a2b-b08e-4c38-ac3f-d39b61fee333)
   )
@@ -22,7 +22,7 @@
   (fp_line (start 6 7) (end 7 7) (layer "Dwgs.User") (width 0.15) (tstamp cd6b65ba-f66b-439e-a0dd-86e2a247f9f5))
   (fp_line (start 9 -9) (end 9 9) (layer "Dwgs.User") (width 0.15) (tstamp db65f546-f246-4635-a2fb-fbcdfebf13d3))
   (fp_line (start 9 9) (end -9 9) (layer "Dwgs.User") (width 0.15) (tstamp e4e4e7dc-508d-4ff7-8bfe-88641fb7842e))
-  (pad "" np_thru_hole circle (at 0 0 90) (size 4.9 4.9) (drill 4.9) (layers *.Cu *.Mask) (tstamp 27eea0e5-dec0-4328-8fc5-c2a06c226a75))
+  (pad "" np_thru_hole circle (at 0 0 90) (size 4.8 4.8) (drill 4.8) (layers F&B.Cu *.Mask) (tstamp 27eea0e5-dec0-4328-8fc5-c2a06c226a75))
   (pad "" smd rect (at 0 -4.93) (size 5.5 2.95) (layers "Eco1.User") (tstamp 3ea817bb-6617-4aaf-87ed-928d2f7c8baf))
   (pad "" np_thru_hole circle (at 5.5 0 90) (size 1.8 1.8) (drill 1.8) (layers *.Cu *.Mask) (tstamp bbd880c2-6cf7-4c43-8425-8f64fee8887f))
   (pad "" np_thru_hole circle (at -5.5 0 90) (size 1.8 1.8) (drill 1.8) (layers *.Cu *.Mask) (tstamp ef5bd37b-1c29-4704-8a27-da1eb3cfcab7))
