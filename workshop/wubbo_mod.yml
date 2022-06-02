@@ -218,10 +218,17 @@ outlines:
       - type: outline
         name: _bottom
         fillet: 30
-    _switch_cutouts:
-      - type: keys
+    switch_demo:
+      - combined
+      - operation: stack
+        type: keys
         side: left
-        size: 14 # Plate cutouts are 14mm * 14mm for both MX and Choc
+        size: 14
         bound: false
-    switch_plate:
-      [ combined, -_switch_cutouts]
+    key_demo:
+      - combined
+      - operation: stack
+        type: keys
+        side: left
+        size: [choc_cap_x, choc_cap_y]
+        bound: false
