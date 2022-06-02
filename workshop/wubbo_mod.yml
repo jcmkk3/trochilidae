@@ -18,7 +18,7 @@ units:
   index_stagger: -3
   index_spread: 1cx
 
-  inner_rotation: -2
+  inner_rotation: 0
   inner_stagger: -0.5cy
   inner_spread: 16.5
 
@@ -125,7 +125,7 @@ points:
             home.key_net: P004
             top.key_net: P005
         inner:
-          rotate: inner_rotation - index_rotation
+          rotate: inner_rotation
           stagger: inner_stagger
           spread: inner_spread
           rows:
@@ -135,10 +135,10 @@ points:
     thumbkeys:
       anchor:
         ref: alphas_index_bottom
-        shift: [ 0.8cx, -1cy - 2]
+        shift: [ 0.8cx, -1.1cy]
       columns:
         near:
-          rotate: 10
+          rotate: 15
           stagger: -5
           origin: [ 0, -0.5cy ]
           key.key_net: P009
@@ -157,7 +157,7 @@ outlines:
         radius: 500
         anchor:
           ref: alphas_middle_bottom
-          shift: [-95, -525]
+          shift: [-110, -522]
     _top_arch_circle:
       - type: circle
         radius: 200
