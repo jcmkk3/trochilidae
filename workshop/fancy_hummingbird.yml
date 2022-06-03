@@ -3,6 +3,7 @@ units:
   # ==========
   capx: 17        # Key cap size horizontal
   capy: 16        # Key cap size vertical
+  capx15: 26      # Key cap size horizontal for 1.5u key
   kx: cx          # Key spacing horizontal
   ky: cy          # Key spacing vertical
 
@@ -41,7 +42,7 @@ points:
       rows:
         bottom.skip: true
         home:
-          width: 1.5kx
+          width: capx15
           bind: [0, 0.5kx, 0, 0.25kx]
           row_net: P2
           column_net: P6
@@ -63,7 +64,7 @@ points:
           row_net: P3
           column_net: P6
         top:
-          width: 1.5capx
+          width: capx15
           shift: [-0.25kx, 0]
           bind: [0, 0.5kx, 0.5ky, 0.25kx]
           row_net: P1
@@ -128,12 +129,12 @@ points:
           row_net: P0
           column_net: P9
     columns.inner:
-      spread: ky
+      spread: 0.5kx + 0.5ky
       rows:
         bottom.skip: true
         home:
           rotate: 90
-          width: 1.5capx
+          width: capx15
           bind: [0.5kx, 0.5ky, 0, 1.5ky]
           row_net: P2
           column_net: P8
@@ -153,7 +154,7 @@ points:
       tucky:
         key:
           name: thumb_tucky
-          width: 1.5capx
+          width: capx15
           bind: [0.5ky, 0.5kx, 0, 0]
           row_net: P5
           column_net: P7
@@ -161,10 +162,10 @@ points:
           row_net: P4
           column_net: P10
       reachy:
-        spread: 1.25kx - (kx - ky)
+        spread: 0.75kx + 0.5ky 
         key:
           name: thumb_reachy
-          width: 1.5capx
+          width: capx15
           rotate: 90
           bind: [1.5ky, 0, 0, 0]
           row_net: P4
