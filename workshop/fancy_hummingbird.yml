@@ -200,8 +200,9 @@ points:
           shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
   zones.mounting_hole:
     anchor:
-      ref: matrix_inner_home
-      shift: [-0.5kx + 4, -ky + 4]
+      - ref: matrix_inner_home
+        rotate: -90
+      - shift: [-0.5kx + 4, -1.25ky + 4]
     mirror: *mirror
     key:
       name: mounting_hole
