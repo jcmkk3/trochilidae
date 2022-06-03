@@ -25,7 +25,8 @@ points:
     key: &key
       width: capx
       height: capy
-      tags.1u: true
+      tags:
+        1u: true
       footprints:
       - type: choc
         nets:
@@ -43,10 +44,12 @@ points:
         bottom.skip: true
         home:
           width: capx15
-          bind: [0, 0.5kx, 0, 0.25kx]
+          bind: [0, 0.5kx, 0, 0]
           row_net: P2
           column_net: P6
-          tags.15u: true
+          tags:
+            1u: false
+            15u: true
         top.skip: true
         home.mirror:
           row_net: P3
@@ -60,16 +63,18 @@ points:
           row_net: P4
           column_net: P6
         home:
-          bind: [0, 0.5kx, 0, 0.5kx]
+          bind: [0, 0.5kx, 0, 0]
           row_net: P3
           column_net: P6
         top:
           width: capx15
           shift: [-0.25kx, 0]
-          bind: [0, 0.5kx, 0.5ky, 0.25kx]
+          bind: [0, 0.5kx, ky, 0]
           row_net: P1
           column_net: P6
-          tags.15u: true
+          tags:
+            1u: false
+            15u: true
         bottom.mirror:
           row_net: P5
           column_net: P9
@@ -135,11 +140,13 @@ points:
         home:
           rotate: 90
           width: capx15
-          bind: [0.5kx, 0.5ky, 0, 1.5ky]
+          bind: [0.5kx, 0, 0, 1.5ky]
           row_net: P2
           column_net: P8
           tags:
             matrix_inner: true
+            1u: false
+            15u: true
         top.skip: true
         home.mirror:
           row_net: P3
@@ -155,9 +162,12 @@ points:
         key:
           name: thumb_tucky
           width: capx15
-          bind: [0.5ky, 0.5kx, 0, 0]
+          bind: [ky, 0.5kx, 0, 0]
           row_net: P5
           column_net: P7
+          tags:
+            1u: false
+            15u: true
         key.mirror:
           row_net: P4
           column_net: P10
@@ -167,9 +177,12 @@ points:
           name: thumb_reachy
           width: capx15
           rotate: 90
-          bind: [1.5ky, 0, 0, 0]
+          bind: [0, 1.5ky, 0, 0]
           row_net: P4
           column_net: P8
+          tags:
+            1u: false
+            15u: true
         key.mirror:
           row_net: P5
           column_net: P10
@@ -207,6 +220,14 @@ outlines:
         side: right
         size: sf
         tags: [1u]
+      - type: keys
+        side: left
+        size: [1.5sf, sf]
+        tags: [15u]
+      - type: keys
+        side: right
+        size: [1.5sf, sf]
+        tags: [15u]
     _center:
       - type: polygon
         points:
@@ -242,12 +263,12 @@ outlines:
         side: left
         size: 14
         bound: false
-        tags: [1u]
+        tags: [1u, 15u]
       - type: keys
         side: right
         size: 14
         bound: false
-        tags: [1u]
+        tags: [1u, 15u]
     _keycaps:
       - type: keys
         side: left
@@ -259,6 +280,16 @@ outlines:
         size: [capx, capy]
         bound: false
         tags: [1u]
+      - type: keys
+        side: left
+        size: [capx15, capy]
+        bound: false
+        tags: [15u]
+      - type: keys
+        side: right
+        size: [capx15, capy]
+        bound: false
+        tags: [15u]
     _mcu:
       - type: rectangle
         anchor:
