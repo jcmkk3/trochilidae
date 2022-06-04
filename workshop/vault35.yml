@@ -68,7 +68,7 @@ points:
   zones.bottom300:
     anchor:
       ref: alphabottom_one_row
-      shift: [0.5U / 2, -U]
+      shift: [1.25U, -U]
     key:
       width: U
       height: U
@@ -76,10 +76,9 @@ points:
     columns:
       one:
         key.width: 1.25U
-        spread: U + (0.25U / 2)
       two:
         key.width: 1.25U
-        spread: U + 0.25U
+        spread: 1.25U
       three:
         key.width: 3U
         spread: 2U + (0.25U / 2)
@@ -88,4 +87,30 @@ points:
         spread: 2U + (0.25U / 2)
       five:
         key.width: 1.25U
-        spread: U + 0.25U
+        spread: 1.25U
+  zones.bottom175:
+    anchor:
+      ref: bottom300_one_row
+      shift: [-0.25U / 2, -U]
+    key:
+      width: U
+      height: U
+    rows.row:
+    columns:
+      one:
+        key.width: 1U
+      two:
+        key.width: 1.25U
+        spread: U + (0.25U / 2)
+      three:
+        key.width: 1.75U
+        spread: 1.5U
+      four:
+        key.width: 1.75U
+        spread: 1.75U
+      five:
+        key.width: 1.25U
+        spread: 1.5U
+      six:
+        key.width: U
+        spread: U + (0.25U / 2)
