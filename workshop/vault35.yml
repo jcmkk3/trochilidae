@@ -1,0 +1,91 @@
+units:
+  visual_x: 1
+  visual_y: 1
+points:
+  zones.alphatop:
+    key:
+      width: U
+      height: U
+    rows.row:
+    columns:
+      one:
+      two:
+      three:
+      four:
+      five:
+      six:
+      seven:
+      eight:
+      nine:
+      ten:
+      eleven:
+  zones.alphahome:
+    key:
+      width: U
+      height: U
+    anchor:
+      ref: alphatop_one_row
+      shift: [0.25U / 2, -U]
+    rows.row:
+    columns:
+      one:
+        key.width: 1.25U
+      two:
+        spread: U + (0.25U / 2)
+      three:
+      four:
+      five:
+      six:
+      seven:
+      eight:
+      nine:
+      ten:
+        key.width: 1.75U
+        spread: U + (0.75U / 2)
+  zones.alphabottom:
+    anchor:
+      ref: alphahome_one_row
+      shift: [0.5U / 2, -U]
+    key:
+      width: U
+      height: U
+    rows.row:
+    columns:
+      one:
+        key.width: 1.75U
+      two:
+        spread: U + (0.75U / 2)
+      three:
+      four:
+      five:
+      six:
+      seven:
+      eight:
+      nine:
+      ten:
+        key.width: 1.25U
+        spread: U + (0.25U / 2)
+  zones.bottom300:
+    anchor:
+      ref: alphabottom_one_row
+      shift: [0.5U / 2, -U]
+    key:
+      width: U
+      height: U
+    rows.row:
+    columns:
+      one:
+        key.width: 1.25U
+        spread: U + (0.25U / 2)
+      two:
+        key.width: 1.25U
+        spread: U + 0.25U
+      three:
+        key.width: 3U
+        spread: 2U + (0.25U / 2)
+      four:
+        key.width: 1.25U
+        spread: 2U + (0.25U / 2)
+      five:
+        key.width: 1.25U
+        spread: U + 0.25U
