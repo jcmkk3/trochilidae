@@ -1,5 +1,6 @@
 units:
   # Parameters
+  # ==========
   row_spacing: 16.5
 
   pinky_rotation: 5 # degrees rotation relative to zone rotation
@@ -22,134 +23,153 @@ units:
   inner_stagger: -0.5cy
   inner_spread: 16.5
 
-  usb_cutout_x:  47
-  usb_cutout_y: -1.27
-  usb_cutout_r: -15.5
-
   # Constants
-  choc_cap_x: 15.5
-  choc_cap_y: 15.5
+  # =========
+  capx: 15.5
+  capy: 15.5
 
-  choc_plate_thickness: 1.2
-  mx_plate_thickness: 1.5
+  xiao_x: 17.5
+  xiao_y: 20
 
   # demo.dxf multiplies key.width/height by this value
   visual_x: 1
   visual_y: 1
 
 points:
-  rotate: 0
-  mirror:
-  key: # each key across all zones will have these properties
-    bind: 5
-    width: choc_cap_x
-    height: choc_cap_y
-    tags:
-      1u: true
-    footprints: # These footprints will be added for each of the points
-      choc_hotswap:
-        type: choc
-        nets:
-          to: =key_net
-          from: GND
-        params:
-          reverse: false
-          hotswap: true
-          # Don't show a model for this since 'choc' already loads the model
-          model: false
-          keycaps: false
-      choc:
-        type: choc
-        anchor: 
-          rotate: 180
-        nets:
-          to: =key_net
-          from: GND
-        params:
-          keycaps: true
-          reverse: false
-      # A trace to connect each hotswap socket with a pin hole (do a 4mm fillet on these in KiCad)
-      trace:
-        type: trace
-        params:
-          side: B
-          points: [
-            [0, 6],
-            [6, 6],
-            [9, 4],
-            [9, -4]
-          ]
-  zones:
-    alphas:
-      rows:
-        bottom.padding: row_spacing
-        home.padding: row_spacing
-        top.padding: row_spacing
-      columns:
-        pinkycluster:
-          rotate: pinky_rotation
-          rows:
-            bottom.skip: true
-            home.key_net: P106
-            top.skip: true
-        pinky:
-          rotate: pinky_rotation - pinky_rotation
-          stagger: pinky_stagger
-          spread: pinky_spread
-          rows:
-            bottom.key_net: P104
-            home.key_net: P102
-            top.skip: true
-        ring:
-          rotate: ring_rotation - pinky_rotation
-          stagger: ring_stagger
-          spread: ring_spread
-          rows:
-            bottom.key_net: P101
-            home.key_net: P103
-            top.key_net: P100
-        middle:
-          rotate: middle_rotation - ring_rotation
-          stagger: middle_stagger
-          spread: middle_spread
-          rows:
-            bottom.key_net: P022
-            home.key_net: P029
-            top.key_net: P030
-        index:
-          rotate: index_rotation - middle_rotation
-          stagger: index_stagger
-          spread: index_spread
-          rows:
-            bottom.key_net: P031
-            home.key_net: P004
-            top.key_net: P005
-        inner:
-          rotate: inner_rotation
-          stagger: inner_stagger
-          spread: inner_spread
-          rows:
-            bottom.skip: true
-            home.key_net: P109
-            top.key_net: P012
-    thumbkeys:
-      anchor:
-        ref: alphas_index_bottom
-        shift: [ 0.8cx, -1.1cy]
-      columns:
-        near:
-          rotate: 15
-          stagger: -5
-          origin: [ 0, -0.5cy ]
-          key.key_net: P009
-        home:
-          spread: 16.5
-          rotate: -15 # -25 degrees cumulative
-          origin: [-0.5choc_cap_y, -0.5choc_cap_x] # Pivot at the lower left corner of a 1.5u choc key
-          key.key_net: P010
-      rows:
-        thumb:
-          padding: 0
+  # Keys/Switches
+  # =============
+  zones.alphas:
+    key: &key
+      width: capx
+      height: capy
+      tags:
+        keys: true
+      footprints:
+        - type: choc
+          anchor:
+            rotate: 180
+          nets:
+            from: GND
+            to: =key_net
+          params:
+            reverse: true
+            keycaps: true
+    rows:
+      bottom.padding: row_spacing
+      home.padding: row_spacing
+      top.padding: row_spacing
+    columns:
+      pinkycluster:
+        rotate: pinky_rotation
+        rows:
+          bottom.skip: true
+          home.key_net: P106
+          top.skip: true
+      pinky:
+        rotate: pinky_rotation - pinky_rotation
+        stagger: pinky_stagger
+        spread: pinky_spread
+        rows:
+          bottom.key_net: P104
+          home.key_net: P102
+          top.skip: true
+      ring:
+        rotate: ring_rotation - pinky_rotation
+        stagger: ring_stagger
+        spread: ring_spread
+        rows:
+          bottom.key_net: P101
+          home.key_net: P103
+          top.key_net: P100
+      middle:
+        rotate: middle_rotation - ring_rotation
+        stagger: middle_stagger
+        spread: middle_spread
+        rows:
+          bottom.key_net: P022
+          home.key_net: P029
+          top.key_net: P030
+      index:
+        rotate: index_rotation - middle_rotation
+        stagger: index_stagger
+        spread: index_spread
+        rows:
+          bottom.key_net: P031
+          home.key_net: P004
+          top.key_net: P005
+      inner:
+        rotate: inner_rotation
+        stagger: inner_stagger
+        spread: inner_spread
+        rows:
+          bottom.skip: true
+          home.key_net: P109
+          top.key_net: P012
+  zones.thumb:
+    anchor:
+      ref: alphas_index_bottom
+      shift: [ 0.8cx, -1.1cy]
+    key: *key
+    columns:
+      tucky:
+        rotate: 15
+        stagger: -5
+        origin: [ 0, -0.5cy ]
+        key:
+          key_net: P009
+          name: thumb_tucky
+      reachy:
+        spread: 16.5
+        rotate: -15 # -25 degrees cumulative
+        origin: [-0.5capy, -0.5capx] # Pivot at the lower left corner of a 1.5u choc key
+        key:
+          key_net: P010
+          name: thumb_reachy
+    rows:
+      thumb:
+        padding: 0
+
+  # Components
+  # ==========
+  zones.mcu:
+    anchor:
+      ref: alphas_inner_top
+      shift: [0.5inner_spread + 0.5xiao_x + 3, -5]
+    key:
+      name: mcu
+      width: xiao_x
+      height: xiao_y
+      footprints:
+      - type: xiao
+        anchor:
+          shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
+  zones.power_jumper:
+    anchor:
+      - ref: mcu
+        shift: [0, 0]
+    key:
+      name: power_jumper
+      height: 4.4
+      width: 1.8
+      footprints:
+        - type: jumper
+          anchor.rotate: 90
+          nets:
+            from: B+
+            to: RAW
+  zones.battery_pads:
+    anchor:
+      - ref: mcu
+        shift: [0, 0]
+    key:
+      name: battery_pads
+      height: 2.1
+      width: 3.8
+      footprints:
+        - type: jumper
+          nets:
+            from: GND
+            to: B+
 outlines:
   exports:
     _bottom_arch_circle:
@@ -186,10 +206,10 @@ outlines:
           - ref: alphas_middle_top
             affect: y
             shift: [0, 40]
-          - ref: thumbkeys_home_thumb
+          - ref: thumb_reachy
             affect: x
             shift: [60, 0]
-          - ref: thumbkeys_home_thumb
+          - ref: thumb_reachy
             shift: [0, -10]
           - ref: alphas_pinkycluster_home
             affect: x
@@ -203,10 +223,10 @@ outlines:
             shift: [-40, 0]
           - ref: alphas_middle_top
             affect: y
-          - ref: thumbkeys_home_thumb
+          - ref: thumb_reachy
             affect: x
             shift: [40, 0]
-          - ref: thumbkeys_home_thumb
+          - ref: thumb_reachy
             affect: y
             shift: [0, -40]
           - ref: alphas_pinkycluster_home
@@ -218,17 +238,27 @@ outlines:
       - type: outline
         name: _bottom
         fillet: 30
+    _mcu:
+      - type: rectangle
+        anchor:
+          ref: mcu
+          shift: [-0.5sx, -0.5sy]
+        size: [xiao_x, xiao_y]
     switch_demo:
       - combined
+      - ^_mcu
       - operation: stack
         type: keys
         side: left
         size: 14
         bound: false
+        tags: [keys]
     key_demo:
       - combined
+      - ^_mcu
       - operation: stack
         type: keys
         side: left
-        size: [choc_cap_x, choc_cap_y]
+        size: [capx, capy]
         bound: false
+        tags: [keys]
