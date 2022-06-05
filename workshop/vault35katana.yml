@@ -1,0 +1,101 @@
+units:
+  visual_x: 1
+  visual_y: 1
+points:
+  zones.alphatop:
+    mirror: &mirror
+      ref: alphatop_inner_row
+      distance: U
+    key:
+      width: U
+      height: U
+    rows.row:
+    columns:
+      pinky:
+        key.width: 1.5U
+      ring:
+        spread: U + (0.5U / 2)
+      middle:
+      index:
+      inner:
+  zones.alphahome:
+    mirror: *mirror
+    key:
+      width: U
+      height: U
+    anchor:
+      ref: alphatop_pinky_row
+      shift: [-0.25U / 2, -U]
+    rows.row:
+    columns:
+      pinky:
+        key.width: 1.25U
+      ring:
+        spread: U + (0.25U / 2)
+      middle:
+      index:
+      inner:
+  zones.alphabottom:
+    mirror: *mirror
+    anchor:
+      ref: alphahome_pinky_row
+      shift: [-0.25U / 2, -U]
+    key:
+      width: U
+      height: U
+    rows.row:
+    columns:
+      pinky:
+      ring:
+      middle:
+      index:
+      inner:
+  zones.bottom300:
+    anchor:
+      ref: alphabottom_pinky_row
+      shift: [1.5U, -U]
+    key:
+      width: U
+      height: U
+    rows.row:
+    columns:
+      one:
+        key.width: 1.25U
+      two:
+        key.width: 1.25U
+        spread: 1.25U
+      three:
+        key.width: 3U
+        spread: 2U + (0.25U / 2)
+      four:
+        key.width: 1.25U
+        spread: 2U + (0.25U / 2)
+      five:
+        key.width: 1.25U
+        spread: 1.25U
+  zones.bottom175:
+    anchor:
+      ref: bottom300_one_row
+      shift: [-0.25U / 2, -U]
+    key:
+      width: U
+      height: U
+    rows.row:
+    columns:
+      one:
+        key.width: 1U
+      two:
+        key.width: 1.25U
+        spread: U + (0.25U / 2)
+      three:
+        key.width: 1.75U
+        spread: 1.5U
+      four:
+        key.width: 1.75U
+        spread: 1.75U
+      five:
+        key.width: 1.25U
+        spread: 1.5U
+      six:
+        key.width: U
+        spread: U + (0.25U / 2)
