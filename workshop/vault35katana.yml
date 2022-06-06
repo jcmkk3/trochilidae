@@ -12,7 +12,9 @@ points:
     rows.row:
     columns:
       pinky:
-        key.width: 1.5U
+        key:
+          width: 1.5U
+          bind: [1.5U / 2, 0]
       ring:
         spread: U + (0.5U / 2)
       middle:
@@ -25,16 +27,20 @@ points:
       height: U
     anchor:
       ref: alphatop_pinky_row
-      shift: [-0.25U / 2, -U]
+      shift: [-0.25U / 2 - 0.5U, -U]
     rows.row:
     columns:
       pinky:
-        key.width: 1.25U
+        key:
+          width: 1.25U
+          bind: [1.25U / 2 - 0.5U, 0]
       ring:
         spread: U + (0.25U / 2)
       middle:
       index:
       inner:
+        key:
+          bind: [2U, 0]
   zones.alphabottom:
     mirror: *mirror
     anchor:
@@ -50,7 +56,10 @@ points:
       middle:
       index:
       inner:
-  zones.bottom300:
+        key:
+          bind: [2U, 0]
+  zones.bottom:
+    mirror: *mirror
     anchor:
       ref: alphabottom_pinky_row
       shift: [1.5U, -U]
@@ -60,42 +69,34 @@ points:
     rows.row:
     columns:
       one:
-        key.width: 1.25U
       two:
-        key.width: 1.25U
-        spread: 1.25U
-      three:
-        key.width: 3U
-        spread: 2U + (0.25U / 2)
-      four:
-        key.width: 1.25U
-        spread: 2U + (0.25U / 2)
-      five:
-        key.width: 1.25U
-        spread: 1.25U
-  zones.bottom175:
-    anchor:
-      ref: bottom300_one_row
-      shift: [-0.25U / 2, -U]
-    key:
-      width: U
-      height: U
-    rows.row:
-    columns:
-      one:
-        key.width: 1U
-      two:
-        key.width: 1.25U
         spread: U + (0.25U / 2)
+        key:
+          width: 1.25U
+          bind: [0.5U, 0]
       three:
-        key.width: 1.75U
         spread: 1.5U
-      four:
-        key.width: 1.75U
-        spread: 1.75U
-      five:
-        key.width: 1.25U
-        spread: 1.5U
-      six:
-        key.width: U
-        spread: U + (0.25U / 2)
+        key:
+          width: 1.75U
+          bind: [U, 0]
+outlines:
+  exports:
+    panel:
+      - type: keys
+        side: left
+        size: U
+      - type: keys
+        side: right
+        size: U
+    switch_demo:
+      - type: keys
+        side: left
+        size: 14
+        bound: false
+      - type: keys
+        side: right
+        size: 14
+        bound: false
+      - operation: stack
+        type: outline
+        name: panel
