@@ -1,0 +1,76 @@
+units:
+  # Parameters
+  # ==========
+  capx: 18        # Key cap size horizontal
+  capy: 18        # Key cap size vertical
+  kx: U           # Key spacing horizontal
+  ky: U           # Key spacing vertical
+
+  # Constants
+  # =========
+  visual_x: 1     # Visual representation of keycaps horizontal
+  visual_y: 1     # Visual representation of keycaps vertical
+  sf: 16          # Switch footprint (square)
+
+points:
+  zones.matrix:
+    rotate: -10
+    mirror: &mirror
+      ref: matrix_inner_top
+      shift: [0.5sf, 0.5sf]
+      distance: 35
+    key: &key
+      width: capx
+      height: capy
+      tags:
+        keys: true
+      footprints:
+      - type: choc
+        nets:
+          from: =row_net
+          to: =column_net
+        params:
+          keycaps: true
+    rows:
+      bottom.padding: ky
+      home.padding: ky
+      top.padding: ky
+      num.padding: ky
+    columns.outer:
+      spread: kx
+      key.width: 1.25kx + capx - kx
+    columns.pinky:
+      spread: kx + 0.25kx / 2
+    columns.ring:
+      spread: kx
+    columns.middle:
+      spread: kx
+    columns.index:
+      spread: kx
+    columns.inner:
+      spread: kx
+  zones.thumb:
+    anchor:
+      ref: matrix_middle_bottom
+      shift: [0.5kx, -ky]
+    mirror: *mirror
+    key: *key
+    columns:
+      tucky:
+        key:
+          name: thumb_tucky
+      middle:
+        spread: kx
+        key:
+          name: thumb_middle
+      home:
+        spread: 1.25kx
+        key:
+          name: thumb_home
+          width: 1.5kx + capx - kx
+      top:
+        spread: 0.25kx
+        stagger: ky
+        key:
+          name: thumb_top
+
