@@ -2,13 +2,28 @@ units:
   visual_x: 1
   visual_y: 1
 points:
-  zones.alphatop:
+  zones.alpha:
     key:
       width: U
       height: U
-    rows.row:
+    rows:
+      r4:
+        padding: U
+        shift: [0.75U, 0]
+      r3:
+        padding: U
+        shift: [0.25U, 0]
+      r2:
+        padding: U
     columns:
       one:
+        rows:
+          r4:
+            width: 1.75U
+            shift: [0.75U / 2, 0]
+          r3:
+            width: 1.25U
+            shift: [0.25U / 2, 0]
       two:
       three:
       four:
@@ -18,56 +33,20 @@ points:
       eight:
       nine:
       ten:
+        rows:
+          r4:
+            width: 1.25U
+            shift: [1.75U / 2, 0]
+          r3:
+            width: 1.75U
+            shift: [1.25U / 2, 0]
       eleven:
-  zones.alphahome:
-    key:
-      width: U
-      height: U
+        rows:
+          r4.skip: true
+          r3.skip: true
+  zones.r5:
     anchor:
-      ref: alphatop_one_row
-      shift: [0.25U / 2, -U]
-    rows.row:
-    columns:
-      one:
-        key.width: 1.25U
-      two:
-        spread: U + (0.25U / 2)
-      three:
-      four:
-      five:
-      six:
-      seven:
-      eight:
-      nine:
-      ten:
-        key.width: 1.75U
-        spread: U + (0.75U / 2)
-  zones.alphabottom:
-    anchor:
-      ref: alphahome_one_row
-      shift: [0.5U / 2, -U]
-    key:
-      width: U
-      height: U
-    rows.row:
-    columns:
-      one:
-        key.width: 1.75U
-      two:
-        spread: U + (0.75U / 2)
-      three:
-      four:
-      five:
-      six:
-      seven:
-      eight:
-      nine:
-      ten:
-        key.width: 1.25U
-        spread: U + (0.25U / 2)
-  zones.bottom300:
-    anchor:
-      ref: alphabottom_one_row
+      ref: alpha_one_r4
       shift: [1.25U, -U]
     key:
       width: U
@@ -88,29 +67,3 @@ points:
       five:
         key.width: 1.25U
         spread: 1.25U
-  zones.bottom175:
-    anchor:
-      ref: bottom300_one_row
-      shift: [-0.25U / 2, -U]
-    key:
-      width: U
-      height: U
-    rows.row:
-    columns:
-      one:
-        key.width: 1U
-      two:
-        key.width: 1.25U
-        spread: U + (0.25U / 2)
-      three:
-        key.width: 1.75U
-        spread: 1.5U
-      four:
-        key.width: 1.75U
-        spread: 1.75U
-      five:
-        key.width: 1.25U
-        spread: 1.5U
-      six:
-        key.width: U
-        spread: U + (0.25U / 2)
