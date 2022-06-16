@@ -27,7 +27,7 @@ points:
       height: U
     anchor:
       ref: alphatop_pinky_row
-      shift: [-0.25U / 2 - 0.5U, -U]
+      shift: [-0.25U / 2, -U]
     rows.row:
     columns:
       pinky:
