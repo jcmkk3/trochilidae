@@ -1,6 +1,6 @@
 (footprint "ChocV2Simple" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
-  (tedit 627C3A14)
+  (tedit 629C13CC)
   (attr through_hole)
   (fp_text reference "SW*" (at 4 6.25 180) (layer "F.SilkS") hide
     (effects (font (size 1 1) (thickness 0.15)))
@@ -24,9 +24,9 @@
   (fp_line (start 9 9) (end -9 9) (layer "Dwgs.User") (width 0.15) (tstamp e4e4e7dc-508d-4ff7-8bfe-88641fb7842e))
   (pad "" np_thru_hole circle (at 0 0 90) (size 4.8 4.8) (drill 4.8) (layers F&B.Cu *.Mask) (tstamp 27eea0e5-dec0-4328-8fc5-c2a06c226a75))
   (pad "" smd rect (at 0 -4.93) (size 5.5 2.95) (layers "Eco1.User") (tstamp 3ea817bb-6617-4aaf-87ed-928d2f7c8baf))
-  (pad "" np_thru_hole circle (at 5.5 0 90) (size 1.8 1.8) (drill 1.8) (layers *.Cu *.Mask) (tstamp bbd880c2-6cf7-4c43-8425-8f64fee8887f))
-  (pad "" np_thru_hole circle (at -5.5 0 90) (size 1.8 1.8) (drill 1.8) (layers *.Cu *.Mask) (tstamp ef5bd37b-1c29-4704-8a27-da1eb3cfcab7))
-  (pad "" thru_hole oval (at 5 -5.55) (size 2 1.5) (drill oval 1 0.3) (layers *.Cu "B.Mask") (tstamp f6116b4c-bf85-47bc-b4a0-d6d824c4e0f7))
+  (pad "" np_thru_hole circle (at 5.5 0 90) (size 1.7018 1.7018) (drill 1.7018) (layers F&B.Cu *.Mask) (tstamp bbd880c2-6cf7-4c43-8425-8f64fee8887f))
+  (pad "" np_thru_hole circle (at -5.5 0 90) (size 1.7018 1.7018) (drill 1.7018) (layers F&B.Cu *.Mask) (tstamp ef5bd37b-1c29-4704-8a27-da1eb3cfcab7))
+  (pad "" thru_hole circle (at 5 -5.55) (size 2 2) (drill 1) (layers *.Cu "B.Mask") (tstamp f6116b4c-bf85-47bc-b4a0-d6d824c4e0f7))
   (pad "1" thru_hole circle (at 0 5.9) (size 2.2 2.2) (drill 1.2) (layers *.Cu "B.Mask") (tstamp 1808e7fd-349b-43bd-8d6c-b6e6d48ce08a))
   (pad "2" thru_hole circle (at -5 3.8) (size 2.2 2.2) (drill 1.2) (layers *.Cu "B.Mask") (tstamp 2e80e961-4c3a-403a-b4e3-119ce28319ed))
   (model "/Users/foostan/src/github.com/foostan/kbd/kicad-packages3D/kbd.3dshapes/kailh_choc.step"

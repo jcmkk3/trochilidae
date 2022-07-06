@@ -1,6 +1,6 @@
 (footprint "ChocV2SimpleDiode" (version 20211014) (generator pcbnew)
   (layer "F.Cu")
-  (tedit 627C39B0)
+  (tedit 629C13C2)
   (attr through_hole)
   (fp_text reference "SW*" (at 4 6.25 180) (layer "F.SilkS") hide
     (effects (font (size 1 1) (thickness 0.15)))
@@ -38,10 +38,10 @@
       (gr_line (start 1.7 1.7) (end 1.7 7.48) (width 0.25))
       (gr_line (start 1.7 7.48) (end -1.65 10.83) (width 0.25))
     ) (tstamp a7a27db3-26d1-4801-b378-7ca6de1dbeb1))
-  (pad "" np_thru_hole circle (at 5.5 0 90) (size 1.8 1.8) (drill 1.8) (layers *.Cu *.Mask) (tstamp bbd880c2-6cf7-4c43-8425-8f64fee8887f))
-  (pad "" np_thru_hole circle (at -5.5 0 90) (size 1.8 1.8) (drill 1.8) (layers *.Cu *.Mask) (tstamp ef5bd37b-1c29-4704-8a27-da1eb3cfcab7))
+  (pad "" np_thru_hole circle (at 5.5 0 90) (size 1.7018 1.7018) (drill 1.7018) (layers F&B.Cu *.Mask) (tstamp bbd880c2-6cf7-4c43-8425-8f64fee8887f))
+  (pad "" np_thru_hole circle (at -5.5 0 90) (size 1.7018 1.7018) (drill 1.7018) (layers F&B.Cu *.Mask) (tstamp ef5bd37b-1c29-4704-8a27-da1eb3cfcab7))
   (pad "" smd rect (at 1.65 -4.93) (size 1.1 1.9) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp f0b46255-e918-4a38-931d-8a945e9905c3))
-  (pad "" thru_hole oval (at 5 -5.55) (size 2 1.5) (drill oval 1 0.3) (layers *.Cu "B.Mask") (tstamp f6116b4c-bf85-47bc-b4a0-d6d824c4e0f7))
+  (pad "" thru_hole circle (at 5 -5.55) (size 2 2) (drill 1) (layers *.Cu "B.Mask") (tstamp f6116b4c-bf85-47bc-b4a0-d6d824c4e0f7))
   (pad "1" thru_hole circle (at -5.020411 3.79647) (size 2.2 2.2) (drill 1.2) (layers *.Cu "B.Mask") (tstamp 849ef7e5-8097-4aee-8015-323905546838))
   (pad "2" smd rect (at -1.65 -4.93) (size 1.1 1.9) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 0bf07fd4-aa7e-4f51-a6a6-44b27866d654))
   (model "/Users/foostan/src/github.com/foostan/kbd/kicad-packages3D/kbd.3dshapes/kailh_choc.step"
