@@ -167,8 +167,8 @@ points:
         - type: jumper
           anchor.rotate: 90
           nets:
-            from: B+
-            to: RAW
+            from: RAW
+            to: B+
   zones.battery_pads:
     anchor:
       - ref: mcu
@@ -180,8 +180,8 @@ points:
       footprints:
         - type: jumper
           nets:
-            from: GND
-            to: B+
+            from: B+
+            to: GND
   zones.reset:
     anchor:
       - ref: mcu
