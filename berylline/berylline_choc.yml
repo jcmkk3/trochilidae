@@ -1,24 +1,55 @@
 meta:
   engine: 4.0.0
-  name: berylline_choc
+  name: berylline
   version: 0.1
   author: jcmkk3
   url: https://github.com/jcmkk3/trochilidae
 
+presets:
+  # These presets provide different layout options
+  # Select a preset in the `units` section below
+  # Note: The appropriate switch footprint will still need to be set in the `pcb` section
+  choc_spaced:
+    capx: 17        # Key cap size horizontal
+    capy: 16        # Key cap size vertical
+    kx: cx + 0.5    # Key spacing horizontal
+    ky: cy + 0.5    # Key spacing vertical
+    pinky_splay: 5  # Degrees of splay between pinky and ring columns
+    pinky_adj: -3   # Adjustment to compensate for splay spacing
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 0
+    middle_adj: 0
+    thumb_offsetx: 0.25kx
+  
+  choc_min_spaced:
+    capx: 14.5
+    capy: 14.5
+    kx: 15 + 0.5
+    ky: 15 + 0.5
+    pinky_splay: 5
+    pinky_adj: -3
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 3
+    middle_adj: -5
+    thumb_offsetx: 1/3kx
+  
+  mx_min_spaced:
+    capx: 15.5
+    capy: 15.5
+    kx: 16 + 0.5
+    ky: 16 + 0.5
+    pinky_splay: 5
+    pinky_adj: -3
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 3
+    middle_adj: -5
+    thumb_offsetx: 1/3kx
+
 units:
-  # Parameters
-  # ==========
-  capx: 17        # Key cap size horizontal
-  capy: 16        # Key cap size vertical
-  kx: cx + 0.5    # Key spacing horizontal
-  ky: cy + 0.5    # Key spacing vertical
-  pinky_splay: 5  # Degrees of splay between pinky and ring columns
-  pinky_adj: -3   # Adjustment to compensate for splay spacing
-  ring_splay: 3
-  ring_adj: -8
-  middle_splay: 0
-  middle_adj: 0
-  thumb_offsetx: 0.25kx
+  $extends: presets.choc_spaced
 
   # Defaults/Constants
   # ====================
