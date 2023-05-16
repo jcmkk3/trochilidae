@@ -1,0 +1,227 @@
+meta:
+  engine: 4.0.0
+  name: berylline
+  version: 0.1
+  author: jcmkk3
+  url: https://github.com/jcmkk3/trochilidae
+
+presets:
+  # These presets provide different layout options
+  # Select a preset in the `units` section below
+  # Note: The appropriate switch footprint will still need to be set in the `pcb` section
+  choc_spaced:
+    capx: 17        # Key cap size horizontal
+    capy: 16        # Key cap size vertical
+    kx: cx + 0.5    # Key spacing horizontal
+    ky: cy + 0.5    # Key spacing vertical
+    pinky_splay: 5  # Degrees of splay between pinky and ring columns
+    pinky_adj: -3   # Adjustment to compensate for splay spacing
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 0
+    middle_adj: 0
+    thumb_offsetx: 0.25kx
+  
+  choc_min_spaced:
+    capx: 14.5
+    capy: 14.5
+    kx: 15 + 0.5
+    ky: 15 + 0.5
+    pinky_splay: 5
+    pinky_adj: -3
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 3
+    middle_adj: -5
+    thumb_offsetx: 1/3kx
+  
+  mx_min_spaced:
+    capx: 15.5
+    capy: 15.5
+    kx: 16 + 0.5
+    ky: 16 + 0.5
+    pinky_splay: 5
+    pinky_adj: -3
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 3
+    middle_adj: -5
+    thumb_offsetx: 1/3kx
+
+units:
+  $extends: presets.choc_spaced
+
+  # Defaults/Constants
+  # ====================
+  $default_height: 0  # Points invisible by default unless height/width explicitly set
+  $default_width: 0
+  promicro_x: 33
+  promicro_y: 18
+
+points:
+  # Keys/Switches
+  # =============
+  zones.matrix:
+    anchor.shift: [150, -180]
+    rotate: pinky_splay + ring_splay + middle_splay
+    key:
+      width: capx
+      height: capy
+      spread: kx      
+      padding: ky
+    rows:
+      bottom:
+      home:
+      top:
+    columns:
+      pinky:
+        rows.bottom.skip: true
+      ring.key:
+        stagger: 2/3ky
+        splay: -pinky_splay
+        origin: [0, pinky_adj]
+      middle.key:
+        stagger: 0.25ky
+        splay: -ring_splay
+        origin: [0, ring_adj]
+      index.key:
+        stagger: -0.25ky
+        splay: -middle_splay
+        origin: [0, middle_adj]
+      inner:
+        key.stagger: -0.5ky
+        rows.bottom.skip: true
+  zones.thumb:
+    anchor:
+      ref: matrix_index_bottom
+      shift: [thumb_offsetx, -22]
+    key.$extends: points.zones.matrix.key
+    columns:
+      tucky:
+      reachy.key.stagger: -0.25ky
+
+  # Outline Extents
+  # ===============
+  zones.outline_top_left:
+    anchor:
+    - ref: matrix_middle_top
+      shift: [0.5kx, 0.5ky]
+      affect: y
+    - ref: matrix_pinky_top
+      affect: x
+      shift: [-0.5kx, 0.5ky]
+  zones.outline_top_right:
+    anchor:
+    - ref: outline_top_left
+    - ref: thumb_reachy
+      affect: x
+      shift: [0.5kx, -0.5ky]
+  zones.outline_bottom_left:
+    anchor:
+    - ref: outline_top_left
+    - ref: thumb_reachy
+      affect: y
+      shift: [0.5kx, -0.5ky]
+  zones.outline_bottom_right:
+    anchor:
+    - ref: outline_top_right
+    - ref: outline_bottom_left
+      affect: y
+
+  # Components
+  # ==========
+  zones.mcu:
+    anchor:
+      ref: outline_bottom_left
+      shift: [0.5promicro_x + 1, 0.5promicro_y + 3]
+    key:
+      width: promicro_x
+      height: promicro_y
+  zones.mounting_hole_top:
+    anchor:
+      - ref: matrix_pinky_top
+        affect: y
+        shift: [0, 0.5ky + 4.5]
+      - ref: matrix_ring_top
+        affect: x
+        shift: [-0.5kx - 2.5, 0]
+    key:
+      height: 2
+      width: 2
+  zones.mounting_hole_bottom:
+    anchor:
+      - ref: matrix_inner_home
+        affect: y
+        shift: [0, -0.5ky - 2.5]
+      - ref: matrix_index_bottom
+        affect: x
+        shift: [0.5kx + 2.5, 0]
+    key.$extends: points.zones.mounting_hole_top.key
+
+outlines:
+  panel:
+    - what: polygon
+      fillet: 3
+      points:
+      - ref: outline_top_left
+      - ref: outline_top_right
+      - ref: outline_bottom_right
+      - ref: outline_bottom_left
+  _mcu:
+    - what: rectangle
+      where: mcu
+      size: [promicro_x, promicro_y]
+  _mounting_holes:
+    - what: circle
+      where: /mounting_hole_.*/
+      radius: 1
+  _keycaps:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: [capx, capy]
+      bound: false
+  key_demo:
+    - panel
+    - ^_mcu
+    - ^_mounting_holes
+    - ^_keycaps
+
+pcbs.berylline:
+  outlines.main:
+    outline: panel
+  footprints:
+    - what: choc
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      params:
+        from: GND
+        to: "{{name}}"
+        reverse: true
+        keycaps: true
+    - what: promicro
+      where:
+        ref: mcu
+        shift: [1.5, 0]  # Compensate for midpoint being off-center 
+      params:
+        orientation: up
+        P20: matrix_pinky_top
+        P21: matrix_pinky_home
+        P14: matrix_ring_top
+        P16: matrix_ring_home
+        P10: matrix_ring_bottom
+        P19: matrix_middle_top
+        P18: matrix_middle_home
+        P15: matrix_middle_bottom
+        P7: matrix_index_top
+        P8: matrix_index_home
+        P9: matrix_index_bottom
+        P4: matrix_inner_top
+        P5: matrix_inner_home
+        P6: thumb_tucky
+        P3: thumb_reachy
+    - what: via
+      where: /mounting_hole_.*/
+      params.net: ""
