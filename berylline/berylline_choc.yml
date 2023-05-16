@@ -178,23 +178,23 @@ pcbs:
           keycaps: true
       - what: promicro
         where:
-          - ref: mcu
-            shift: [1.5, 0]  # Compensate for midpoint being off-center 
+          ref: mcu
+          shift: [1.5, 0]  # Compensate for midpoint being off-center 
         params:
           orientation: up
           P20: matrix_pinky_top
-          P14: matrix_ring_top
-          P19: matrix_middle_top
-          P7: matrix_index_top
-          P4: matrix_inner_top
           P21: matrix_pinky_home
+          P14: matrix_ring_top
           P16: matrix_ring_home
-          P18: matrix_middle_home
-          P8: matrix_index_home
-          P5: matrix_inner_home
           P10: matrix_ring_bottom
+          P19: matrix_middle_top
+          P18: matrix_middle_home
           P15: matrix_middle_bottom
+          P7: matrix_index_top
+          P8: matrix_index_home
           P9: matrix_index_bottom
+          P4: matrix_inner_top
+          P5: matrix_inner_home
           P6: thumb_tucky
           P3: thumb_reachy
       - what: via
