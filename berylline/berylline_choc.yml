@@ -115,7 +115,7 @@ points:
   zones.mcu:
     anchor:
       ref: outline_bottom_left
-      shift: [0.5promicro_x + 1, 0.5promicro_y + 3]
+      shift: [0.5promicro_x, 0.5promicro_y + 3]
     key:
       width: promicro_x
       height: promicro_y
