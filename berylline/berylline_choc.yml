@@ -39,48 +39,38 @@ points:
     key:
       width: capx
       height: capy
+      spread: kx      
+      padding: ky
     rows:
-      bottom.padding: ky
-      home.padding: ky
-      top.padding: ky
+      bottom:
+      home:
+      top:
     columns:
       pinky:
-        key.spread: kx
-        rows:
-          bottom.skip: true
+        rows.bottom.skip: true
       ring.key:
-        spread: kx
         stagger: 2/3ky
         splay: -pinky_splay
         origin: [0, pinky_adj]
       middle.key:
-        spread: kx
         stagger: 0.25ky
         splay: -ring_splay
         origin: [0, ring_adj]
       index.key:
-        spread: kx
         stagger: -0.25ky
         splay: -middle_splay
         origin: [0, middle_adj]
       inner:
-        key:
-          spread: kx
-          stagger: -0.5ky
-        rows:
-          bottom.skip: true
+        key.stagger: -0.5ky
+        rows.bottom.skip: true
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
       shift: [thumb_offsetx, -22]
-    key:
-      width: capx
-      height: capy
+    key.$extends: points.zones.matrix.key
     columns:
       tucky:
-      reachy.key:
-        spread: kx
-        stagger: -0.25ky
+      reachy.key.stagger: -0.25ky
 
   # Outline Extents
   # ===============
@@ -123,10 +113,10 @@ points:
     anchor:
       - ref: matrix_pinky_top
         affect: y
-        shift: [0, ky / 2 + 4.5]
+        shift: [0, 0.5ky + 4.5]
       - ref: matrix_ring_top
         affect: x
-        shift: [-kx / 2 - 2.5, 0]
+        shift: [-0.5kx - 2.5, 0]
     key:
       height: 1
       width: 1
@@ -134,10 +124,10 @@ points:
     anchor:
       - ref: matrix_inner_home
         affect: y
-        shift: [0, -ky / 2 - 2.5]
+        shift: [0, -0.5ky - 2.5]
       - ref: matrix_index_bottom
         affect: x
-        shift: [kx / 2 + 2.5, 0]
+        shift: [0.5kx + 2.5, 0]
     key:
       height: 1
       width: 1
