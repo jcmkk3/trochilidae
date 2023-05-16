@@ -157,41 +157,40 @@ outlines:
     - ^_mounting_holes
     - ^_keycaps
 
-pcbs:
-  berylline_choc:
-    outlines.main:
-      outline: panel
-    footprints:
-      - what: choc
-        where:
-          - /matrix_.*/
-          - /thumb_.*/
-        params:
-          from: GND
-          to: "{{name}}"
-          reverse: true
-          keycaps: true
-      - what: promicro
-        where:
-          ref: mcu
-          shift: [1.5, 0]  # Compensate for midpoint being off-center 
-        params:
-          orientation: up
-          P20: matrix_pinky_top
-          P21: matrix_pinky_home
-          P14: matrix_ring_top
-          P16: matrix_ring_home
-          P10: matrix_ring_bottom
-          P19: matrix_middle_top
-          P18: matrix_middle_home
-          P15: matrix_middle_bottom
-          P7: matrix_index_top
-          P8: matrix_index_home
-          P9: matrix_index_bottom
-          P4: matrix_inner_top
-          P5: matrix_inner_home
-          P6: thumb_tucky
-          P3: thumb_reachy
-      - what: via
-        where: /mounting_hole_.*/
-        params.net: ""
+pcbs.berylline:
+  outlines.main:
+    outline: panel
+  footprints:
+    - what: choc
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      params:
+        from: GND
+        to: "{{name}}"
+        reverse: true
+        keycaps: true
+    - what: promicro
+      where:
+        ref: mcu
+        shift: [1.5, 0]  # Compensate for midpoint being off-center 
+      params:
+        orientation: up
+        P20: matrix_pinky_top
+        P21: matrix_pinky_home
+        P14: matrix_ring_top
+        P16: matrix_ring_home
+        P10: matrix_ring_bottom
+        P19: matrix_middle_top
+        P18: matrix_middle_home
+        P15: matrix_middle_bottom
+        P7: matrix_index_top
+        P8: matrix_index_home
+        P9: matrix_index_bottom
+        P4: matrix_inner_top
+        P5: matrix_inner_home
+        P6: thumb_tucky
+        P3: thumb_reachy
+    - what: via
+      where: /mounting_hole_.*/
+      params.net: ""
