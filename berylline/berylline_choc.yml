@@ -87,23 +87,23 @@ points:
   zones.outline_top_left:
     anchor:
     - ref: matrix_middle_top
-      shift: [0.5sf, 0.5sf]
+      shift: [0.5kx, 0.5ky]
       affect: y
     - ref: matrix_pinky_top
       affect: x
-      shift: [-0.5sf, 0.5sf]
+      shift: [-0.5kx, 0.5ky]
   zones.outline_top_right:
     anchor:
     - ref: outline_top_left
     - ref: thumb_reachy
       affect: x
-      shift: [0.5sf, -0.5sf]
+      shift: [0.5kx, -0.5ky]
   zones.outline_bottom_left:
     anchor:
     - ref: outline_top_left
     - ref: thumb_reachy
       affect: y
-      shift: [0.5sf, -0.5sf]
+      shift: [0.5kx, -0.5ky]
   zones.outline_bottom_right:
     anchor:
     - ref: outline_top_right
@@ -115,7 +115,7 @@ points:
   zones.mcu:
     anchor:
       ref: outline_bottom_left
-      shift: [0.5promicro_x, 0.5promicro_y + 3]
+      shift: [0.5promicro_x + 1, 0.5promicro_y + 3]
     key:
       width: promicro_x
       height: promicro_y
