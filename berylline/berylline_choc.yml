@@ -1,3 +1,10 @@
+meta:
+  engine: 4.0.0
+  name: berylline_choc
+  version: 0.1
+  author: jcmkk3
+  url: https://github.com/jcmkk3/trochilidae
+
 units:
   # Parameters
   # ==========
@@ -123,7 +130,6 @@ points:
     key:
       height: 1
       width: 1
-      tags: [mounting_hole]
   zones.mounting_hole_bottom:
     anchor:
       - ref: matrix_inner_home
@@ -135,7 +141,6 @@ points:
     key:
       height: 1
       width: 1
-      tags: [mounting_hole]     
 
 outlines:
   panel:
@@ -148,24 +153,29 @@ outlines:
       - ref: outline_bottom_left
   _mcu:
     - what: rectangle
+      where: mcu
       size: [promicro_x, promicro_y]
-      adjust.ref: mcu
-  key_demo:
-    - panel
-    - ^_mcu
-    - operation: stack
-      what: rectangle
+  _mounting_holes:
+    - what: circle
+      where: /mounting_hole_.*/
+      radius: 1
+  _keycaps:
+    - what: rectangle
       where:
         - /matrix_.*/
         - /thumb_.*/
       size: [capx, capy]
       bound: false
+  key_demo:
+    - panel
+    - ^_mcu
+    - ^_mounting_holes
+    - ^_keycaps
 
 pcbs:
   berylline_choc:
-    outlines:
-      main:
-        outline: panel
+    outlines.main:
+      outline: panel
     footprints:
       - what: choc
         where:
@@ -198,5 +208,5 @@ pcbs:
           P6: thumb_tucky
           P3: thumb_reachy
       - what: via
-        where: mounting_hole
+        where: /mounting_hole_.*/
         params.net: ""
