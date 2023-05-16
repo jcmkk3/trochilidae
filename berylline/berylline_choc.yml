@@ -27,8 +27,8 @@ units:
   sf: 15          # Switch footprint (square)
 
 points:
-  key:  # Zero out points so they don't have a size unless explicitly set
-    height: 0
+  key:
+    height: 0  # Zero out points so they don't have a size unless explicitly set
     width: 0
 
   # Keys/Switches
