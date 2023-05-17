@@ -137,6 +137,14 @@ points:
     key:
       width: promicro_x
       height: promicro_y
+  zones.battery_connector:
+    anchor:
+      ref: matrix_index_bottom
+      affect: xy
+      shift: [-kx, -0.5ky]
+    key:
+      height: 1.5
+      width: 6
   zones.mounting_hole_top:
     anchor:
       - ref: matrix_pinky_top
@@ -222,6 +230,11 @@ pcbs.berylline:
         P5: matrix_inner_home
         P6: thumb_tucky
         P3: thumb_reachy
+    - what: jstph
+      where: battery_connector
+      params:
+        pos: RAW
+        neg: GND
     - what: via
       where: /mounting_hole_.*/
       params.net: ""
