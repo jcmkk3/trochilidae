@@ -145,6 +145,17 @@ points:
     key:
       height: 1.5
       width: 6
+  zones.reset:
+    anchor:
+      - ref: mcu
+        shift: [0, 0.5promicro_y + 4]
+        affect: y
+      - ref: outline_bottom_left
+        shift: [2.5, 0]
+        affect: x
+    key:
+      height: 6
+      width: 3
   zones.mounting_hole_top:
     anchor:
       - ref: matrix_pinky_top
@@ -238,3 +249,9 @@ pcbs.berylline:
     - what: via
       where: /mounting_hole_.*/
       params.net: ""
+    - what: button
+      where: reset
+      adjust.rotate: 90
+      params:
+        from: RST
+        to: GND
