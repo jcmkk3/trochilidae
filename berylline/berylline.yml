@@ -253,5 +253,5 @@ pcbs.berylline:
       where: reset
       adjust.rotate: 90
       params:
-        from: RST
-        to: GND
+        from: GND
+        to: RST
