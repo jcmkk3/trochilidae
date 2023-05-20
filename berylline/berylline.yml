@@ -148,7 +148,7 @@ points:
   zones.reset:
     anchor:
       - ref: mcu
-        shift: [0, 0.5promicro_y + 4]
+        shift: [0, 0.5promicro_y + 3]
         affect: y
       - ref: outline_bottom_left
         shift: [2.5, 0]
@@ -253,5 +253,5 @@ pcbs.berylline:
       where: reset
       adjust.rotate: 90
       params:
-        from: GND
-        to: RST
+        from: RST
+        to: GND
