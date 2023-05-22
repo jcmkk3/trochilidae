@@ -148,7 +148,7 @@ points:
   zones.reset:
     anchor:
       - ref: mcu
-        shift: [0, 0.5promicro_y + 3]
+        shift: [0, 0.5promicro_y + 4]
         affect: y
       - ref: outline_bottom_left
         shift: [2.5, 0]
