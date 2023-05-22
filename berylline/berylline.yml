@@ -1,7 +1,7 @@
 meta:
   engine: 4.0.0
   name: berylline
-  version: 0.1
+  version: 0.3
   author: jcmkk3
   url: https://github.com/jcmkk3/trochilidae
 
@@ -226,21 +226,21 @@ pcbs.berylline:
         shift: [1.5, 0]  # Compensate for midpoint being off-center 
       params:
         orientation: up
-        P20: matrix_pinky_top
-        P21: matrix_pinky_home
-        P14: matrix_ring_top
-        P16: matrix_ring_home
-        P10: matrix_ring_bottom
-        P19: matrix_middle_top
-        P18: matrix_middle_home
-        P15: matrix_middle_bottom
-        P7: matrix_index_top
-        P8: matrix_index_home
-        P9: matrix_index_bottom
-        P4: matrix_inner_top
-        P5: matrix_inner_home
-        P6: thumb_tucky
-        P3: thumb_reachy
+        P21: matrix_pinky_top
+        P20: matrix_pinky_home
+        P19: matrix_ring_top
+        P18: matrix_ring_home
+        P15: matrix_ring_bottom
+        P14: matrix_middle_top
+        P16: matrix_middle_home
+        P10: matrix_middle_bottom
+        P3: matrix_index_top
+        P4: matrix_index_home
+        P5: matrix_index_bottom
+        P6: matrix_inner_top
+        P7: matrix_inner_home
+        P8: thumb_reachy
+        P9: thumb_tucky
     - what: jstph
       where: battery_connector
       params:
