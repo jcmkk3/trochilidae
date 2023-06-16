@@ -55,8 +55,8 @@ units:
   # ====================
   $default_height: 0  # Points invisible by default unless height/width explicitly set
   $default_width: 0
-  promicro_x: 33
-  promicro_y: 18
+  xiao_x: 20
+  xiao_y: 17.5
 
 points:
   # Keys/Switches
@@ -132,50 +132,16 @@ points:
   # ==========
   zones.mcu:
     anchor:
-      ref: outline_bottom_left
-      shift: [0.5promicro_x + 1, 0.5promicro_y + 3]
+    - ref: outline_bottom_right
+      shift: [-0.5xiao_x, 0]
+      affect: x
+    - aggregate.parts:
+      - matrix_inner_home
+      - thumb_reachy
+      affect: y
     key:
-      width: promicro_x
-      height: promicro_y
-  zones.battery_connector:
-    anchor:
-      ref: matrix_index_bottom
-      affect: xy
-      shift: [-kx, -0.5ky]
-    key:
-      height: 1.5
-      width: 6
-  zones.reset:
-    anchor:
-      - ref: mcu
-        shift: [0, 0.5promicro_y + 4]
-        affect: y
-      - ref: outline_bottom_left
-        shift: [2.5, 0]
-        affect: x
-    key:
-      height: 6
-      width: 3
-  zones.mounting_hole_top:
-    anchor:
-      - ref: matrix_pinky_top
-        affect: y
-        shift: [0, 0.5ky + 4.5]
-      - ref: matrix_ring_top
-        affect: x
-        shift: [-0.5kx - 2.5, 0]
-    key:
-      height: 2
-      width: 2
-  zones.mounting_hole_bottom:
-    anchor:
-      - ref: matrix_inner_home
-        affect: y
-        shift: [0, -0.5ky - 2.5]
-      - ref: matrix_index_bottom
-        affect: x
-        shift: [0.5kx + 2.5, 0]
-    key.$extends: points.zones.mounting_hole_top.key
+      width: xiao_x
+      height: xiao_y
 
 outlines:
   panel:
@@ -189,7 +155,7 @@ outlines:
   _mcu:
     - what: rectangle
       where: mcu
-      size: [promicro_x, promicro_y]
+      size: [xiao_x, xiao_y]
   _mounting_holes:
     - what: circle
       where: /mounting_hole_.*/
