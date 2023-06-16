@@ -55,8 +55,9 @@ units:
   # ====================
   $default_height: 0  # Points invisible by default unless height/width explicitly set
   $default_width: 0
-  promicro_x: 33
-  promicro_y: 18
+  sf: 14              # Switch footprint
+  xiao_x: 20
+  xiao_y: 17.5
 
 points:
   # Keys/Switches
@@ -153,11 +154,17 @@ points:
   # ==========
   zones.mcu:
     anchor:
-      ref: outline_bottom_left
-      shift: [0.5promicro_x + 1, 0.5promicro_y + 3]
+    - ref: thumb_reachy
+      shift: [0.5sf, 0]
+      affect: x
+    - aggregate.parts:
+      - matrix_inner_home
+      - thumb_reachy
+      affect: y
+    - shift: [-0.5xiao_x, 0]
     key:
-      width: promicro_x
-      height: promicro_y
+      width: xiao_x
+      height: xiao_y
   zones.battery_connector:
     anchor:
       ref: matrix_index_bottom
@@ -168,12 +175,12 @@ points:
       width: 6
   zones.reset:
     anchor:
-      - ref: mcu
-        shift: [0, 0.5promicro_y + 4]
-        affect: y
-      - ref: outline_bottom_left
-        shift: [2.5, 0]
-        affect: x
+    - ref: mcu
+      shift: [0, 0.5xiao_y + 4]
+      affect: y
+    - ref: outline_bottom_left
+      shift: [2.5, 0]
+      affect: x
     key:
       height: 6
       width: 3
@@ -210,7 +217,7 @@ outlines:
   _mcu:
     - what: rectangle
       where: mcu
-      size: [promicro_x, promicro_y]
+      size: [xiao_x, xiao_y]
   _mounting_holes:
     - what: circle
       where: /mounting_hole_.*/
@@ -227,20 +234,20 @@ outlines:
       where:
         - /matrix.*/
         - /thumb.*/
-      size: [capx, capy]
+      size: sf
       bound: true
     - what: polygon
       points:
       - ref: thumb_reachy
-        shift: [0.5capx, -0.5capy]
+        shift: [0.5sf, -0.5sf]
       - ref: thumb_tucky
-        shift: [-0.5capx, 0]
+        shift: [-0.5sf, 0]
         affect: x
       - ref: matrix_inner_top
-        shift: [0, 0.5capy]
+        shift: [0, 0.5sf]
         affect: y
       - ref: thumb_reachy
-        shift: [0.5capx, 0]
+        shift: [0.5sf, 0]
         affect: x
   minimal_panel:
     - name: _minimal_panel
@@ -248,6 +255,7 @@ outlines:
   key_demo:
     - panel
     - ^minimal_panel
+    - ^_mcu
     - ^_keycaps
 
 pcbs.berylline:
