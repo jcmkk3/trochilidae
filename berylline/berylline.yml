@@ -75,22 +75,43 @@ points:
       top:
     columns:
       pinky:
-        rows.bottom.skip: true
-      ring.key:
-        stagger: 2/3ky
-        splay: -pinky_splay
-        origin: [0, pinky_adj]
-      middle.key:
-        stagger: 0.25ky
-        splay: -ring_splay
-        origin: [0, ring_adj]
-      index.key:
-        stagger: -0.25ky
-        splay: -middle_splay
-        origin: [0, middle_adj]
+        rows:
+          bottom.skip: true
+          home.bind: [ky, kx, 0, 0]
+          top.bind: [0, kx, ky, 0]
+      ring:
+        key:
+          stagger: 2/3ky
+          splay: -pinky_splay
+          origin: [0, pinky_adj]
+        rows:
+          bottom.bind: [ky, 0, 0, 0]
+          home.bind: [ky, 0, ky, 0]
+          top.bind: [0, kx, ky, 0]
+      middle:
+        key:
+          stagger: 0.25ky
+          splay: -ring_splay
+          origin: [0, ring_adj]
+        rows:
+          bottom.bind: [ky, kx, 0, kx]
+          home.bind: [ky, 0, ky, 0]
+          top.bind: [0, 0, ky, 0]
+      index:
+        key:
+          stagger: -0.25ky
+          splay: -middle_splay
+          origin: [0, middle_adj]
+        rows:
+          bottom.bind: [ky, 0, 0, 0]
+          home.bind: [ky, 0, ky, 0]
+          top.bind: [0, 0, ky, kx]
       inner:
         key.stagger: -0.5ky
-        rows.bottom.skip: true
+        rows:
+          bottom.skip: true
+          home.bind: [ky, 0, 0, kx]
+          top.bind: [0, 0, ky, kx]
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
@@ -201,10 +222,32 @@ outlines:
         - /thumb_.*/
       size: [capx, capy]
       bound: false
+  _minimal_panel:
+    - what: rectangle
+      where:
+        - /matrix.*/
+        - /thumb.*/
+      size: [capx, capy]
+      bound: true
+    - what: polygon
+      points:
+      - ref: thumb_reachy
+        shift: [0.5capx, -0.5capy]
+      - ref: thumb_tucky
+        shift: [-0.5capx, 0]
+        affect: x
+      - ref: matrix_inner_top
+        shift: [0, 0.5capy]
+        affect: y
+      - ref: thumb_reachy
+        shift: [0.5capx, 0]
+        affect: x
+  minimal_panel:
+    - name: _minimal_panel
+      fillet: 1.5
   key_demo:
     - panel
-    - ^_mcu
-    - ^_mounting_holes
+    - ^minimal_panel
     - ^_keycaps
 
 pcbs.berylline:
