@@ -70,35 +70,45 @@ points:
       spread: kx      
       padding: ky
     rows:
-      bottom:
-      home:
-      top:
+      bottom.key.row_net: P6
+      home.key.row_net: P7
+      top.key.row_net: P8
     columns:
       pinky:
+        key.col_net: P1
         rows.bottom.skip: true
       ring.key:
         stagger: 2/3ky
         splay: -pinky_splay
         origin: [0, pinky_adj]
+        col_net: P2
       middle.key:
         stagger: 0.25ky
         splay: -ring_splay
         origin: [0, ring_adj]
+        col_net: P3
       index.key:
         stagger: -0.25ky
         splay: -middle_splay
         origin: [0, middle_adj]
+        col_net: P4
       inner:
-        key.stagger: -0.5ky
+        key:
+          stagger: -0.5ky
+          col_net: P5
         rows.bottom.skip: true
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
       shift: [thumb_offsetx, -22]
-    key.$extends: points.zones.matrix.key
+    key:
+      $extends: points.zones.matrix.key
+      row_net: P6
     columns:
-      tucky:
-      reachy.key.stagger: -0.25ky
+      tucky.key.col_net: P1
+      reachy.key:
+        stagger: -0.25ky
+        col_net: P5
 
   # Outline Extents
   # ===============
@@ -182,36 +192,19 @@ pcbs.berylline:
         - /matrix_.*/
         - /thumb_.*/
       params:
-        from: GND
-        to: "{{name}}"
-        reverse: true
+        from: "{{row_net}}"
+        to: "{{col_net}}"
         keycaps: true
+    - what: diode
+      where: true
+      adjust:
+        shift: [0, -4.7]
+      params:
+        from: "{{row_net}}"
+        to: "{{colrow}}"
     - what: promicro
-      where:
-        ref: mcu
-        shift: [1.5, 0]  # Compensate for midpoint being off-center 
-      params:
-        orientation: up
-        P21: matrix_pinky_top
-        P20: matrix_pinky_home
-        P19: matrix_ring_top
-        P18: matrix_ring_home
-        P15: matrix_ring_bottom
-        P14: matrix_middle_top
-        P16: matrix_middle_home
-        P10: matrix_middle_bottom
-        P3: matrix_index_top
-        P4: matrix_index_home
-        P5: matrix_index_bottom
-        P6: matrix_inner_top
-        P7: matrix_inner_home
-        P8: thumb_reachy
-        P9: thumb_tucky
-    - what: jstph
-      where: battery_connector
-      params:
-        pos: RAW
-        neg: GND
+      where: mcu
+      adjust.rotate: 90
     - what: via
       where: /mounting_hole_.*/
       params.net: ""
