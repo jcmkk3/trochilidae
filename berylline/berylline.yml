@@ -77,7 +77,6 @@ points:
       pinky:
         rows.bottom.skip: true
       ring.key:
-        spread: max(18.5, kx)  # Ensure that pinky column horizontal spacing is at least 18.5mm
         stagger: 2/3ky
         splay: -pinky_splay
         origin: [0, pinky_adj]
