@@ -12,8 +12,8 @@ presets:
   choc_spaced:
     capx: 17        # Key cap size horizontal
     capy: 16        # Key cap size vertical
-    kx: cx + 0.5    # Key spacing horizontal
-    ky: cy + 0.5    # Key spacing vertical
+    kx: 18 + 0.5    # Key spacing horizontal
+    ky: 17 + 0.5    # Key spacing vertical
     pinky_splay: 5  # Degrees of splay between pinky and ring columns
     pinky_adj: -3   # Adjustment to compensate for splay spacing
     ring_splay: 3
@@ -34,6 +34,19 @@ presets:
     middle_splay: 3
     middle_adj: -5
     thumb_offsetx: 1/3kx
+
+  mx_spaced:
+    capx: 18
+    capy: 18
+    kx: 19
+    ky: 19
+    pinky_splay: 5
+    pinky_adj: -4
+    ring_splay: 3
+    ring_adj: -10
+    middle_splay: 0
+    middle_adj: 0
+    thumb_offsetx: 0.25kx
   
   mx_min_spaced:
     capx: 15.5
@@ -57,6 +70,7 @@ units:
   $default_width: 0
   promicro_x: 33
   promicro_y: 18
+  sf: 15
 
 points:
   # Keys/Switches
@@ -105,23 +119,23 @@ points:
   zones.outline_top_left:
     anchor:
     - ref: matrix_middle_top
-      shift: [0.5kx, 0.5ky]
+      shift: [0.5sf, 0.5sf]
       affect: y
     - ref: matrix_pinky_top
       affect: x
-      shift: [-0.5kx, 0.5ky]
+      shift: [-0.5sf, 0.5sf]
   zones.outline_top_right:
     anchor:
     - ref: outline_top_left
     - ref: thumb_reachy
       affect: x
-      shift: [0.5kx, -0.5ky]
+      shift: [0.5sf, -0.5sf]
   zones.outline_bottom_left:
     anchor:
     - ref: outline_top_left
     - ref: thumb_reachy
       affect: y
-      shift: [0.5kx, -0.5ky]
+      shift: [0.5sf, -0.5sf]
   zones.outline_bottom_right:
     anchor:
     - ref: outline_top_right
