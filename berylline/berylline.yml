@@ -229,6 +229,13 @@ outlines:
         - /thumb_.*/
       size: [capx, capy]
       bound: false
+  _switches:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: 14
+      bound: false
   _minimal_panel:
     - what: rectangle
       where:
@@ -252,11 +259,13 @@ outlines:
   minimal_panel:
     - name: _minimal_panel
       fillet: 1.5
-  key_demo:
-    - panel
-    - ^minimal_panel
+  board_demo:
+    - minimal_panel
     - ^_mcu
-    - ^_keycaps
+    - ^_keycaps  
+  case_demo:
+    - panel
+    - ^board_demo
 
 pcbs.berylline:
   outlines.main:
