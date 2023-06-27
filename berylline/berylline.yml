@@ -95,22 +95,43 @@ points:
       top:
     columns:
       pinky:
-        rows.bottom.skip: true
-      ring.key:
-        stagger: 2/3ky
-        splay: -pinky_splay
-        origin: [0, pinky_adj]
-      middle.key:
-        stagger: 0.25ky
-        splay: -ring_splay
-        origin: [0, ring_adj]
-      index.key:
-        stagger: -0.25ky
-        splay: -middle_splay
-        origin: [0, middle_adj]
+        rows:
+          bottom.skip: true
+          home.bind: [ky, kx, 0, 0]
+          top.bind: [0, kx, ky, 0]
+      ring:
+        key:
+          stagger: 2/3ky
+          splay: -pinky_splay
+          origin: [0, pinky_adj]
+        rows:
+          bottom.bind: [ky, 0, 0, 0]
+          home.bind: [ky, 0, ky, 0]
+          top.bind: [0, kx, ky, 0]
+      middle:
+        key:
+          stagger: 0.25ky
+          splay: -ring_splay
+          origin: [0, ring_adj]
+        rows:
+          bottom.bind: [ky, kx, 0, kx]
+          home.bind: [ky, 0, ky, 0]
+          top.bind: [0, 0, ky, 0]
+      index:
+        key:
+          stagger: -0.25ky
+          splay: -middle_splay
+          origin: [0, middle_adj]
+        rows:
+          bottom.bind: [ky, 0, 0, 0]
+          home.bind: [ky, 0, ky, 0]
+          top.bind: [0, 0, ky, kx]
       inner:
         key.stagger: -0.5ky
-        rows.bottom.skip: true
+        rows:
+          bottom.skip: true
+          home.bind: [ky, 0, 0, kx]
+          top.bind: [0, 0, ky, kx]
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
@@ -118,7 +139,9 @@ points:
     key.$extends: points.zones.matrix.key
     columns:
       tucky:
-      reachy.key.stagger: -0.25ky
+      reachy.key:
+        stagger: -0.25ky
+        bind: [0, 0, 0, kx]
 
   # Outline Extents
   # ===============
@@ -245,8 +268,21 @@ outlines:
       where:
         - /matrix_.*/
         - /thumb_.*/
-      size: [1.2kx, 1.2ky]
+      size: [kx, ky]
+      bound: true
     - ~_outer
+  _subtract_panel:
+    - _outer
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: [kx, ky]
+      bound: true
+      operation: subtract
+  _contracted_subtract_panel:
+    - name: _subtract_panel
+      expand: -wall_thickness  
 
 cases:
   _outer_wall:
@@ -264,11 +300,27 @@ cases:
       extrude: plate_height
       shift: [0, 0, switch_pin_depth - pcb_thickness]
       operation: subtract
+  _inner_wall:
+    - name: _subtract_panel
+      extrude: keycap_bottom_height
+    - name: _contracted_subtract_panel
+      extrude: keycap_bottom_height
+      operation: subtract
+  _topplate:
+    - name: _subtract_panel
+      extrude: wall_thickness
+      shift: [0, 0, keycap_bottom_height]
   case:
     - what: case
       name: _outer_wall
     - what: case
       name: _switchplate
+      operation: add
+    - what: case
+      name: _inner_wall
+      operation: add
+    - what: case
+      name: _topplate
       operation: add
 
 pcbs.berylline:
