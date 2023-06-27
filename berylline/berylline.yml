@@ -76,6 +76,8 @@ units:
   pcb_thickness: 1.6
   switch_pin_depth: 3
   plate_height: 2.2
+  wall_thickness: 1
+  keycap_bottom_height: 5
 
 points:
   # Keys/Switches
@@ -204,13 +206,6 @@ outlines:
       - ref: outline_top_right
       - ref: outline_bottom_right
       - ref: outline_bottom_left
-  _minimal_panel:
-    - what: rectangle
-      where:
-        - /matrix_.*/
-        - /thumb_.*/
-      size: [1.2kx, 1.2ky]
-    - ~panel
   _mcu:
     - what: rectangle
       where: mcu
@@ -243,7 +238,15 @@ outlines:
   # =============
   _outer:
     - name: panel
-      expand: 2
+      expand: wall_thickness
+
+  _minimal_panel:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: [1.2kx, 1.2ky]
+    - ~_outer
 
 cases:
   _outer_wall:
@@ -254,13 +257,9 @@ cases:
       extrude: switch_pin_depth + plate_height
       operation: subtract
       shift: [0, 0, -pcb_thickness]
-  _midplate:
-    - name: _minimal_panel
-      extrude: switch_pin_depth - pcb_thickness
   _switchplate:
-    - name: _outer
-      extrude: plate_height
-      shift: [0, 0, switch_pin_depth - pcb_thickness]
+    - name: _minimal_panel
+      extrude: switch_pin_depth - pcb_thickness + plate_height
     - name: _switches
       extrude: plate_height
       shift: [0, 0, switch_pin_depth - pcb_thickness]
@@ -268,9 +267,6 @@ cases:
   case:
     - what: case
       name: _outer_wall
-    - what: case
-      name: _midplate
-      operation: add
     - what: case
       name: _switchplate
       operation: add
