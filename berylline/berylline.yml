@@ -138,10 +138,10 @@ points:
       shift: [thumb_offsetx, -22]
     key.$extends: points.zones.matrix.key
     columns:
-      tucky:
+      tucky.key.bind: [ky, 0, 0, 0]
       reachy.key:
         stagger: -0.25ky
-        bind: [0, 0, 0, kx]
+        bind: [18, 0, 0, kx]
 
   # Outline Extents
   # ===============
