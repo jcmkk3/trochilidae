@@ -72,11 +72,15 @@ units:
   promicro_y: 18
   sf: 15
 
+
+  pcb_thickness: 1.6
+  switch_pin_depth: 3
+  plate_height: 2.2
+
 points:
   # Keys/Switches
   # =============
   zones.matrix:
-    anchor.shift: [150, -180]
     rotate: pinky_splay + ring_splay + middle_splay
     key:
       width: capx
@@ -200,6 +204,13 @@ outlines:
       - ref: outline_top_right
       - ref: outline_bottom_right
       - ref: outline_bottom_left
+  _minimal_panel:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: [1.2kx, 1.2ky]
+    - ~panel
   _mcu:
     - what: rectangle
       where: mcu
@@ -237,19 +248,29 @@ outlines:
 cases:
   _outer_wall:
     - name: _outer
-      extrude: -1.6
+      extrude: switch_pin_depth + plate_height
+      shift: [0, 0, -pcb_thickness]
     - name: panel
-      extrude: -1.6
+      extrude: switch_pin_depth + plate_height
       operation: subtract
+      shift: [0, 0, -pcb_thickness]
+  _midplate:
+    - name: _minimal_panel
+      extrude: switch_pin_depth - pcb_thickness
   _switchplate:
     - name: _outer
-      extrude: 2
+      extrude: plate_height
+      shift: [0, 0, switch_pin_depth - pcb_thickness]
     - name: _switches
-      extrude: 2
+      extrude: plate_height
+      shift: [0, 0, switch_pin_depth - pcb_thickness]
       operation: subtract
   case:
     - what: case
       name: _outer_wall
+    - what: case
+      name: _midplate
+      operation: add
     - what: case
       name: _switchplate
       operation: add
