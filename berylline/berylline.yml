@@ -65,7 +65,7 @@ units:
   $extends: presets.choc_spaced
 
   # Defaults/Constants
-  # ====================
+  # ==================
   $default_height: 0  # Points invisible by default unless height/width explicitly set
   $default_width: 0
   promicro_x: 33
@@ -208,6 +208,13 @@ outlines:
     - what: circle
       where: /mounting_hole_.*/
       radius: 1
+  _switches:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: 14
+      bound: false
   _keycaps:
     - what: rectangle
       where:
@@ -220,6 +227,32 @@ outlines:
     - ^_mcu
     - ^_mounting_holes
     - ^_keycaps
+
+  # Case Outlines
+  # =============
+  _outer:
+    - name: panel
+      expand: 2
+
+cases:
+  _outer_wall:
+    - name: _outer
+      extrude: -1.6
+    - name: panel
+      extrude: -1.6
+      operation: subtract
+  _switchplate:
+    - name: _outer
+      extrude: 2
+    - name: _switches
+      extrude: 2
+      operation: subtract
+  case:
+    - what: case
+      name: _outer_wall
+    - what: case
+      name: _switchplate
+      operation: add
 
 pcbs.berylline:
   outlines.main:
