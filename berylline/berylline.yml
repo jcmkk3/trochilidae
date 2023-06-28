@@ -74,10 +74,12 @@ units:
 
 
   pcb_thickness: 1.6
+  plate_thickness: 1.2
   switch_pin_depth: 3
   plate_height: 2.2
   wall_thickness: 1
   keycap_bottom_height: 5
+  case_overlap: 1
 
 points:
   # Keys/Switches
@@ -138,10 +140,10 @@ points:
       shift: [thumb_offsetx, -22]
     key.$extends: points.zones.matrix.key
     columns:
-      tucky.key.bind: [ky, 0, 0, 0]
+      tucky:
       reachy.key:
         stagger: -0.25ky
-        bind: [18, 0, 0, kx]
+        bind: [0, 0, 0, kx]
 
   # Outline Extents
   # ===============
@@ -262,7 +264,6 @@ outlines:
   _outer:
     - name: panel
       expand: wall_thickness
-
   _minimal_panel:
     - what: rectangle
       where:
@@ -287,29 +288,32 @@ outlines:
 cases:
   _outer_wall:
     - name: _outer
-      extrude: switch_pin_depth + plate_height
-      shift: [0, 0, -pcb_thickness]
+      extrude: pcb_thickness + keycap_bottom_height
+      shift: [0, 0, -case_overlap]
     - name: panel
-      extrude: switch_pin_depth + plate_height
+      extrude: pcb_thickness + keycap_bottom_height
       operation: subtract
-      shift: [0, 0, -pcb_thickness]
-  _switchplate:
-    - name: _minimal_panel
-      extrude: switch_pin_depth - pcb_thickness + plate_height
-    - name: _switches
-      extrude: plate_height
-      shift: [0, 0, switch_pin_depth - pcb_thickness]
-      operation: subtract
-  _inner_wall:
-    - name: _subtract_panel
-      extrude: keycap_bottom_height
-    - name: _contracted_subtract_panel
-      extrude: keycap_bottom_height
-      operation: subtract
+      shift: [0, 0, -case_overlap]
   _topplate:
     - name: _subtract_panel
       extrude: wall_thickness
-      shift: [0, 0, keycap_bottom_height]
+      shift: [0, 0, pcb_thickness + keycap_bottom_height - case_overlap]
+  _switchplate:
+    - name: _minimal_panel
+      extrude: plate_thickness
+      shift: [0, 0, pcb_thickness + plate_height - case_overlap]
+    - name: _switches
+      extrude: plate_thickness
+      shift: [0, 0, pcb_thickness + plate_height - case_overlap]
+      operation: subtract
+  _inner_wall:
+    - name: _subtract_panel
+      extrude: keycap_bottom_height - plate_height
+      shift: [0, 0, pcb_thickness + plate_height - case_overlap]
+    - name: _contracted_subtract_panel
+      extrude: keycap_bottom_height - plate_height
+      shift: [0, 0, pcb_thickness + plate_height - case_overlap]
+      operation: subtract
   case:
     - what: case
       name: _outer_wall
