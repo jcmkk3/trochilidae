@@ -97,7 +97,7 @@ points:
       pinky:
         rows:
           bottom.skip: true
-          home.bind: [ky, kx, 0, 0]
+          home.bind: [ky, kx, 0, kx]
           top.bind: [0, kx, ky, 0]
       ring:
         key:
