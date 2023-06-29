@@ -62,7 +62,7 @@ presets:
     thumb_offsetx: 1/3kx
 
 units:
-  $extends: presets.choc_spaced
+  $extends: presets.mx_spaced
 
   # Defaults/Constants
   # ==================
@@ -75,7 +75,7 @@ units:
 
   pcb_thickness: 1.6
   plate_thickness: 1.2
-  switch_pin_depth: 3
+  switch_pin_depth: 3 + 1
   plate_height: 2.2
   wall_thickness: 1
   keycap_bottom_height: 5
@@ -264,6 +264,9 @@ outlines:
   _outer:
     - name: panel
       expand: wall_thickness
+  _inner:
+    - name: panel
+      expand: -wall_thickness
   _minimal_panel:
     - what: rectangle
       where:
@@ -292,8 +295,12 @@ cases:
       shift: [0, 0, -case_overlap]
     - name: panel
       extrude: pcb_thickness + keycap_bottom_height
-      operation: subtract
       shift: [0, 0, -case_overlap]
+      operation: subtract
+    - name: _minimal_panel
+      extrude: keycap_bottom_height - plate_height
+      shift: [0, 0, pcb_thickness + plate_height]
+      operation: subtract
   _topplate:
     - name: _subtract_panel
       extrude: wall_thickness
@@ -314,7 +321,7 @@ cases:
       extrude: keycap_bottom_height - plate_height
       shift: [0, 0, pcb_thickness + plate_height - case_overlap]
       operation: subtract
-  case:
+  case_top:
     - what: case
       name: _outer_wall
     - what: case
@@ -326,6 +333,33 @@ cases:
     - what: case
       name: _topplate
       operation: add
+
+  _bottom_outer_wall:
+    - name: panel
+      extrude: switch_pin_depth - pcb_thickness + wall_thickness + 0.5case_overlap
+      shift: [0, 0, pcb_thickness - switch_pin_depth - wall_thickness]
+    - name: _inner
+      extrude: switch_pin_depth - pcb_thickness + wall_thickness + 0.5case_overlap
+      shift: [0, 0, pcb_thickness - switch_pin_depth - wall_thickness]
+      operation: subtract
+  _bottomplate:
+    - name: panel
+      extrude: wall_thickness
+      shift: [0, 0, pcb_thickness - switch_pin_depth - wall_thickness]
+  case_bottom:
+    - what: case
+      name: _bottom_outer_wall
+    - what: case
+      name: _bottomplate
+      operation: add
+  
+  case_demo:
+    - what: case
+      name: case_top
+      shift: [0, 0, switch_pin_depth - pcb_thickness + wall_thickness]
+    - what: case
+      name: case_bottom
+      shift: [0, 0, switch_pin_depth - pcb_thickness + wall_thickness]
 
 pcbs.berylline:
   outlines.main:
