@@ -84,13 +84,14 @@ points:
     key:
       width: capx
       height: capy
+      spread: kx      
+      padding: ky
       autobind: false
     rows:
-      bottom.padding: ky
-      home.padding: ky
-      top.padding: ky
+      bottom:
+      home:
+      top:
     columns.pinky:
-      key.spread: kx
       rows:
         bottom.skip: true
         home:
@@ -109,7 +110,6 @@ points:
           column_net: P10
     columns.ring:
       key:
-        spread: kx
         stagger: 2/3ky
         splay: -pinky_splay
         origin: [0, pinky_adj]
@@ -137,7 +137,6 @@ points:
           column_net: P10
     columns.middle:
       key:
-        spread: kx
         stagger: 0.25ky
         splay: -ring_splay
         origin: [0, ring_adj]
@@ -164,9 +163,7 @@ points:
           row_net: P1
           column_net: P9
     columns.index:
-      key:
-        spread: kx
-        stagger: -0.25ky
+      key.stagger: -0.25ky
       rows:
         bottom:
           bind: [0.5ky, 0, 0, 0]
@@ -189,9 +186,7 @@ points:
           row_net: P0
           column_net: P9
     columns.inner:
-      key:
-        spread: kx
-        stagger: -0.5ky
+      key.stagger: -0.5ky
       rows:
         bottom.skip: true
         home:
@@ -225,7 +220,6 @@ points:
           column_net: P10
       reachy:
         key:
-          spread: kx
           stagger: -0.25ky        
           bind: [1.5ky, 0, 0, 0]
           row_net: P4
