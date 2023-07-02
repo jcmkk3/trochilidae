@@ -1,45 +1,90 @@
-units:
-  # Parameters
-  # ==========
-  capx: cx        # Key cap size horizontal
-  capy: cy        # Key cap size vertical
-  kx: cx + 0.5    # Key spacing horizontal
-  ky: cy + 0.5    # Key spacing vertical
-  angle: 22       # Angle between halves
-  pinky_stagger: 2/3ky
-  pinky_splay: 5  # Degrees of splay between pinky and ring columns
-  pinky_adj: -3   # Adjustment to compensate for splay spacing
-  ring_splay: 3
-  ring_adj: -8
+meta:
+  engine: 4.0.0
+  name: rufous
+  version: 0.2
+  author: jcmkk3
+  url: https://github.com/jcmkk3/trochilidae
 
-  # Constants
-  # =========
+presets:
+  # These presets provide different layout options
+  # Select a preset in the `units` section below
+  # Note: The appropriate switch footprint will still need to be set in the `pcb` section
+  choc_spaced:
+    capx: 17        # Key cap size horizontal
+    capy: 16        # Key cap size vertical
+    kx: 18.5        # Key spacing horizontal
+    ky: 17.5        # Key spacing vertical
+    pinky_splay: 5  # Degrees of splay between pinky and ring columns
+    pinky_adj: -3   # Adjustment to compensate for splay spacing
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 0
+    middle_adj: 0
+    thumb_offsetx: 0.25kx
+  
+  choc_min_spaced:
+    capx: 14.5
+    capy: 14.5
+    kx: 15.5
+    ky: 15.5
+    pinky_splay: 5
+    pinky_adj: -3
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 3
+    middle_adj: -5
+    thumb_offsetx: 1/3kx
+
+  mx_spaced:
+    capx: 18
+    capy: 18
+    kx: 19
+    ky: 19
+    pinky_splay: 5
+    pinky_adj: -4
+    ring_splay: 3
+    ring_adj: -10
+    middle_splay: 0
+    middle_adj: 0
+    thumb_offsetx: 0.25kx
+  
+  mx_min_spaced:
+    capx: 15.5
+    capy: 15.5
+    kx: 16 + 0.5
+    ky: 16 + 0.5
+    pinky_splay: 5
+    pinky_adj: -3
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 3
+    middle_adj: -5
+    thumb_offsetx: 1/3kx
+
+units:
+  $extends: presets.choc_spaced
+  angle: 22  # Angle between halves
+
+  # Defaults/Constants
+  # ====================
+  $default_height: 0  # Points invisible by default unless height/width explicitly set
+  $default_width: 0
   xiao_x: 17.5
   xiao_y: 20
-  visual_x: 1     # Visual representation of keycaps horizontal
-  visual_y: 1     # Visual representation of keycaps vertical
-  sf: 16          # Switch footprint (square)
+  sf: 15
 
 points:
   zones.matrix:
+    anchor.shift: [100, -100]  # Fix placement on KiCAD sheet
     rotate: -angle + pinky_splay + ring_splay
-    mirror: &mirror
+    mirror:
       ref: matrix_inner_top
       shift: [0.5sf, 0.5sf]
-      distance: 13
-    key: &key
+      distance: 14
+    key:
       width: capx
       height: capy
-      autobind: false      
-      tags:
-        keys: true
-      footprints:
-      - type: choc
-        nets:
-          from: =row_net
-          to: =column_net
-        params:
-          keycaps: true
+      autobind: false
     rows:
       bottom.padding: ky
       home.padding: ky
@@ -65,7 +110,7 @@ points:
     columns.ring:
       key:
         spread: kx
-        stagger: pinky_stagger
+        stagger: 2/3ky
         splay: -pinky_splay
         origin: [0, pinky_adj]
       rows:
@@ -153,14 +198,10 @@ points:
           bind: [0.5ky, 0, 0.5ky, 0.5kx]
           row_net: P2
           column_net: P8
-          tags:
-            matrix_inner: true
         top:
           bind: [0, 0, 0.5ky, 0.5kx]
           row_net: P0
           column_net: P8
-          tags:
-            matrix_inner: true
         home.mirror:
           row_net: P3
           column_net: P8
@@ -171,12 +212,11 @@ points:
     anchor:
       ref: matrix_index_bottom
       shift: [0.25kx, -22]
-    mirror: *mirror
-    key: *key
+    mirror.$extends: points.zones.matrix.mirror
+    key.$extends: points.zones.matrix.key
     columns:
       tucky:
         key:
-          name: thumb_tucky
           bind: [0.5ky, 0.5kx, 0, 0]
           row_net: P5
           column_net: P7
@@ -187,7 +227,6 @@ points:
         key:
           spread: kx
           stagger: -0.25ky        
-          name: thumb_reachy
           bind: [1.5ky, 0, 0, 0]
           row_net: P4
           column_net: P8
@@ -199,30 +238,24 @@ points:
       aggregate.parts: [matrix_inner_top, mirror_matrix_inner_top]
       shift: [0, -0.7ky - 0.5xiao_y]
     key:
-      name: mcu
       width: xiao_x
       height: xiao_y
-      footprints:
-      - type: xiao
-        anchor:
-          shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
   zones.mounting_hole:
     anchor:
       ref: matrix_inner_home
       shift: [-0.5kx + 4, -ky + 4]
-    mirror: *mirror
+    mirror.$extends: points.zones.matrix.mirror
     key:
-      name: mounting_hole
       width: 1
       height: 1
-      footprints:
-      - type: mountinghole
 outlines:
     _key_outline:
       - what: rectangle
         bound: true
         size: sf
-        where: [keys]
+        where:
+          - /matrix_.*/
+          - /thumb_.*/
     _center:
       - what: polygon
         points:
@@ -235,7 +268,7 @@ outlines:
       - what: rectangle
         bound: true
         size: sf
-        where: [matrix_inner]  # Include the inner keys in addition to the center polygon 
+        where: /matrix_inner_.*/  # Include the inner keys in addition to the center polygon 
     _panel:
       - name: _center
         fillet: 3  # The inner rounding where the glue meets the top center keys
@@ -252,11 +285,15 @@ outlines:
     _switches:
       - what: rectangle
         size: 14
-        where: [keys]
+        where:
+          - /matrix_.*/
+          - /thumb_.*/
     _keycaps:
       - what: rectangle
         size: [capx, capy]
-        where: [keys]
+        where:
+          - /matrix_.*/
+          - /thumb_.*/
     _mcu:
       - what: rectangle
         adjust.ref: mcu
@@ -284,7 +321,20 @@ outlines:
         name: _switches
         fillet: 0.5
 pcbs:
-  rufous_splay:
+  rufous:
     outlines:
       main:
         outline: panel
+    footprints:
+      - what: choc
+        where:
+          - /matrix_.*/
+          - /thumb_.*/
+        params:
+          from: "{{row_net}}"
+          to: "{{column_net}}"
+      - what: xiao
+        where: mcu
+        adjust.shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
+      - what: mountinghole
+        where: mounting_hole
