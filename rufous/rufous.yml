@@ -268,7 +268,7 @@ outlines:
         fillet: 3  # The inner rounding where the glue meets the top center keys
       - operation: subtract
         what: circle
-        adjust:
+        where:
           aggregate.parts: [thumb_reachy, mirror_thumb_reachy]
           shift: [0, 0.5sf - 60]
         radius: 60  # Should be the same as the last number in `shift` above
@@ -290,14 +290,11 @@ outlines:
           - /thumb_.*/
     _mcu:
       - what: rectangle
-        adjust.ref: mcu
+        where: mcu
         size: [xiao_x, xiao_y]
     _mounting_holes:
       - what: circle
-        adjust.ref: mounting_hole
-        radius: 1
-      - what: circle
-        adjust.ref: mirror_mounting_hole
+        where: /.*mounting_hole/
         radius: 1
     demo_switches:
       - panel

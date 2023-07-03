@@ -235,9 +235,8 @@ pcbs.berylline:
         reverse: true
         keycaps: true
     - what: promicro
-      where:
-        ref: mcu
-        shift: [1.5, 0]  # Compensate for midpoint being off-center 
+      where: mcu
+      adjust.shift: [1.5, 0]  # Compensate for midpoint being off-center 
       params:
         orientation: up
         P21: matrix_pinky_top
