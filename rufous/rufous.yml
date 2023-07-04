@@ -311,16 +311,20 @@ outlines:
       - operation: subtract
         name: _switches
         fillet: 0.5
-    _panel_usb:
-      - panel
+    usb_cutout:
       - what: rectangle
         where:
           aggregate.parts: [matrix_inner_top, mirror_matrix_inner_top]
-          shift: [0, -0.7ky - 2.25]
-        size: [9.5, 6.5]
-        operation: subtract
+          shift: [0, -0.7ky - 0.25]
+        size: [9.5, 10.5]
+    _panel_usb:
+      - panel
+      - -usb_cutout
     panel_usb:
       - name: _panel_usb
+        fillet: 0.5
+    switches:
+      - name: _switches
         fillet: 0.5
 pcbs:
   rufous:
