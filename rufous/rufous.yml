@@ -227,10 +227,14 @@ points:
         key.mirror:
           row_net: P5
           column_net: P10
-  zones.mcu:
+  zones.reference_top_center:
     anchor:
       aggregate.parts: [matrix_inner_top, mirror_matrix_inner_top]
-      shift: [0, -0.7ky - 0.5xiao_y]
+      shift: [0, -0.65ky]
+  zones.mcu:
+    anchor:
+      ref: reference_top_center
+      shift: [0, -0.5xiao_y]
     key:
       width: xiao_x
       height: xiao_y
@@ -251,14 +255,11 @@ outlines:
           - /matrix_.*/
           - /thumb_.*/
     _center:
-      - what: polygon
-        points:
-        - ref: matrix_inner_top
-          shift: [0, -0.7ky]
-        - ref: mirror_matrix_inner_top
-          shift: [0, -0.7ky]
-        - ref: mirror_thumb_reachy
-        - ref: thumb_reachy
+      - what: rectangle
+        where:
+          ref: reference_top_center
+          shift: [0, -1.5ky]
+        size: [3kx, 3ky]
       - what: rectangle
         bound: true
         size: sf
@@ -268,7 +269,7 @@ outlines:
         fillet: 3  # The inner rounding where the glue meets the top center keys
       - operation: subtract
         what: circle
-        adjust:
+        where:
           aggregate.parts: [thumb_reachy, mirror_thumb_reachy]
           shift: [0, 0.5sf - 60]
         radius: 60  # Should be the same as the last number in `shift` above
@@ -290,14 +291,11 @@ outlines:
           - /thumb_.*/
     _mcu:
       - what: rectangle
-        adjust.ref: mcu
+        where: mcu
         size: [xiao_x, xiao_y]
     _mounting_holes:
       - what: circle
-        adjust.ref: mounting_hole
-        radius: 1
-      - what: circle
-        adjust.ref: mirror_mounting_hole
+        where: /.*mounting_hole/
         radius: 1
     demo_switches:
       - panel
@@ -314,11 +312,18 @@ outlines:
       - operation: subtract
         name: _switches
         fillet: 0.5
+    usb_cutout:
+      - what: rectangle
+        where: reference_top_center
+        size: [9.34, 5.56 * 2]
+    panel_usb:
+      - panel
+      - -usb_cutout
 pcbs:
   rufous:
     outlines:
       main:
-        outline: panel
+        outline: panel_usb
     footprints:
       - what: choc
         where:
@@ -327,8 +332,3 @@ pcbs:
         params:
           from: "{{row_net}}"
           to: "{{column_net}}"
-      - what: xiao
-        where: mcu
-        adjust.shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
-      - what: mountinghole
-        where: mounting_hole
