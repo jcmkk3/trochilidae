@@ -315,7 +315,7 @@ outlines:
     usb_cutout:
       - what: rectangle
         where: reference_top_center
-        size: [9.34, 5.56 * 2]
+        size: [9.29, 5.61 * 2]
     panel_usb:
       - panel
       - -usb_cutout
