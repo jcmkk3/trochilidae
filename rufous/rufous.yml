@@ -227,10 +227,14 @@ points:
         key.mirror:
           row_net: P5
           column_net: P10
-  zones.mcu:
+  zones.reference_top_center:
     anchor:
       aggregate.parts: [matrix_inner_top, mirror_matrix_inner_top]
-      shift: [0, -0.7ky - 0.5xiao_y]
+      shift: [0, -0.65ky]
+  zones.mcu:
+    anchor:
+      ref: reference_top_center
+      shift: [0, -0.5xiao_y]
     key:
       width: xiao_x
       height: xiao_y
@@ -251,14 +255,11 @@ outlines:
           - /matrix_.*/
           - /thumb_.*/
     _center:
-      - what: polygon
-        points:
-        - ref: matrix_inner_top
-          shift: [0, -0.7ky]
-        - ref: mirror_matrix_inner_top
-          shift: [0, -0.7ky]
-        - ref: mirror_thumb_reachy
-        - ref: thumb_reachy
+      - what: rectangle
+        where:
+          ref: reference_top_center
+          shift: [0, -1.5ky]
+        size: [3kx, 3ky]
       - what: rectangle
         bound: true
         size: sf
