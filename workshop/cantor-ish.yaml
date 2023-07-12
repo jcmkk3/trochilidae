@@ -1,0 +1,129 @@
+units:
+  capx: 17        # Key cap size horizontal
+  capy: 16        # Key cap size vertical
+  kx: 18.5        # Key spacing horizontal
+  ky: 17.5        # Key spacing vertical
+points:
+  zones:
+    matrix:
+      key:
+        width: capx
+        height: capy
+        spread: kx      
+        padding: ky
+      columns:
+        outer:
+        pinky:
+        ring.key.stagger: 0.66ky
+        middle.key.stagger: 0.25ky
+        index.key.stagger: -0.25ky
+        inner.key.stagger: -0.15ky
+      rows:
+        bottom:
+        home:
+        top:
+    thumb:
+      anchor:
+        ref: matrix_index_bottom
+        shift: [-0.25kx, -1.5ky]
+        rotate: 5
+      key.$extends: points.zones.matrix.key
+      columns:
+        tucky:
+        home.key:
+          splay: -15
+          origin: [-0.5U, -0.5U]
+        reachy.key:
+          splay: -15
+          origin: [-0.5U, -0.5U]
+outlines:
+  _panel:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: [kx, ky]
+    - what: polygon
+      points:
+      - ref: matrix_pinky_bottom
+        shift: [0.5kx, -0.5ky]
+        affect: xy
+      - ref: matrix_ring_bottom
+        shift: [0.5kx, -0.5ky]
+        affect: x
+      - ref: thumb_tucky
+        shift: [-0.5kx, -0.5ky]
+      - ref: thumb_home
+        shift: [-0.5kx, -0.5ky]
+      - ref: thumb_reachy
+        shift: [-0.5kx, -0.5ky]
+      - ref: thumb_reachy
+        shift: [0.5kx, -0.5ky]
+      - ref: thumb_reachy
+        shift: [0.5kx + 3, 0.5ky + 10]
+      - ref: matrix_inner_top
+        shift: [0.5kx, 0.5ky]
+        affect: y
+      - ref: matrix_inner_top
+        shift: [0.5kx, 0.5ky]
+        affect: x
+      - ref: matrix_pinky_top
+        shift: [0.5kx, 0.5ky]
+        affect: xy
+  panel:
+    - name: _panel
+      fillet: 1.5
+  _switches:
+    - what: rectangle
+      size: 14
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+  _keycaps:
+    - what: rectangle
+      size: [capx, capy]
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+  demo_switches:
+    - panel
+    - ^_switches
+  demo_keycaps:
+    - panel
+    - ^_keycaps
+pcbs:
+  simple_split:
+    footprints:
+      keys:
+        what: choc
+        where: true
+        params:
+          from: GND
+          to: "{{name}}"
+          reverse: true
+          keycaps: true
+          hotswap: true
+      mcu:
+        what: promicro
+        where:
+          - ref: matrix_inner_home
+            shift: [1U, 0.5U]
+            rotate: -90
+        params:
+          P7: matrix_pinky_top
+          P18: matrix_ring_top
+          P19: matrix_middle_top
+          P20: matrix_index_top
+          P21: matrix_inner_top
+          P15: matrix_pinky_home
+          P14: matrix_ring_home
+          P16: matrix_middle_home
+          P10: matrix_index_home
+          P1: matrix_inner_home
+          P2: matrix_pinky_bottom
+          P3: matrix_ring_bottom
+          P4: matrix_middle_bottom
+          P5: matrix_index_bottom
+          P6: matrix_inner_bottom
+          P8: thumb_tucky
+          P9: thumb_reachy
