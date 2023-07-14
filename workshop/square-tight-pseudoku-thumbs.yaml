@@ -80,7 +80,7 @@ points:
     mirror:
       ref: matrix_inner_top
       shift: [0.5sf, 0.5sf]
-      distance: 14
+      distance: 15
     key:
       width: capx
       height: capy
@@ -279,20 +279,20 @@ outlines:
       - what: polygon
         points:
         - ref: thumb_reachy
-          shift: [0.5sf, -0.5sf]
+          shift: [0.5sf, 0]
           affect: xy
         - ref: mirror_thumb_reachy
-          shift: [0.5sf, -0.5sf]
+          shift: [0.5sf, 0]
           affect: x
         - shift: [0, 2sf]
         - ref: thumb_reachy
-          shift: [0.5sf, -0.5sf]
+          shift: [0.5sf, 0]
           affect: x
       - what: rectangle
         where:
           ref: reference_top_center
           shift: [0, -0.5sf]
-        size: [3sf, sf]
+        size: [3sf, 2sf]
     panel:
       - name: _tight_panel
         fillet: 1.5
@@ -310,7 +310,9 @@ outlines:
           - /thumb_.*/
     _mcu:
       - what: rectangle
-        where: mcu
+        where:
+          ref: mcu
+          shift: [0, 0.5sf]
         size: [xiao_x, xiao_y]
     _mounting_holes:
       - what: circle
