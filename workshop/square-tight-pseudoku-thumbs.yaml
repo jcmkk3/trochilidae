@@ -80,7 +80,7 @@ points:
     mirror:
       ref: matrix_inner_top
       shift: [0.5sf, 0.5sf]
-      distance: 15
+      distance: 16
     key:
       width: capx
       height: capy
@@ -206,33 +206,43 @@ points:
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      rotate: 15
-      shift: [kx, -22]
+      shift: [2kx, -1.25ky]
     mirror.$extends: points.zones.matrix.mirror
     key.$extends: points.zones.matrix.key
     columns:
-      tucky:
-        key:
-          bind: [1.5ky, 0.5kx, 0, 0]
-          row_net: P5
-          column_net: P7
-        key.mirror:
-          row_net: P4
-          column_net: P10
       reachy:
         key:
-          origin: [-0.5ky, -0.5kx]
-          splay: -15
           bind: [1.5ky, 0, 0, 0.5kx]
           row_net: P4
           column_net: P8
         key.mirror:
           row_net: P5
           column_net: P10
+      tucky:
+        key:
+          origin: [0.5kx, -0.5ky]
+          spread: -kx
+          splay: 15
+          bind: [1.5ky, 0.5kx, 0, 0]
+          row_net: P5
+          column_net: P7
+        key.mirror:
+          row_net: P4
+          column_net: P10
   zones.reference_top_center:
     anchor:
-      aggregate.parts: [matrix_inner_top, mirror_matrix_inner_top]
-      shift: [0, -0.65ky]
+      aggregate.parts:
+      - ref: matrix_inner_top
+        shift: [0.5kx, 0]
+      - ref: mirror_matrix_inner_top
+        shift: [0.5kx, 0]
+  zones.reference_bottom_center:
+    anchor:
+      aggregate.parts:
+      - ref: thumb_reachy
+        shift: [0.5kx, 0]
+      - ref: mirror_thumb_reachy
+        shift: [0.5kx, 0]
   zones.mcu:
     anchor:
       ref: reference_top_center
@@ -249,52 +259,25 @@ points:
       width: 1
       height: 1
 outlines:
-    _key_outline:
+    _panel:
       - what: rectangle
         bound: true
         size: sf
         where:
           - /matrix_.*/
           - /thumb_.*/
-    _rectangle_panel:
-      - what: polygon
-        points:
-        - ref: matrix_pinky_home
-          shift: [-0.5sf, -0.5sf]
-          affect: xy
-        - ref: matrix_ring_top
-          shift: [-0.5sf, 0.5sf]
-          affect: y
-        - ref: mirror_matrix_pinky_home
-          shift: [-0.5sf, -0.5sf]
-          affect: x
-        - ref: thumb_reachy
-          shift: [0.5sf, -0.5sf]
-          affect: y
-        - ref: matrix_pinky_home
-          shift: [-0.5sf, -0.5sf]
-          affect: x
-    _tight_panel:
-      - _key_outline
-      - what: polygon
-        points:
-        - ref: thumb_reachy
-          shift: [0.5sf, 0]
-          affect: xy
-        - ref: mirror_thumb_reachy
-          shift: [0.5sf, 0]
-          affect: x
-        - shift: [0, 2sf]
-        - ref: thumb_reachy
-          shift: [0.5sf, 0]
-          affect: x
       - what: rectangle
         where:
           ref: reference_top_center
-          shift: [0, -0.5sf]
+          shift: [0, -sf]  # Half of rectangle height
+        size: [3sf, 2sf]
+      - what: rectangle
+        where:
+          ref: reference_bottom_center
+          shift: [0, sf]  # Half of rectangle height
         size: [3sf, 2sf]
     panel:
-      - name: _tight_panel
+      - name: _panel
         fillet: 1.5
     _switches:
       - what: rectangle
@@ -312,7 +295,6 @@ outlines:
       - what: rectangle
         where:
           ref: mcu
-          shift: [0, 0.5sf]
         size: [xiao_x, xiao_y]
     _mounting_holes:
       - what: circle
