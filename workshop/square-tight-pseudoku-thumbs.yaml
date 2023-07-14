@@ -256,17 +256,7 @@ outlines:
         where:
           - /matrix_.*/
           - /thumb_.*/
-    _center:
-      - what: rectangle
-        where:
-          ref: reference_top_center
-          shift: [0, -1.25ky]
-        size: [2.5kx, 2.5ky]
-      - what: rectangle
-        bound: true
-        size: sf
-        where: /matrix_inner_.*/  # Include the inner keys in addition to the center polygon 
-    _panel:
+    _rectangle_panel:
       - what: polygon
         points:
         - ref: matrix_pinky_home
@@ -284,9 +274,28 @@ outlines:
         - ref: matrix_pinky_home
           shift: [-0.5sf, -0.5sf]
           affect: x
+    _tight_panel:
+      - _key_outline
+      - what: polygon
+        points:
+        - ref: thumb_reachy
+          shift: [0.5sf, -0.5sf]
+          affect: xy
+        - ref: mirror_thumb_reachy
+          shift: [0.5sf, -0.5sf]
+          affect: x
+        - shift: [0, 2sf]
+        - ref: thumb_reachy
+          shift: [0.5sf, -0.5sf]
+          affect: x
+      - what: rectangle
+        where:
+          ref: reference_top_center
+          shift: [0, -0.5sf]
+        size: [3sf, sf]
     panel:
-      - name: _panel
-        fillet: 2.5
+      - name: _tight_panel
+        fillet: 1.5
     _switches:
       - what: rectangle
         size: 14
