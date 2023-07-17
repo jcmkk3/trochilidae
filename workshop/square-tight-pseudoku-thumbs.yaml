@@ -233,16 +233,16 @@ points:
     anchor:
       aggregate.parts:
       - ref: matrix_inner_top
-        shift: [0.5kx, 0]
+        shift: [0.5kx, -0.25ky]
       - ref: mirror_matrix_inner_top
-        shift: [0.5kx, 0]
+        shift: [0.5kx, -0.25ky]
   zones.reference_bottom_center:
     anchor:
       aggregate.parts:
       - ref: thumb_reachy
-        shift: [0.5kx, 0]
+        shift: [0.5kx, 0.25ky]
       - ref: mirror_thumb_reachy
-        shift: [0.5kx, 0]
+        shift: [0.5kx, 0.25ky]
   zones.mcu:
     anchor:
       ref: reference_top_center
@@ -276,9 +276,6 @@ outlines:
           ref: reference_bottom_center
           shift: [0, sf]  # Half of rectangle height
         size: [3sf, 2sf]
-    panel:
-      - name: _panel
-        fillet: 1.5
     _switches:
       - what: rectangle
         size: 14
@@ -300,6 +297,16 @@ outlines:
       - what: circle
         where: /.*mounting_hole/
         radius: 1
+    panel:
+      - name: _panel
+        fillet: 1.5
+    switchplate:
+      - name: _panel
+        expand: 2
+        fillet: 1.5
+      - operation: subtract
+        name: _switches
+        fillet: 0.5
     demo_switches:
       - panel
       - ^_switches
@@ -310,11 +317,11 @@ outlines:
       - ^_keycaps
       - ^_mcu
       - ^_mounting_holes
-    switchplate:
-      - panel
-      - operation: subtract
-        name: _switches
-        fillet: 0.5
+    demo_all:
+      - switchplate
+      - ^_keycaps
+      - ^_mcu
+      - ^_mounting_holes
 pcbs:
   rufous:
     outlines:
