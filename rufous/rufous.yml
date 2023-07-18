@@ -70,8 +70,8 @@ units:
   $default_height: 0  # Points invisible by default unless height/width explicitly set
   $default_width: 0
   xiao_x: 17.5
-  xiao_y: 20
-  sf: 15
+  xiao_y: 21
+  sf: 16
 
 points:
   zones.matrix:
@@ -80,7 +80,7 @@ points:
     mirror:
       ref: matrix_inner_top
       shift: [0.5sf, 0.5sf]
-      distance: 14
+      distance: 13
     key:
       width: capx
       height: capy
