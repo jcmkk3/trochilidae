@@ -1,4 +1,4 @@
-#+title: 🐦trochilidae
+#+title: 🐦 trochilidae
 
 A from-scratch re-creation of the [[https://github.com/PJE66/hummingbird][Hummingbird keyboard]] using ergogen
 
