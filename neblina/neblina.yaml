@@ -254,6 +254,13 @@ points:
     key:
       width: xiao_x
       height: xiao_y
+  zones.power_switch:
+    anchor:
+      ref: reference_bottom_center
+      shift: [0, 3 / 2]
+    key:
+      width: 6
+      height: 3
   zones.mounting_hole:
     anchor:
       ref: matrix_inner_home
@@ -342,5 +349,11 @@ pcbs:
       - what: xiao
         where: mcu
         adjust.shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
+      - what: slider
+        where: power_switch
+        params:
+          side: 'B'
+          from: bat+
+          to: bat+
       - what: mountinghole
         where: mounting_hole
