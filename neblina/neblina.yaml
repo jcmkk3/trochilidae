@@ -73,8 +73,8 @@ units:
   # ====================
   $default_height: 0  # Points invisible by default unless height/width explicitly set
   $default_width: 0
-  xiao_x: 17.5
-  xiao_y: 20
+  xiao_x: 17.8
+  xiao_y: 21
   sf: 15
 
 points:
@@ -309,7 +309,7 @@ outlines:
       - operation: subtract
         what: rectangle
         where: reference_top_center
-        size: [9 + 0.5, (4 + 0.5) * 2]
+        size: [9 + 0.5, (6 + 0.5) * 2]
         fillet: 0.25
     switchplate:
       - name: _panel
