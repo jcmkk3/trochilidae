@@ -22,7 +22,7 @@ presets:
     middle_adj: 0
     thumb_offsetx: 2kx
     thumb_offsety: -1.25ky
-  
+
   choc_min_spaced:
     capx: 14.5
     capy: 14.5
@@ -50,7 +50,7 @@ presets:
     middle_adj: 0
     thumb_offsetx: 2kx
     thumb_offsety: -1.25ky
-  
+
   mx_min_spaced:
     capx: 15.5
     capy: 15.5
@@ -88,7 +88,7 @@ points:
     key:
       width: capx
       height: capy
-      spread: kx      
+      spread: kx
       padding: ky
       autobind: false
     rows:
@@ -257,7 +257,7 @@ points:
   zones.mounting_hole:
     anchor:
       ref: matrix_inner_home
-      shift: [-0.5kx + 4, -ky + 4]
+      shift: [-0.5kx + 5, -0.5ky - 5]
     mirror.$extends: points.zones.matrix.mirror
     key:
       width: 1
