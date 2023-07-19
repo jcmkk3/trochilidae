@@ -69,7 +69,7 @@ units:
   # ====================
   $default_height: 0  # Points invisible by default unless height/width explicitly set
   $default_width: 0
-  xiao_x: 17.5
+  xiao_x: 17.8
   xiao_y: 21
   sf: 16
 
