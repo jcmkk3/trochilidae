@@ -254,13 +254,6 @@ points:
     key:
       width: xiao_x
       height: xiao_y
-  zones.power_switch:
-    anchor:
-      ref: reference_bottom_center
-      shift: [0, 3 / 2]
-    key:
-      width: 6
-      height: 3
   zones.mounting_hole:
     anchor:
       ref: matrix_inner_home
@@ -311,6 +304,13 @@ outlines:
     panel:
       - name: _panel
         fillet: 1.5
+    panel_usb:
+      - panel
+      - operation: subtract
+        what: rectangle
+        where: reference_top_center
+        size: [9 + 0.5, (4 + 0.5) * 2]
+        fillet: 0.25
     switchplate:
       - name: _panel
         expand: 2
@@ -337,7 +337,7 @@ pcbs:
   neblina:
     outlines:
       main:
-        outline: panel
+        outline: panel_usb
     footprints:
       - what: choc
         where:
@@ -349,11 +349,5 @@ pcbs:
       - what: xiao
         where: mcu
         adjust.shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
-      - what: slider
-        where: power_switch
-        params:
-          side: 'B'
-          from: bat+
-          to: bat+
       - what: mountinghole
-        where: mounting_hole
+        where: /.*mounting_hole/
