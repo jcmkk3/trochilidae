@@ -310,7 +310,6 @@ outlines:
         what: rectangle
         where: reference_top_center
         size: [9 + 0.5, (6 + 0.5) * 2]
-        fillet: 0.25
     switchplate:
       - name: _panel
         expand: 2
