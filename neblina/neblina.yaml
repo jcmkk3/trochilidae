@@ -286,6 +286,7 @@ outlines:
         where:
           - /matrix_.*/
           - /thumb_.*/
+        fillet: 0.5
     _keycaps:
       - what: rectangle
         size: [capx, capy]
@@ -316,7 +317,6 @@ outlines:
         fillet: 1.5
       - operation: subtract
         name: _switches
-        fillet: 0.5
     demo_switches:
       - panel
       - ^_switches
