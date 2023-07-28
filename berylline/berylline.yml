@@ -9,11 +9,11 @@ presets:
   # These presets provide different layout options
   # Select a preset in the `units` section below
   # Note: The appropriate switch footprint will still need to be set in the `pcb` section
-  choc_spaced:
+  defaults:
     capx: 17        # Key cap size horizontal
     capy: 16        # Key cap size vertical
-    kx: 18 + 0.5    # Key spacing horizontal
-    ky: 17 + 0.5    # Key spacing vertical
+    kx: 18.5        # Key spacing horizontal
+    ky: 17.5        # Key spacing vertical
     pinky_splay: 5  # Degrees of splay between pinky and ring columns
     pinky_adj: -3   # Adjustment to compensate for splay spacing
     ring_splay: 3
@@ -21,42 +21,35 @@ presets:
     middle_splay: 0
     middle_adj: 0
     thumb_offsetx: 0.25kx
+
+  choc_spaced:
+    $extends: presets.defaults
   
   choc_min_spaced:
+    $extends: presets.defaults
     capx: 14.5
     capy: 14.5
-    kx: 15 + 0.5
-    ky: 15 + 0.5
-    pinky_splay: 5
-    pinky_adj: -3
-    ring_splay: 3
-    ring_adj: -8
+    kx: 15.5
+    ky: 15.5
     middle_splay: 3
     middle_adj: -5
     thumb_offsetx: 1/3kx
 
   mx_spaced:
+    $extends: presets.defaults
     capx: 18
     capy: 18
     kx: 19
     ky: 19
-    pinky_splay: 5
     pinky_adj: -4
-    ring_splay: 3
     ring_adj: -10
-    middle_splay: 0
-    middle_adj: 0
-    thumb_offsetx: 0.25kx
   
   mx_min_spaced:
+    $extends: presets.defaults
     capx: 15.5
     capy: 15.5
-    kx: 16 + 0.5
-    ky: 16 + 0.5
-    pinky_splay: 5
-    pinky_adj: -3
-    ring_splay: 3
-    ring_adj: -8
+    kx: 16.5
+    ky: 16.5
     middle_splay: 3
     middle_adj: -5
     thumb_offsetx: 1/3kx
