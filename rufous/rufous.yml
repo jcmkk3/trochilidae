@@ -86,7 +86,7 @@ points:
       height: capy
       spread: kx      
       padding: ky
-      autobind: false
+      autobind: 0
     rows:
       bottom:
       home:
