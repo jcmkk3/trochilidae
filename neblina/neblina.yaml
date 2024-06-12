@@ -9,7 +9,7 @@ presets:
   # These presets provide different layout options
   # Select a preset in the `units` section below
   # Note: The appropriate switch footprint will still need to be set in the `pcb` section
-  choc_spaced:
+  defaults:
     capx: 17        # Key cap size horizontal
     capy: 16        # Key cap size vertical
     kx: 18.5        # Key spacing horizontal
@@ -20,333 +20,296 @@ presets:
     ring_adj: -8
     middle_splay: 0
     middle_adj: 0
-    thumb_offsetx: 2kx
-    thumb_offsety: -1.25ky
+    thumb_offsetx: 0.25kx
 
+  choc_spaced:
+    $extends: presets.defaults
+  
   choc_min_spaced:
+    $extends: presets.defaults
     capx: 14.5
     capy: 14.5
     kx: 15.5
     ky: 15.5
-    pinky_splay: 5
-    pinky_adj: -3
-    ring_splay: 3
-    ring_adj: -8
     middle_splay: 3
     middle_adj: -5
-    thumb_offsetx: 2kx
-    thumb_offsety: -1.25ky
+    thumb_offsetx: 1/3kx
 
   mx_spaced:
+    $extends: presets.defaults
     capx: 18
     capy: 18
     kx: 19
     ky: 19
-    pinky_splay: 5
     pinky_adj: -4
-    ring_splay: 3
     ring_adj: -10
-    middle_splay: 0
-    middle_adj: 0
-    thumb_offsetx: 2kx
-    thumb_offsety: -1.25ky
-
+  
   mx_min_spaced:
+    $extends: presets.defaults
     capx: 15.5
     capy: 15.5
-    kx: 16 + 0.5
-    ky: 16 + 0.5
-    pinky_splay: 5
-    pinky_adj: -3
-    ring_splay: 3
-    ring_adj: -8
+    kx: 16.5
+    ky: 16.5
     middle_splay: 3
     middle_adj: -5
-    thumb_offsetx: 2kx
-    thumb_offsety: -1.25ky
+    thumb_offsetx: 1/3kx
 
 units:
   $extends: presets.choc_spaced
-  angle: 22  # Angle between halves
 
   # Defaults/Constants
   # ====================
   $default_height: 0  # Points invisible by default unless height/width explicitly set
   $default_width: 0
-  xiao_x: 17.8
-  xiao_y: 21
+  promicro_x: 33
+  promicro_y: 18
   sf: 15
 
 points:
+  # Keys/Switches
+  # =============
   zones.matrix:
-    anchor.shift: [100, -100]  # Fix placement on KiCAD sheet
-    rotate: -angle + pinky_splay + ring_splay
-    mirror:
-      ref: matrix_inner_top
-      shift: [0.5sf, 0.5sf]
-      distance: 16
+    anchor.shift: [150, -180]
+    rotate: pinky_splay + ring_splay + middle_splay
     key:
       width: capx
       height: capy
-      spread: kx
+      spread: kx      
       padding: ky
-      autobind: false
+      autobind: 0
     rows:
       bottom:
       home:
       top:
-    columns.pinky:
-      rows:
-        bottom.skip: true
-        home:
-          bind: [0.5ky, 0.5kx, 0, 0]
-          row_net: P2
-          column_net: P6
-        top:
-          bind: [0, 0.5kx, 0.5ky, 0]
-          row_net: P0
-          column_net: P6
-        home.mirror:
-          row_net: P3
-          column_net: P10
-        top.mirror:
-          row_net: P1
-          column_net: P10
-    columns.ring:
-      key:
+    columns:
+      pinky:
+        rows:
+          home.bind: [0, sf, 0, 0]
+          bottom.skip: true
+      ring.key:
         stagger: 2/3ky
         splay: -pinky_splay
         origin: [0, pinky_adj]
-      rows:
-        bottom:
-          bind: [0.5ky, 0, 0, 0]
-          row_net: P4
-          column_net: P6
-        home:
-          bind: [0, 0.5kx, 0, 0]
-          row_net: P3
-          column_net: P6
-        top:
-          bind: [0, 0.5kx, 0.5ky, 0]
-          row_net: P1
-          column_net: P6
-        bottom.mirror:
-          row_net: P5
-          column_net: P9
-        home.mirror:
-          row_net: P2
-          column_net: P10
-        top.mirror:
-          row_net: P0
-          column_net: P10
-    columns.middle:
-      key:
+      middle.key:
         stagger: 0.25ky
         splay: -ring_splay
         origin: [0, ring_adj]
-      rows:
-        bottom:
-          bind: [0.5ky, 0.5kx, 0, 0.5kx]
-          row_net: P5
-          column_net: P6
-        home:
-          bind: [0, 0.5kx, 0, 0]
-          row_net: P2
-          column_net: P7
-        top:
-          bind: [0, 0, 0.5ky, 0]
-          row_net: P0
-          column_net: P7
-        bottom.mirror:
-          row_net: P4
-          column_net: P9
-        home.mirror:
-          row_net: P3
-          column_net: P9
-        top.mirror:
-          row_net: P1
-          column_net: P9
-    columns.index:
-      key.stagger: -0.25ky
-      rows:
-        bottom:
-          bind: [0.5ky, 0, 0, 0]
-          row_net: P4
-          column_net: P7
-        home:
-          row_net: P3
-          column_net: P7
-        top:
-          bind: [0, 0, 0.5ky, 0.5kx]
-          row_net: P1
-          column_net: P7
-        bottom.mirror:
-          row_net: P5
-          column_net: P8
-        home.mirror:
-          row_net: P2
-          column_net: P9
-        top.mirror:
-          row_net: P0
-          column_net: P9
-    columns.inner:
-      key.stagger: -0.5ky
-      rows:
-        bottom.skip: true
-        home:
-          bind: [0.5ky, 0, 0.5ky, 0.5kx]
-          row_net: P2
-          column_net: P8
-        top:
-          bind: [0, 0, 0.5ky, 0.5kx]
-          row_net: P0
-          column_net: P8
-        home.mirror:
-          row_net: P3
-          column_net: P8
-        top.mirror:
-          row_net: P1
-          column_net: P8
+        bind: [0, sf, 0, sf]
+      index.key:
+        stagger: -0.25ky
+        splay: -middle_splay
+        origin: [0, middle_adj]
+      inner:
+        key.stagger: -0.5ky
+        rows.bottom.skip: true
   zones.thumb:
     anchor:
       ref: matrix_index_bottom
-      shift: [thumb_offsetx, thumb_offsety]
-    mirror.$extends: points.zones.matrix.mirror
+      shift: [thumb_offsetx, -22]
     key.$extends: points.zones.matrix.key
     columns:
-      reachy:
-        key:
-          bind: [1.5ky, 0, 0, 0.5kx]
-          row_net: P4
-          column_net: P8
-        key.mirror:
-          row_net: P5
-          column_net: P10
       tucky:
-        key:
-          origin: [0.5kx, -0.5ky]
-          spread: -kx
-          splay: 15
-          bind: [1.5ky, 0.5kx, 0, 0]
-          row_net: P5
-          column_net: P7
-        key.mirror:
-          row_net: P4
-          column_net: P10
-  zones.reference_top_center:
+      reachy.key.stagger: -0.25ky
+
+  # Outline Extents
+  # ===============
+  zones.outline_top_left:
     anchor:
-      aggregate.parts:
-      - ref: matrix_inner_top
-        shift: [0.5kx, -0.25ky]
-      - ref: mirror_matrix_inner_top
-        shift: [0.5kx, -0.25ky]
-  zones.reference_bottom_center:
+    - ref: matrix_middle_top
+      shift: [0.5sf, 0.5sf]
+      affect: y
+    - ref: matrix_pinky_top
+      affect: x
+      shift: [-0.5sf, 0.5sf]
+  zones.outline_top_right:
     anchor:
-      aggregate.parts:
-      - ref: thumb_reachy
-        shift: [0.5kx, 0.25ky]
-      - ref: mirror_thumb_reachy
-        shift: [0.5kx, 0.25ky]
+    - ref: outline_top_left
+    - ref: thumb_reachy
+      affect: x
+      shift: [0.5sf, -0.5sf]
+  zones.outline_bottom_left:
+    anchor:
+    - ref: outline_top_left
+    - ref: thumb_reachy
+      affect: y
+      shift: [0.5sf, -0.5sf]
+  zones.outline_bottom_right:
+    anchor:
+    - ref: outline_top_right
+    - ref: outline_bottom_left
+      affect: y
+
+  # Components
+  # ==========
   zones.mcu:
     anchor:
-      ref: reference_top_center
-      shift: [0, -0.5xiao_y]
+      ref: outline_bottom_left
+      shift: [0.5promicro_x + 3, 0.5promicro_y + 3]
     key:
-      width: xiao_x
-      height: xiao_y
-  zones.mounting_hole:
+      width: promicro_x
+      height: promicro_y
+  zones.battery_connector:
     anchor:
-      ref: matrix_inner_home
-      shift: [-0.5kx + 5, -0.5ky - 5]
-    mirror.$extends: points.zones.matrix.mirror
+      ref: matrix_index_bottom
+      affect: xy
+      shift: [-kx, -0.5ky]
     key:
-      width: 1
-      height: 1
+      height: 1.5
+      width: 6
+  zones.reset:
+    anchor:
+      - ref: mcu
+        shift: [0, 0.5promicro_y + 4]
+        affect: y
+      - ref: outline_bottom_left
+        shift: [2.5, 0]
+        affect: x
+    key:
+      height: 6
+      width: 3
+  zones.mounting_hole_top:
+    anchor:
+      - ref: matrix_pinky_top
+        affect: y
+        shift: [0, 0.5ky + 4.5]
+      - ref: matrix_ring_top
+        affect: x
+        shift: [-0.5kx - 2.5, 0]
+    key:
+      height: 2
+      width: 2
+  zones.mounting_hole_bottom:
+    anchor:
+      - ref: matrix_inner_home
+        affect: y
+        shift: [0, -0.5ky - 2.5]
+      - ref: matrix_index_bottom
+        affect: x
+        shift: [0.5kx + 2.5, 0]
+    key.$extends: points.zones.mounting_hole_top.key
+
 outlines:
-    _panel:
-      - what: rectangle
-        bound: true
-        size: sf
-        where:
-          - /matrix_.*/
-          - /thumb_.*/
-      - what: rectangle
-        where:
-          ref: reference_top_center
-          shift: [0, -sf]  # Half of rectangle height
-        size: [3sf, 2sf]
-      - what: rectangle
-        where:
-          ref: reference_bottom_center
-          shift: [0, sf]  # Half of rectangle height
-        size: [3sf, 2sf]
-    _switches:
-      - what: rectangle
-        size: 14
-        where:
-          - /matrix_.*/
-          - /thumb_.*/
-        fillet: 0.5
-    _keycaps:
-      - what: rectangle
-        size: [capx, capy]
-        where:
-          - /matrix_.*/
-          - /thumb_.*/
-    _mcu:
-      - what: rectangle
-        where:
-          ref: mcu
-        size: [xiao_x, xiao_y]
-    _mounting_holes:
-      - what: circle
-        where: /.*mounting_hole/
-        radius: 1
-    panel:
-      - name: _panel
-        fillet: 1.5
-    panel_usb:
-      - panel
-      - operation: subtract
-        what: rectangle
-        where: reference_top_center
-        size: [9 + 0.5, (6 + 0.5) * 2]
-    switchplate:
-      - name: _panel
-        expand: 2
-        fillet: 1.5
-      - operation: subtract
-        name: _switches
-    demo_switches:
-      - panel
-      - ^_switches
-      - ^_mcu
-      - ^_mounting_holes
-    demo_keycaps:
-      - panel
-      - ^_keycaps
-      - ^_mcu
-      - ^_mounting_holes
-    demo_all:
-      - switchplate
-      - ^_keycaps
-      - ^_mcu
-      - ^_mounting_holes
-pcbs:
-  neblina:
-    outlines:
-      main:
-        outline: panel_usb
-    footprints:
-      - what: choc
-        where:
-          - /matrix_.*/
-          - /thumb_.*/
-        params:
-          from: "{{row_net}}"
-          to: "{{column_net}}"
-      - what: xiao
-        where: mcu
-        adjust.shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
-      - what: mountinghole
-        where: /.*mounting_hole/
+  back_panel:
+    - what: polygon
+      fillet: 3
+      points:
+      - ref: outline_top_left
+      - ref: outline_top_right
+      - ref: outline_bottom_right
+      - ref: outline_bottom_left
+  front_panel:
+    - what: polygon
+      points:
+      - ref: outline_top_left
+      - ref: outline_top_right
+      - ref: outline_top_right
+        shift: [0, -10]
+      - ref: outline_top_left
+        shift: [0, -10]
+      fillet: 3
+    - what: rectangle
+      bound: true
+      size: sf
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+    - what: polygon
+      points:
+      - ref: outline_top_left
+        shift: [0, -5]
+      - ref: outline_top_right
+        shift: [0, -5]
+      - ref: matrix_inner_home
+        shift: [0.5sf, -0.5sf]
+        affect: y
+      - ref: outline_bottom_left
+        affect: x
+    - what: polygon
+      points:
+      - ref: matrix_index_bottom
+        shift: [0.5sf, -0.5sf]
+        affect: xy
+      - ref: thumb_tucky
+        affect: y
+      - ref: thumb_tucky
+        shift: [-0.5sf, 0]
+      - ref: matrix_index_bottom
+        affect: y
+    - what: polygon
+      points:
+      - ref: thumb_tucky
+        shift: [0, -0.5sf]
+      - ref: thumb_reachy
+        affect: x
+      - ref: thumb_reachy
+        shift: [0, 0.5sf]
+      - ref: thumb_tucky
+        affect: x
+      fillet: 1
+  _mcu:
+    - what: rectangle
+      where: mcu
+      size: [promicro_x, promicro_y]
+  _mounting_holes:
+    - what: circle
+      where: /mounting_hole_.*/
+      radius: 1
+  _keycaps:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: [capx, capy]
+      bound: false
+  key_demo:
+    - back_panel
+    - ^front_panel
+    - ^_keycaps
+
+pcbs.berylline:
+  outlines.main:
+    outline: front_panel
+  footprints:
+    - what: choc
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      params:
+        from: GND
+        to: "{{name}}"
+        reverse: true
+        keycaps: true
+    - what: promicro
+      where: mcu
+      adjust.shift: [1.5, 0]  # Compensate for midpoint being off-center 
+      params:
+        orientation: up
+        P21: matrix_pinky_top
+        P20: matrix_pinky_home
+        P19: matrix_ring_top
+        P18: matrix_ring_home
+        P15: matrix_ring_bottom
+        P14: matrix_middle_top
+        P16: matrix_middle_home
+        P10: matrix_middle_bottom
+        P3: matrix_index_top
+        P4: matrix_index_home
+        P5: matrix_index_bottom
+        P6: matrix_inner_top
+        P7: matrix_inner_home
+        P8: thumb_reachy
+        P9: thumb_tucky
+    - what: jstph
+      where: battery_connector
+      params:
+        pos: RAW
+        neg: GND
+    - what: via
+      where: /mounting_hole_.*/
+      params.net: ""
+    - what: button
+      where: reset
+      adjust.rotate: 90
+      params:
+        from: RST
+        to: GND
