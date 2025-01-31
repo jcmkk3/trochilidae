@@ -61,8 +61,10 @@ units:
   # ====================
   $default_height: 0  # Points invisible by default unless height/width explicitly set
   $default_width: 0
-  promicro_x: 33
-  promicro_y: 18
+  battery_x: 51
+  battery_y: 25
+  xiao_x: 17.8
+  xiao_y: 21
   sf: 15
 
 points:
@@ -76,16 +78,14 @@ points:
       height: capy
       spread: kx      
       padding: ky
-      autobind: 0
     rows:
       bottom:
       home:
       top:
     columns:
       pinky:
-        rows:
-          home.bind: [0, sf, 0, 0]
-          bottom.skip: true
+        rows.top.skip: true
+        rows.bottom.skip: true
       ring.key:
         stagger: 2/3ky
         splay: -pinky_splay
@@ -94,7 +94,6 @@ points:
         stagger: 0.25ky
         splay: -ring_splay
         origin: [0, ring_adj]
-        bind: [0, sf, 0, sf]
       index.key:
         stagger: -0.25ky
         splay: -middle_splay
@@ -118,7 +117,7 @@ points:
     - ref: matrix_middle_top
       shift: [0.5sf, 0.5sf]
       affect: y
-    - ref: matrix_pinky_top
+    - ref: matrix_pinky_home
       affect: x
       shift: [-0.5sf, 0.5sf]
   zones.outline_top_right:
@@ -143,11 +142,18 @@ points:
   # ==========
   zones.mcu:
     anchor:
-      ref: outline_bottom_left
-      shift: [0.5promicro_x + 3, 0.5promicro_y + 3]
+      ref: outline_top_left
+      shift: [0.5xiao_x, -0.5xiao_y]
     key:
-      width: promicro_x
-      height: promicro_y
+      width: xiao_x
+      height: xiao_y
+  zones.battery:
+    anchor:
+      ref: outline_bottom_left
+      shift: [0.5battery_x + 2, 0.5battery_y]
+    key:
+      width: battery_x
+      height: battery_y
   zones.battery_connector:
     anchor:
       ref: matrix_index_bottom
@@ -158,8 +164,8 @@ points:
       width: 6
   zones.reset:
     anchor:
-      - ref: mcu
-        shift: [0, 0.5promicro_y + 4]
+      - ref: battery
+        shift: [0, 0.5battery_y + 4]
         affect: y
       - ref: outline_bottom_left
         shift: [2.5, 0]
@@ -169,10 +175,10 @@ points:
       width: 3
   zones.mounting_hole_top:
     anchor:
-      - ref: matrix_pinky_top
+      - ref: matrix_pinky_home
         affect: y
         shift: [0, 0.5ky + 4.5]
-      - ref: matrix_ring_top
+      - ref: matrix_ring_home
         affect: x
         shift: [-0.5kx - 2.5, 0]
     key:
@@ -189,7 +195,7 @@ points:
     key.$extends: points.zones.mounting_hole_top.key
 
 outlines:
-  back_panel:
+  panel:
     - what: polygon
       fillet: 3
       points:
@@ -197,59 +203,14 @@ outlines:
       - ref: outline_top_right
       - ref: outline_bottom_right
       - ref: outline_bottom_left
-  front_panel:
-    - what: polygon
-      points:
-      - ref: outline_top_left
-      - ref: outline_top_right
-      - ref: outline_top_right
-        shift: [0, -10]
-      - ref: outline_top_left
-        shift: [0, -10]
-      fillet: 3
-    - what: rectangle
-      bound: true
-      size: sf
-      where:
-        - /matrix_.*/
-        - /thumb_.*/
-    - what: polygon
-      points:
-      - ref: outline_top_left
-        shift: [0, -5]
-      - ref: outline_top_right
-        shift: [0, -5]
-      - ref: matrix_inner_home
-        shift: [0.5sf, -0.5sf]
-        affect: y
-      - ref: outline_bottom_left
-        affect: x
-    - what: polygon
-      points:
-      - ref: matrix_index_bottom
-        shift: [0.5sf, -0.5sf]
-        affect: xy
-      - ref: thumb_tucky
-        affect: y
-      - ref: thumb_tucky
-        shift: [-0.5sf, 0]
-      - ref: matrix_index_bottom
-        affect: y
-    - what: polygon
-      points:
-      - ref: thumb_tucky
-        shift: [0, -0.5sf]
-      - ref: thumb_reachy
-        affect: x
-      - ref: thumb_reachy
-        shift: [0, 0.5sf]
-      - ref: thumb_tucky
-        affect: x
-      fillet: 1
   _mcu:
     - what: rectangle
       where: mcu
-      size: [promicro_x, promicro_y]
+      size: [xiao_x, xiao_y]
+  _battery:
+    - what: rectangle
+      where: battery
+      size: [battery_x, battery_y]
   _mounting_holes:
     - what: circle
       where: /mounting_hole_.*/
@@ -262,13 +223,15 @@ outlines:
       size: [capx, capy]
       bound: false
   key_demo:
-    - back_panel
-    - ^front_panel
+    - panel
+    - ^_mcu
+    - ^_battery
+    - ^_mounting_holes
     - ^_keycaps
 
 pcbs.berylline:
   outlines.main:
-    outline: front_panel
+    outline: panel
   footprints:
     - what: choc
       where:
