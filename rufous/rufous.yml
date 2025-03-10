@@ -207,11 +207,11 @@ points:
       rows:
         bottom.skip: true
         home:
-          bind: [0.5ky, 0, 0.5ky, 0.5kx + 1.25]
+          bind: [0.5ky, 0, 0.5ky, 0.5kx]
           row_net: P2
           column_net: P8
         top:
-          bind: [0,  0.75, 0.5ky, 0.5kx + 1.25]
+          bind: [0,  0, 0.5ky, 0.5kx]
           row_net: P0
           column_net: P8
         home.mirror:
@@ -311,11 +311,11 @@ outlines:
       - what: rectangle
         size: [16.5, capy]
         where: /matrix_index/
-        adjust.shift: [-0.5, 0]
+        adjust.shift: [-0.75, 0]
       - what: rectangle
         size: [16.5, capy]
         where: /matrix_inner/
-        adjust.shift: [1.25, 0]
+        adjust.shift: [0.75, 0]
     _key_centers:
       - what: circle
         radius: 0.25
