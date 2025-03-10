@@ -1,7 +1,7 @@
 meta:
   engine: 4.0.0
   name: rufous
-  version: 0.2
+  version: 0.3
   author: jcmkk3
   url: https://github.com/jcmkk3/trochilidae
 
@@ -61,8 +61,21 @@ presets:
     middle_adj: -5
     thumb_offsetx: 1/3kx
 
+  mx_mix_spaced:
+    capx: 18
+    capy: 15
+    kx: 19
+    ky: 16
+    pinky_splay: 5
+    pinky_adj: -3
+    ring_splay: 3
+    ring_adj: -8
+    middle_splay: 3
+    middle_adj: -5
+    thumb_offsetx: 1/3kx
+
 units:
-  $extends: presets.choc_spaced
+  $extends: presets.mx_mix_spaced
   angle: 22  # Angle between halves
 
   # Defaults/Constants
@@ -80,7 +93,7 @@ points:
     mirror:
       ref: matrix_inner_top
       shift: [0.5sf, 0.5sf]
-      distance: 13
+      distance: 15
     key:
       width: capx
       height: capy
@@ -163,7 +176,9 @@ points:
           row_net: P1
           column_net: P9
     columns.index:
-      key.stagger: -0.25ky
+      key:
+        stagger: -0.25ky
+        spread: kx
       rows:
         bottom:
           bind: [0.5ky, 0, 0, 0]
@@ -186,15 +201,17 @@ points:
           row_net: P0
           column_net: P9
     columns.inner:
-      key.stagger: -0.5ky
+      key:
+        stagger: -0.5ky
+        spread: 16
       rows:
         bottom.skip: true
         home:
-          bind: [0.5ky, 0, 0.5ky, 0.5kx]
+          bind: [0.5ky, 0, 0.5ky, 0.5kx + 1.25]
           row_net: P2
           column_net: P8
         top:
-          bind: [0, 0, 0.5ky, 0.5kx]
+          bind: [0,  0.75, 0.5ky, 0.5kx + 1.25]
           row_net: P0
           column_net: P8
         home.mirror:
@@ -205,8 +222,8 @@ points:
           column_net: P8
   zones.thumb:
     anchor:
-      ref: matrix_index_bottom
-      shift: [0.25kx, -22]
+      ref: matrix_index_home
+      shift: [0.25kx, -40]
     mirror.$extends: points.zones.matrix.mirror
     key.$extends: points.zones.matrix.key
     columns:
@@ -287,8 +304,24 @@ outlines:
       - what: rectangle
         size: [capx, capy]
         where:
-          - /matrix_.*/
+          - /matrix_pinky/
+          - /matrix_ring/
+          - /matrix_middle/
           - /thumb_.*/
+      - what: rectangle
+        size: [16.5, capy]
+        where: /matrix_index/
+        adjust.shift: [-0.5, 0]
+      - what: rectangle
+        size: [16.5, capy]
+        where: /matrix_inner/
+        adjust.shift: [1.25, 0]
+    _key_centers:
+      - what: circle
+        radius: 0.25
+        where:
+          - /matrix/
+          - /thumb/
     _mcu:
       - what: rectangle
         where: mcu
@@ -307,26 +340,9 @@ outlines:
       - ^_keycaps
       - ^_mcu
       - ^_mounting_holes
+      - ^_key_centers
     switchplate:
       - panel
       - operation: subtract
         name: _switches
         fillet: 0.5
-pcbs:
-  rufous:
-    outlines:
-      main:
-        outline: panel
-    footprints:
-      - what: choc
-        where:
-          - /matrix_.*/
-          - /thumb_.*/
-        params:
-          from: "{{row_net}}"
-          to: "{{column_net}}"
-      - what: xiao
-        where: mcu
-        adjust.shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
-      - what: mountinghole
-        where: mounting_hole
