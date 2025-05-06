@@ -64,8 +64,8 @@ presets:
   mx_mix_spaced:
     capx: 18
     capy: 15
-    kx: 19
-    ky: 16
+    kx: 18.5
+    ky: 15.5
     pinky_splay: 5
     pinky_adj: -3
     ring_splay: 3
@@ -97,7 +97,7 @@ points:
     key:
       width: capx
       height: capy
-      spread: kx      
+      spread: kx     
       padding: ky
       autobind: 0
     rows:
@@ -203,7 +203,7 @@ points:
     columns.inner:
       key:
         stagger: -0.5ky
-        spread: 16
+        spread: ky
       rows:
         bottom.skip: true
         home:
@@ -229,7 +229,7 @@ points:
     columns:
       tucky:
         key:
-          bind: [0.5ky, 0.5kx, 0, 0]
+          bind: [2ky, 0.5kx, 0, 0]
           row_net: P5
           column_net: P7
         key.mirror:
@@ -238,7 +238,7 @@ points:
       reachy:
         key:
           stagger: -0.25ky        
-          bind: [1.5ky, 0, 0, 0]
+          bind: [2ky, 0, 0, 0]
           row_net: P4
           column_net: P8
         key.mirror:
