@@ -93,7 +93,7 @@ points:
     mirror:
       ref: matrix_inner_top
       shift: [0.5sf, 0.5sf]
-      distance: 15
+      distance: 14.5
     key:
       width: capx
       height: capy
@@ -267,7 +267,7 @@ outlines:
     _key_outline:
       - what: rectangle
         bound: true
-        size: sf
+        size: [sf + 0.01, sf - 1]
         where:
           - /matrix_.*/
           - /thumb_.*/
@@ -279,7 +279,7 @@ outlines:
         size: [3kx, 3ky]
       - what: rectangle
         bound: true
-        size: sf
+        size: [sf + 0.01, sf - 1]
         where: /matrix_inner_.*/  # Include the inner keys in addition to the center polygon 
     _panel:
       - name: _center
