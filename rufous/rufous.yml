@@ -267,10 +267,17 @@ outlines:
     _key_outline:
       - what: rectangle
         bound: true
-        size: [sf + 0.01, sf - 1]
+        size: [sf + 2, sf - 1]
         where:
-          - /matrix_.*/
+          - /matrix_pinky.*/
+          - /matrix_ring.*/
+          - /matrix_middle.*/
           - /thumb_.*/
+      - what: rectangle
+        bound: true
+        size: [sf + 0.5, sf - 1]
+        where: /matrix_index.*/
+        adjust.shift: [-0.75, 0]
     _center:
       - what: rectangle
         where:
@@ -279,7 +286,7 @@ outlines:
         size: [3kx, 3ky]
       - what: rectangle
         bound: true
-        size: [sf + 0.01, sf - 1]
+        size: [sf + 2, sf - 1]
         where: /matrix_inner_.*/  # Include the inner keys in addition to the center polygon 
     _panel:
       - name: _center
