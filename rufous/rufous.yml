@@ -1,7 +1,7 @@
 meta:
   engine: 4.0.0
   name: rufous
-  version: 0.2
+  version: 0.3
   author: jcmkk3
   url: https://github.com/jcmkk3/trochilidae
 
@@ -9,7 +9,9 @@ presets:
   # These presets provide different layout options
   # Select a preset in the `units` section below
   # Note: The appropriate switch footprint will still need to be set in the `pcb` section
-  choc_spaced:
+  defaults:
+    edgex: 16       # Edge cut distance horizontal
+    edgey: 16       # Edge cut distance vertical
     capx: 17        # Key cap size horizontal
     capy: 16        # Key cap size vertical
     kx: 18.5        # Key spacing horizontal
@@ -20,46 +22,40 @@ presets:
     ring_adj: -8
     middle_splay: 0
     middle_adj: 0
-    thumb_offsetx: 0.25kx
+
+  choc_spaced:
+    $extends: presets.defaults
   
   choc_min_spaced:
+    $extends: presets.defaults
+    edgex: 15
+    edgey: 15
     capx: 14.5
     capy: 14.5
     kx: 15.5
     ky: 15.5
-    pinky_splay: 5
-    pinky_adj: -3
-    ring_splay: 3
-    ring_adj: -8
     middle_splay: 3
     middle_adj: -5
-    thumb_offsetx: 1/3kx
 
   mx_spaced:
+    $extends: presets.defaults
     capx: 18
     capy: 18
     kx: 19
     ky: 19
-    pinky_splay: 5
     pinky_adj: -4
-    ring_splay: 3
     ring_adj: -10
-    middle_splay: 0
-    middle_adj: 0
-    thumb_offsetx: 0.25kx
   
   mx_min_spaced:
+    $extends: presets.defaults
+    edgex: 15
+    edgey: 15
     capx: 15.5
     capy: 15.5
-    kx: 16 + 0.5
-    ky: 16 + 0.5
-    pinky_splay: 5
-    pinky_adj: -3
-    ring_splay: 3
-    ring_adj: -8
+    kx: 16.5
+    ky: 16.5
     middle_splay: 3
     middle_adj: -5
-    thumb_offsetx: 1/3kx
 
 units:
   $extends: presets.choc_spaced
@@ -71,7 +67,8 @@ units:
   $default_width: 0
   xiao_x: 17.8
   xiao_y: 21
-  sf: 16
+  topx: max(capx, edgex) * 0.5
+  topy: max(capy, edgey) * 0.5
 
 points:
   zones.matrix:
@@ -79,8 +76,8 @@ points:
     rotate: -angle + pinky_splay + ring_splay
     mirror:
       ref: matrix_inner_top
-      shift: [0.5sf, 0.5sf]
-      distance: 13
+      shift: [topx, topy]
+      distance: 12
     key:
       width: capx
       height: capy
@@ -205,14 +202,17 @@ points:
           column_net: P8
   zones.thumb:
     anchor:
-      ref: matrix_index_bottom
-      shift: [0.25kx, -22]
+      # The position of the home index and home (reachy) thumb
+      # stay consistent accross switch spacings and are pinned
+      # to the values of the original hummingbird thumb cluster
+      ref: matrix_index_home
+      shift: [4.625, -39.5]
     mirror.$extends: points.zones.matrix.mirror
     key.$extends: points.zones.matrix.key
     columns:
       tucky:
         key:
-          bind: [0.5ky, 0.5kx, 0, 0]
+          bind: [ky, 0.5kx, 0, 0]
           row_net: P5
           column_net: P7
         key.mirror:
@@ -250,7 +250,7 @@ outlines:
     _key_outline:
       - what: rectangle
         bound: true
-        size: sf
+        size: [edgex, edgey]
         where:
           - /matrix_.*/
           - /thumb_.*/
@@ -262,7 +262,7 @@ outlines:
         size: [3kx, 3ky]
       - what: rectangle
         bound: true
-        size: sf
+        size: [edgex, edgey]
         where: /matrix_inner_.*/  # Include the inner keys in addition to the center polygon 
     _panel:
       - name: _center
@@ -271,7 +271,7 @@ outlines:
         what: circle
         where:
           aggregate.parts: [thumb_reachy, mirror_thumb_reachy]
-          shift: [0, 0.5sf - 60]
+          shift: [0, 0.5edgey - 60]
         radius: 60  # Should be the same as the last number in `shift` above
       - _key_outline
     panel:
@@ -325,8 +325,9 @@ pcbs:
         params:
           from: "{{row_net}}"
           to: "{{column_net}}"
-      - what: xiao
+      - what: promicro
         where: mcu
         adjust.shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
-      - what: mountinghole
+      - what: via
         where: mounting_hole
+        params.net: ""
