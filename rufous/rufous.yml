@@ -64,8 +64,8 @@ presets:
   mx_mix_spaced:
     capx: 18
     capy: 15
-    kx: 18.5
-    ky: 15.5
+    kx: 19
+    ky: 16
     pinky_splay: 5
     pinky_adj: -3
     ring_splay: 3
@@ -92,12 +92,12 @@ points:
     rotate: -angle + pinky_splay + ring_splay
     mirror:
       ref: matrix_inner_top
-      shift: [0.5sf, 0.5sf]
-      distance: 14.5
+      shift: [0.5capx, 0.5capy]
+      distance: 13
     key:
       width: capx
       height: capy
-      spread: kx     
+      spread: kx
       padding: ky
       autobind: 0
     rows:
@@ -295,7 +295,7 @@ outlines:
         what: circle
         where:
           aggregate.parts: [thumb_reachy, mirror_thumb_reachy]
-          shift: [0, 0.5sf - 60]
+          shift: [0, (0.5sf - 1.5) - 60]
         radius: 60  # Should be the same as the last number in `shift` above
       - _key_outline
     panel:
