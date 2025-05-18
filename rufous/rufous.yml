@@ -325,9 +325,8 @@ pcbs:
         params:
           from: "{{row_net}}"
           to: "{{column_net}}"
-      - what: promicro
+      - what: xiao
         where: mcu
         adjust.shift: [-0.5xiao_x, -0.5xiao_y]  # Anchor is topleft corner
-      - what: via
+      - what: mountinghole
         where: mounting_hole
-        params.net: ""
